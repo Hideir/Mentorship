@@ -1,4 +1,4 @@
-import React,{useState} from 'react';
+import React from 'react';
 import {Link}  from "react-router-dom";
 import S from 'styled-components';
 
@@ -16,16 +16,16 @@ const DesktopNavigation = () => {
                             <StyledLink to="/">Home</StyledLink>
                         </StyledLi>
                         <StyledLi>
-                            <StyledLink>Mentors</StyledLink>
+                            <StyledLink to="mentors">Mentors</StyledLink>
                         </StyledLi>
                         <StyledLi>
-                            <StyledLink>About</StyledLink>
+                            <StyledLink to="about">About</StyledLink>
                         </StyledLi>
                         <StyledLi>
-                            <StyledLink>Login</StyledLink>
+                            <StyledLink to="login">Login</StyledLink>
                         </StyledLi>
                         <StyledLi>
-                            <StyledLink Secondary >Get Started</StyledLink>
+                            <StyledLink Secondary to="signup">Get Started</StyledLink>
                         </StyledLi>
                     </StyledUL>
                 </StyledNavigation>
