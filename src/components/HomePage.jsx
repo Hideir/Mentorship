@@ -1,12 +1,14 @@
 import React,{useState} from 'react';
 import S from 'styled-components';
 
+import HeroSection from './HeroSection';
+
 
 const HomePage = () => {
     return(
-        <div>
-            <h1>Home Page!</h1>
-        </div>
+        <>
+            <HeroSection />
+        </>
     );
 
 }

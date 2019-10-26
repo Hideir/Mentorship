@@ -4,3 +4,7 @@
 html {
   font-size: 62.65%;
 }
+* {
+  margin: 0;
+  padding: 0;
+}
