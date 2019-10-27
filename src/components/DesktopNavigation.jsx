@@ -19,13 +19,13 @@ const DesktopNavigation = () => {
                             <StyledLink to="mentors">Mentors</StyledLink>
                         </StyledLi>
                         <StyledLi>
-                            <StyledLink to="about">About</StyledLink>
+                            <StyledLink to="/about">About</StyledLink>
                         </StyledLi>
                         <StyledLi>
-                            <StyledLink to="login">Login</StyledLink>
+                            <StyledLink to="/login">Login</StyledLink>
                         </StyledLi>
                         <StyledLi>
-                            <StyledLink Secondary to="signup">Get Started</StyledLink>
+                            <StyledLink secondary="true" to="signup">Get Started</StyledLink>
                         </StyledLi>
                     </StyledUL>
                 </StyledNavigation>
@@ -74,19 +74,18 @@ const StyledLink = S(Link)`
     font-weight: 600;
     align-items: center;
     font-size: 1.6rem;
-    color: ${props => props.Secondary ? '#fff' : '#000'};
+    color: ${props => props.secondary ? '#fff' : '#000'};
     height: 2rem;
     padding: 1rem 2.4rem;
     border-radius: 20px;
     text-decoration: none;
-    background-color: ${props => props.Secondary ? '#0077ff' : 'transparent'}
+    background-color: ${props => props.secondary ? '#0077ff' : 'transparent'}
     transition: all ease-in-out 120ms;
     :hover {
-        background-color: ${props => props.Secondary ? '#003c80' : 'rgba(194, 194, 194, 0.4)'}
+        background-color: ${props => props.secondary ? '#003c80' : 'rgba(194, 194, 194, 0.4)'}
     }
     :active {
         box-shadow: 0px 2px 5px 0px #464545;
         transform: scale(1.1);
     }
-
 `;

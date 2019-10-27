@@ -16,7 +16,7 @@ const StyledForm = S.form`
     background-color: #ffffff;
     border: 1px solid #000;
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
     flex-flow: row;
     padding: 10px 0;
@@ -25,6 +25,7 @@ const StyledForm = S.form`
     margin-bottom: 40px;
     margin: 0 auto 40px auto;
     width: 80%;
+    height: 60px;
 `;
 const StyledInput = S.input`
     font-size: 2.2rem;
@@ -32,7 +33,7 @@ const StyledInput = S.input`
     background-color: transparent;
     border: none;
     height: 50px;
-    color: #fff;
+    color: #000;
     outline: none;
 `;
 const Styledbutton = S.button`

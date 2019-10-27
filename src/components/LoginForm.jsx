@@ -5,22 +5,28 @@ import {Link} from "react-router-dom";
 
   const LoginForm = () => {
     return(
-        <div>
-        <h1>I Rendered!!!</h1>
+        <FormContainer>
             <Form>
                 <Title>Login</Title>
+                <StyledText secondary="true" >Email</StyledText>
                 <StyledInput label="Email" type="email" />
+                <StyledText secondary="true">Password</StyledText>
                 <StyledInput label="Password" type="password"/>
-                <StyledButton>Login</StyledButton>
-                <StyledButton>Sign up</StyledButton>
+                <StyledButton secondary="true" >Login</StyledButton>
+                <StyledText>New to Mentorship? <StyledSignup to="/signup">Sign Up Now</StyledSignup> </StyledText>
                 <StyledLink to="/forgot-credentials">Can't Login?</StyledLink>
             </Form>
-        </div>
+        </FormContainer>
       );
   }
 
   export default LoginForm;
 
+const FormContainer = S.div`
+    height: 100vh;
+    display: flex;
+    align-items: center;
+`;
   const Form = S.form`
     width: 30%;
     min-width: 300px;
@@ -33,13 +39,17 @@ import {Link} from "react-router-dom";
     border-radius: 25px;
     padding: 20px;
     box-shadow: 0px 10px 20px -3px #000;
+    margin: 0 auto;
+    height: 500px;
+    display: flex;
+    justify-content: space-around;
   `;
   const Title = S.h2`
     font-size: 40px;
     color: #000;
     text-transform: uppercase;
   `;
-  const StyledLink = S.a`
+  const StyledLink = S(Link)`
     font-size: 18px;
     text-decoration: underline;
     color: #666;
@@ -50,14 +60,51 @@ import {Link} from "react-router-dom";
   `;
 
   const StyledInput = S.input`
-    width: 800px;
+    width: 80%;
+    font-size: 2rem;
+    padding: 10px;
+    border: 1px solid #000;
+    border-radius: 50px;
   `;
   const StyledButton = S.button`
-  font-size: 2.4rem;
-  color: #fff;
-  background-color: #0077ff;
+  display: flex;
+  text-transform: uppercase;
+  font-weight: 600;
+  align-items: center;
+  font-size: 2rem;
+  color: ${props => props.secondary ? '#fff' : '#000'};
+  padding: 1rem 2.4rem;
+  border-radius: 20px;
+  text-decoration: none;
+  background-color: ${props => props.secondary ? '#0077ff' : 'transparent'}
+  transition: all ease-in-out 120ms;
+  height: 4rem;
+  width: 200px;
   border: none;
-  border-radius: 50px;
-  padding: 1rem;
-  width: 200px; 
+  align-items: center;
+  justify-content: center;
+  :hover {
+      background-color: ${props => props.secondary ? '#003c80' : 'rgba(194, 194, 194, 0.4)'}
+  }
+  :active {
+      box-shadow: 0px 2px 5px 0px #464545;
+      transform: scale(1.1);
+  }
   `;
+
+  const StyledSignup = S(Link)`
+    font-size: 2.2rem;
+    color: #003c80;
+    margin-left: 10px;
+    transition: all ease-in-out 120ms;
+    :hover {
+      letter-spacing: 1px;
+    }
+  `;
+const StyledText = S.span`
+  font-size: 1.8rem;
+  display: flex;
+  text-align: ${props => props.secondary ? 'left' : 'center'}
+  width: ${props => props.secondary ? '80%' : 'auto'}
+  margin: 0 auto;
+`;

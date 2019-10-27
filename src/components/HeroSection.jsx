@@ -42,6 +42,7 @@ const ContentContainer = S.div`
     background-color: #fff;
     box-shadow: 0px 3px 8px #000000;
     width: 60%;
+    border-radius: 50px;
 `;
 const TextContentContainer = S.div`
     display: flex;
