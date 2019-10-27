@@ -1,26 +1,32 @@
 import React,{useState} from 'react';
 import S from 'styled-components';
 import {Link} from "react-router-dom";
+
 import BGImg from './homepage_background.svg';
 
-  const LoginForm = () => {
+  const SignupForm = () => {
     return(
         <FormContainer>
             <Form>
-                <Title>Login</Title>
-                <StyledText secondary="true" >Email</StyledText>
+                <Title>Sign Up</Title>
+                <StyledText secondary="true" >First Name</StyledText>
+                <StyledInput label="Email" type="text" />
+                <StyledText secondary="true">Last Name</StyledText>
+                <StyledInput label="Password" type="text"/>
+                <StyledText secondary="true" >Email Address</StyledText>
                 <StyledInput label="Email" type="email" />
-                <StyledText secondary="true">Password</StyledText>
-                <StyledInput label="Password" type="password"/>
-                <StyledButton secondary="true" >Login</StyledButton>
-                <StyledText>New to Mentorship? <StyledSignup to="/signup">Sign Up Now</StyledSignup> </StyledText>
-                <StyledLink to="/forgot-credentials">Can't Login?</StyledLink>
+                <StyledText secondary="true" >Password</StyledText>
+                <StyledInput label="Email" type="password" />
+                <StyledText secondary="true" >Password Confirmation</StyledText>
+                <StyledInput label="Email" type="password" />
+                <StyledButton secondary="true" >Get Started</StyledButton>
+
             </Form>
         </FormContainer>
       );
   }
 
-  export default LoginForm;
+  export default SignupForm;
 
 const FormContainer = S.div`
     height: 100vh;
@@ -88,6 +94,7 @@ const FormContainer = S.div`
   border: none;
   align-items: center;
   justify-content: center;
+  margin-top: 20px;
   :hover {
       background-color: ${props => props.secondary ? '#003c80' : 'rgba(194, 194, 194, 0.4)'}
   }
