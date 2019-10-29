@@ -9,10 +9,6 @@ import BGImg from './homepage_background.svg';
         <FormContainer>
             <Form>
                 <Title>Sign Up</Title>
-                <StyledText secondary="true" >First Name</StyledText>
-                <StyledInput label="Email" type="text" />
-                <StyledText secondary="true">Last Name</StyledText>
-                <StyledInput label="Password" type="text"/>
                 <StyledText secondary="true" >Email Address</StyledText>
                 <StyledInput label="Email" type="email" />
                 <StyledText secondary="true" >Password</StyledText>
