@@ -12,8 +12,8 @@ import BGImg from './homepage_background.svg';
     // create a user object.
     const [newUser, setNewUser] = useState({email: '', password: ''});
     
-    const postSignupData = (newUserObject) => {
-      axios.post((`http://localhost:8080`, newUserObject, {
+    const postSignupData = () => {
+      axios.post((`http://localhost:8080`, {newUser}, {
         headers: {
           'content-type': 'application/json',
         },
@@ -34,33 +34,29 @@ import BGImg from './homepage_background.svg';
         return {...previousState, password: passwordValue}
       });
     }
-
-    const handleSignUp = (newUser, event) => {
+    const handleSignUp = () => {
+      console.log(newUser);
       postSignupData(newUser);
-      event.preventDefault();
     }
-
-    console.log(newUser);
-    useEffect( () => {
-        axios.get(`http://localhost:8080/todo`)
-        .then( response => {
-          console.log(response);
-        })
-        .catch( error => {
-          console.log(error);
-        })
-    }, []);
-
+    // useEffect( () => {
+    //     axios.get(`http://localhost:8080/todo`)
+    //     .then( response => {
+    //       console.log(response);
+    //     })
+    //     .catch( error => {
+    //       console.log(error);
+    //     })
+    // }, []);
 
     return(
         <FormContainer>
             <Form action="/login" method="post">
                 <Title>Sign Up</Title>
                 <StyledText secondary="true" >Email Address</StyledText>
-                <StyledInput label="Email" type="email" onChange={handleEmail} value={newUser.email} />
+                <StyledInput label="Email" type="email" onChange={handleEmail} value={newUser.email}/>
                 <StyledText secondary="true" >Password</StyledText>
                 <StyledInput label="Email" type="password" onChange={handlePassword} value={newUser.password}/>
-                <StyledButton secondary="true" type="submit" onSubmit={handleSignUp}>Get Started</StyledButton>
+                <StyledButton secondary="true" onClick={handleSignUp}>Get Started</StyledButton>
             </Form>
         </FormContainer>
       );
