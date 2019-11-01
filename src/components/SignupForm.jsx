@@ -13,11 +13,17 @@ import BGImg from './homepage_background.svg';
     const [newUser, setNewUser] = useState({email: '', password: ''});
     
     const postSignupData = () => {
-      axios.post((`http://localhost:8080`, {newUser}, {
+      axios.post((`/signup`, {newUser}, {
         headers: {
           'content-type': 'application/json',
         },
       }))
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
     }
     const handleEmail = (event) => {
       const emailValue = event.target.value;
@@ -50,7 +56,7 @@ import BGImg from './homepage_background.svg';
 
     return(
         <FormContainer>
-            <Form action="/login" method="post">
+            <Form action="/signup" method="post">
                 <Title>Sign Up</Title>
                 <StyledText secondary="true" >Email Address</StyledText>
                 <StyledInput label="Email" type="email" onChange={handleEmail} value={newUser.email}/>
