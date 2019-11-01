@@ -10,7 +10,7 @@ const HeroSection = () => {
     <HeroSectionWrapper>
         <ContentContainer>
             <TextContentContainer>
-                <StyledTitle>Mentorship</StyledTitle>
+                <StyledTitle>Friendlier</StyledTitle>
                 <StyledText>Get the guidance you want from industry professionals.</StyledText>
             </TextContentContainer>
             <SearchForm />

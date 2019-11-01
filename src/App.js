@@ -14,9 +14,8 @@ function App() {
         <div className="App">
           <DesktopNavigation />
           <Switch>
-
             <Route exact path="/about" component={AboutPage} />
-            <Route  exact path="/login" component={LoginForm} />
+            <Route exact path="/login" component={LoginForm} />
             <Route exact path="/" component={HomePage} />
             <Route exact path="/signup" component={SignupForm} />
           </Switch>
