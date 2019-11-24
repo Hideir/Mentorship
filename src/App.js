@@ -15,9 +15,9 @@ function App() {
           <DesktopNavigation />
           <Switch>
             <Route exact path="/about" component={AboutPage} />
-            <Route exact path="/login" component={LoginForm} />
+            <Route exact path="/login" render={props => <LoginForm {...props} /> } />
             <Route exact path="/" component={HomePage} />
-            <Route exact path="/signup" component={SignupForm} />
+            <Route exact path="/signup" render={props => <SignupForm {...props} /> } />
           </Switch>
         </div>
     </Router>

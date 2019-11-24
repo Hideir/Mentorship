@@ -7,42 +7,34 @@ import axios from 'axios';
 
 import BGImg from './homepage_background.svg';
 
-  const SignupForm = () => {
-
+  const SignupForm = (props) => {
     // create a user object.
-    const [newUser, setNewUser] = useState({email: '', password: ''});
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
     
-    const postSignupData = () => {
-      axios.post((`/signup`, {newUser}, {
-        headers: {
-          'content-type': 'application/json',
-        },
-      }))
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    }
     const handleEmail = (event) => {
-      const emailValue = event.target.value;
-      // use a callback to have access to previous state so we don't lose the password key/value
-      setNewUser(previousState => {
-        // store our email value into the email key, while passing in the previous state to our new object.
-        return {...previousState, email: emailValue}
-      });
+      setEmail(event.target.value);
     }
     const handlePassword = (event) => {
-      const passwordValue = event.target.value;
-      // pass the previous user state object and create a new password value.
-      setNewUser(previousState => {
-        return {...previousState, password: passwordValue}
-      });
+      setPassword(event.target.value);
     }
-    const handleSignUp = () => {
-      console.log(newUser);
-      postSignupData(newUser);
+
+    const handleSignUp = (event) => {
+      event.preventDefault();
+      // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
+        axios.post(`/signup`, {email, password}, {  
+          headers: {
+            'content-type': 'application/json' // Tell the server we are sending this over as JSON
+          },
+        })
+        .then(function (response) {
+          console.log(response);
+          // When our server responds that we made a good request we push our user to the home component.
+          props.history.push("/");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
     }
     // useEffect( () => {
     //     axios.get(`http://localhost:8080/todo`)
@@ -54,15 +46,17 @@ import BGImg from './homepage_background.svg';
     //     })
     // }, []);
 
+
     return(
         <FormContainer>
-            <Form action="/signup" method="post">
+            {/* The form action sends the data from the form to that path. We also add our function to the form, due to form controls*/}
+            <Form action="/signup" method="post" onSubmit={handleSignUp}>
                 <Title>Sign Up</Title>
                 <StyledText secondary="true" >Email Address</StyledText>
-                <StyledInput label="Email" type="email" onChange={handleEmail} value={newUser.email}/>
+                <StyledInput label="Email" type="email" onChange={handleEmail} value={email}/>
                 <StyledText secondary="true" >Password</StyledText>
-                <StyledInput label="Email" type="password" onChange={handlePassword} value={newUser.password}/>
-                <StyledButton secondary="true" onClick={handleSignUp}>Get Started</StyledButton>
+                <StyledInput label="Email" type="password" onChange={handlePassword} value={password}/>
+                <StyledButton secondary="true" type="submit" >Get Started</StyledButton>
             </Form>
         </FormContainer>
       );
