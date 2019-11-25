@@ -4,8 +4,9 @@ import S from 'styled-components';
 import '../App.css';
 
 const InterestCard = (props) => {
-    // State
     const {selectedInterests, setSelectedInterests, interests} = props;
+    
+    // State
     const [hasActiveClass, setHasActiveClass] = useState(false);
 
     // Event Handlers
@@ -18,7 +19,7 @@ const InterestCard = (props) => {
              setSelectedInterests( selectedInterests.filter( deselectedInterest  => deselectedInterest !== interests.interestName))
         }
     }
-    // Component Update Changes
+    // Component Update
     useEffect( () => {
     },[])
     return(

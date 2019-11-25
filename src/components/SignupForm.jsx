@@ -47,15 +47,15 @@ import {Route} from 'react-router-dom';
 
     return(
       <>
-      <CredentialsForm 
-        isLoginPage={false}
-        isValidFlag={isValidFlag} 
-        email={email} 
-        password={password} 
-        handleEmail={handleEmail}
-        handlePassword={handlePassword} 
-        handleSignUp={handleSignUp}
-      />
+        <CredentialsForm 
+          isLoginPage={false}
+          isValidFlag={isValidFlag} 
+          email={email} 
+          password={password} 
+          handleEmail={handleEmail}
+          handlePassword={handlePassword} 
+          handleSignUp={handleSignUp}
+        />
       </>
       );
   }

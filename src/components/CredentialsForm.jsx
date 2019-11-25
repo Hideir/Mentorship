@@ -16,7 +16,7 @@ import {
 const CredentialsForm = props => {
   return (
     <FormContainer>
-      <Form action="login" method="post" onSubmit={props.handleSignUp}>
+      <Form action={props.isLoginPage ? 'login' : 'signup'} method="post" onSubmit={props.handleSignUp}>
         <Title>{props.isLoginPage === true ? "Log In" : "Sign Up"}</Title>
         {props.isValidFlag === false ? (
           <ErrorMessage>
