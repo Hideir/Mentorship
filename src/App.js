@@ -7,6 +7,7 @@ import HomePage from './components/HomePage';
 import LoginForm from './components/LoginForm';
 import SignupForm from './components/SignupForm';
 import AboutPage from './components/About';
+import InterestListPage from './InterestListPage';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route exact path="/login" render={props => <LoginForm {...props} /> } />
             <Route exact path="/" component={HomePage} />
             <Route exact path="/signup" render={props => <SignupForm {...props} /> } />
+            <Route exact path="/signup/interests" render={props => <InterestListPage {...props} /> } />
           </Switch>
         </div>
     </Router>
