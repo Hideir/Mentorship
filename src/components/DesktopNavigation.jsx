@@ -19,6 +19,9 @@ const DesktopNavigation = () => {
                             <StyledLink to="/about">About</StyledLink>
                         </StyledLi>
                         <StyledLi>
+                            <StyledLink to="/signup/interests">Interests</StyledLink>
+                        </StyledLi>
+                        <StyledLi>
                             <StyledLink to="/login">Login</StyledLink>
                         </StyledLi>
                         <StyledLi>
