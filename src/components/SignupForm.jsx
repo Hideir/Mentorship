@@ -27,6 +27,7 @@ import {Route} from 'react-router-dom';
         })
         .then(function (response) {
           console.log(response);
+          props.setNewSignedUpUser({...props.newSignedUpUser, email: email, password: password})
           // When our server responds that we made a good request we push our user to the home component.
           props.history.push("/signup/interests");
         })

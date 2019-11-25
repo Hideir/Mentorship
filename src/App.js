@@ -11,6 +11,15 @@ import InterestListPage from './InterestListPage';
 
 function App() {
   // Utilize redux or context api to have global state or lift state up. Or else i will create a 'user' object in app to pass the data
+  const [newSignedUpUser, setNewSignedUpUser] = useState({
+    id: 0,
+    email: '',
+    password: '',
+    interests: [],
+    bio: '',
+    name: ''
+  });
+  console.log(newSignedUpUser);
   return (
     <Router>
         <div className="App">
@@ -19,8 +28,8 @@ function App() {
             <Route exact path="/" component={HomePage} />
             <Route exact path="/about" component={AboutPage} />
             <Route exact path="/login" render={props => <LoginForm {...props} /> } />
-            <Route exact path="/signup" render={props => <SignupForm {...props} /> } />
-            <Route exact path="/signup/interests" render={props => <InterestListPage {...props} /> } />
+            <Route exact path="/signup" render={props => <SignupForm {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser} /> } />
+            <Route exact path="/signup/interests" render={props => <InterestListPage {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser}/> } />
           </Switch>
         </div>
     </Router>

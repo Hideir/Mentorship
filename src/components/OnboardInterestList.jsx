@@ -6,13 +6,12 @@ import {interestsArray} from './interestData';
 import {StyledButton} from './StyledComponents/FormStyledComponents';
 
 
-const OnboardInterestList = () => {
+const OnboardInterestList = ({setNewSignedUpUser, newSignedUpUser}) => {
     let cardCounter = 1;
     const [selectedInterests, setSelectedInterests] = useState([]);
-
     useEffect( () => {
-
-    }, [selectedInterests])
+        setNewSignedUpUser({...newSignedUpUser, interests: selectedInterests});
+    },[selectedInterests]);
     return(
         <GridContainer>
             <SelectedInterestTagsContainer>

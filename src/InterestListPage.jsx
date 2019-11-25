@@ -3,7 +3,7 @@ import S from "styled-components";
 import OnboardInterestList from "./components/OnboardInterestList";
 
 
-const InterestListPage = () => {
+const InterestListPage = ({setNewSignedUpUser, newSignedUpUser}) => {
 
   return (
     <StyledMainSection>
@@ -13,7 +13,7 @@ const InterestListPage = () => {
           Don't worry, you will be able to change these later.
         </SubHeading>
       </OnboardingAboutPageContainer>
-      <OnboardInterestList/>
+      <OnboardInterestList setNewSignedUpUser={setNewSignedUpUser} newSignedUpUser={newSignedUpUser}/>
     </StyledMainSection>
   );
 };
