@@ -5,7 +5,7 @@ import '../App.css';
 
 const InterestCard = (props) => {
     const {selectedInterests, setSelectedInterests, interests} = props;
-    
+
     // State
     const [hasActiveClass, setHasActiveClass] = useState(false);
 
@@ -33,12 +33,12 @@ const InterestCard = (props) => {
 export default InterestCard;
 
 const  CardContainer = S.div`
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border-radius: 5%;
     background-color: #c3c3c3;
     padding: 15px;
-    margin: 20px 15px;
+    margin: 15px;
     transition: all ease-in-out 120ms;
     position: relative;
     :hover {

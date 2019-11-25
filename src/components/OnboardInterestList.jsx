@@ -9,9 +9,18 @@ import {StyledButton} from './StyledComponents/FormStyledComponents';
 const OnboardInterestList = ({setNewSignedUpUser, newSignedUpUser}) => {
     let cardCounter = 1;
     const [selectedInterests, setSelectedInterests] = useState([]);
+
     useEffect( () => {
+        // Add interests to the new signedup user object in the app component
         setNewSignedUpUser({...newSignedUpUser, interests: selectedInterests});
     },[selectedInterests]);
+
+    // Test api call to make sure I can post outside of a form. Whcih I can!
+    const fakePostCall = () => {
+        axios.post("https://reqres.in/api/users/", {selectedInterests})
+        .then(res => console.log(res))
+        .catch(error => console.log(error))
+    }
     return(
         <GridContainer>
             <SelectedInterestTagsContainer>
@@ -35,17 +44,9 @@ const OnboardInterestList = ({setNewSignedUpUser, newSignedUpUser}) => {
                 );
             })}
 
-        <StyledForm>
-        {/* set up a form to handle post requests. needs to match the selected array data.*/}
-            {interestsArray.map( (interests, index) => {
-                    if(selectedInterests.includes(interests.interestName)) {
-                        return  <HiddenCheckboxInputs key={index} type="checkbox" value={interests.interestName} checked={true} />
-                    } else if(interests.interestName !== selectedInterests[index]) {
-                        return  <HiddenCheckboxInputs key={index} type="checkbox" value={interests.interestName} />
-                    } 
-            })}
-            <StyledButton style={{ backgroundColor: '#0077ff', color: '#fff', height: '5rem'}}>Next</StyledButton>
-        </StyledForm>
+            <NextButtonContainer onClick={fakePostCall}>
+                <NextButton style={{ backgroundColor: '#0077ff', color: '#fff', height: '3rem'}}>Next</NextButton>
+            </NextButtonContainer>
         </GridContainer>
     );
 }
@@ -58,16 +59,9 @@ const  GridContainer = S.section`
     width: 62%;
     margin: 0 auto;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
 `;
 
-const StyledForm = S.form`
-    width: 100%;
-    height: auto;
-    display: flex;
-    justify-content: flex-end;
-    margin: 0 auto;
-`;
 const SelectedInterestTagsContainer = S.div`
     width: 100%;
     display: flex;
@@ -77,6 +71,7 @@ const SelectedInterestUl = S.ul`
     display: flex;
     justify-content: space-around;
     list-style: none;
+    height: 5rem;
 `;
 const SelectedInterestTags = S.li`
     font-size: 1.8rem;
@@ -87,6 +82,33 @@ const SelectedInterestTags = S.li`
     margin-right: 10px;
     border-radius: 2rem;
 `;
-const HiddenCheckboxInputs = S.input`
-    visibility: hidden;
+const NextButtonContainer = S.div`
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
 `;
+const NextButton = S.div`
+        display: flex;
+        text-transform: uppercase;
+        font-weight: 600;
+        align-items: center;
+        font-size: 2rem;
+        color: ${props => (props.secondary ? "#fff" : "#000")};
+        padding: 1rem 2.4rem;
+        border-radius: 20px;
+        text-decoration: none;
+        background-color: ${props => (props.secondary ? "#0077ff" : "transparent")}
+        transition: all ease-in-out 120ms;
+        height: 4rem;
+        width: 200px;
+        border: none;
+        align-items: center;
+        justify-content: center;
+        :hover {
+        background-color: ${props =>props.secondary ? "#003c80" : "rgba(194, 194, 194, 0.4)"};
+        cursor: pointer;
+        }
+        :active {
+        box-shadow: 0px 2px 5px 0px #464545;
+        transform: scale(1.1);
+        }`;
