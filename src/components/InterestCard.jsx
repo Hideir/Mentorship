@@ -38,7 +38,7 @@ const  CardContainer = S.div`
     border-radius: 5%;
     background-color: #c3c3c3;
     padding: 15px;
-    margin: 15px;
+    margin: 0 5px 15px 5px;
     transition: all ease-in-out 120ms;
     position: relative;
     :hover {

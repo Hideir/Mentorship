@@ -59,6 +59,21 @@ const interestsArray = [
         interestName: "education",
         interestImage : 'defaultImage',
     },
+    {
+        id: 13,
+        interestName: "Drinking",
+        interestImage : 'defaultImage',
+    },
+    {
+        id: 14,
+        interestName: "Board Games",
+        interestImage : 'defaultImage',
+    },
+    {
+        id: 15,
+        interestName: "Cook",
+        interestImage : 'defaultImage',
+    },
 
 ]
 export {

@@ -34,6 +34,7 @@ const Title = S.h2`
   font-size: 40px;
   color: #000;
   text-transform: uppercase;
+  margin: 0 auto;
 `;
 const StyledLink = S(Link)`
   font-size: 18px;
@@ -101,7 +102,7 @@ const StyledLabel = S.label`
   font-size: 1.8rem;
   display: flex;
   flex-direction: column;
-  text-align: ${props => (props.secondary ? "left" : "center")}
+  text-align: left;
   width: ${props => (props.secondary ? "80%" : "auto")}
   margin: 0 auto;
 `;

@@ -3,35 +3,38 @@ import axios from 'axios';
 import S from 'styled-components';
 import InterestCard from './InterestCard';
 import {interestsArray} from './interestData';
-import {StyledButton} from './StyledComponents/FormStyledComponents';
+import {withRouter} from 'react-router-dom';
 
-
-const OnboardInterestList = ({setNewSignedUpUser, newSignedUpUser}) => {
+const OnboardInterestList = (props) => {
+    console.log(props);
     let cardCounter = 1;
     const [selectedInterests, setSelectedInterests] = useState([]);
 
     useEffect( () => {
         // Add interests to the new signedup user object in the app component
-        setNewSignedUpUser({...newSignedUpUser, interests: selectedInterests});
+        props.setNewSignedUpUser({...props.newSignedUpUser, interests: selectedInterests});
     },[selectedInterests]);
 
     // Test api call to make sure I can post outside of a form. Whcih I can!
     const fakePostCall = () => {
         axios.post("https://reqres.in/api/users/", {selectedInterests})
-        .then(res => console.log(res))
+        .then(res => {
+            console.log(res)
+            props.history.push("/signup/add-profile");
+        })
         .catch(error => console.log(error))
     }
     return(
         <GridContainer>
+        {/* Create labels for selected interests*/ }
             <SelectedInterestTagsContainer>
-            <SelectedInterestUl>
-                {selectedInterests.map( (interests, index) => {
-                    return <SelectedInterestTags key={index}>{interests}</SelectedInterestTags>
-                })}
-            </SelectedInterestUl>
-
+                <SelectedInterestUl>
+                    {selectedInterests.map( (interests, index) => {
+                        return <SelectedInterestTags key={index}>{interests}</SelectedInterestTags>
+                    })}
+                </SelectedInterestUl>
             </SelectedInterestTagsContainer>
-
+            {/* Loop through all the interests and pass in the interests data into the InterestCard component */}
             {interestsArray.map( (interests, index) => {
                 return(
                     <InterestCard
@@ -51,7 +54,7 @@ const OnboardInterestList = ({setNewSignedUpUser, newSignedUpUser}) => {
     );
 }
 
-export default OnboardInterestList;
+export default withRouter(OnboardInterestList);
 
 const  GridContainer = S.section`
     display: flex;
@@ -59,7 +62,7 @@ const  GridContainer = S.section`
     width: 62%;
     margin: 0 auto;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
 `;
 
 const SelectedInterestTagsContainer = S.div`
@@ -75,12 +78,12 @@ const SelectedInterestUl = S.ul`
 `;
 const SelectedInterestTags = S.li`
     font-size: 1.8rem;
-    background-color: #c3c3c3;
-    color: #000;
+    background-color: #2f2c2c;
+    color: #fff;
     width: auto;
-    padding: 10px;
+    padding: 10px 20px;
     margin-right: 10px;
-    border-radius: 2rem;
+    border-radius: 1rem;
 `;
 const NextButtonContainer = S.div`
     width: 100%;
