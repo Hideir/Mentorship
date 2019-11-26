@@ -20,7 +20,8 @@ const InterestListPage = ({setNewSignedUpUser, newSignedUpUser}) => {
 export default InterestListPage;
 
 const StyledMainSection = S.main`
-    margin-top: 100px;
+  margin-top: 40px;
+  margin-bottom: 40px;
 `;
 const OnboardingAboutPageContainer = S.div`
     display: flex;

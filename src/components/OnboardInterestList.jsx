@@ -74,7 +74,10 @@ const SelectedInterestUl = S.ul`
     display: flex;
     justify-content: space-around;
     list-style: none;
-    height: 5rem;
+    margin-bottom: 20px;
+    width: 100%;
+    flex-flow: row wrap;
+    height: auto;
 `;
 const SelectedInterestTags = S.li`
     font-size: 1.8rem;
@@ -82,13 +85,14 @@ const SelectedInterestTags = S.li`
     color: #fff;
     width: auto;
     padding: 10px 20px;
-    margin-right: 10px;
+    margin: 0 10px 10px 0;
     border-radius: 1rem;
 `;
 const NextButtonContainer = S.div`
     width: 100%;
     display: flex;
     justify-content: flex-end;
+    margin-top: 20px;
 `;
 const NextButton = S.div`
         display: flex;
