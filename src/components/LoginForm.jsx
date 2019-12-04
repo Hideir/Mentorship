@@ -3,6 +3,7 @@ import axios from "axios";
 import CredentialsForm from './CredentialsForm';
 
 
+
 const LoginForm = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -48,16 +49,16 @@ const LoginForm = props => {
   };
   return (
     <>
-      <CredentialsForm           
-        isLoading={isLoading}
-        isLoginPage={true}
-        isValidFlag={isValidFlag} 
-        email={email} 
-        password={password} 
-        handleEmail={handleEmail}
-        handlePassword={handlePassword} 
-        handleSignUp={handleSignUp}
-      />
+        <CredentialsForm           
+          isLoading={isLoading}
+          isLoginPage={true}
+          isValidFlag={isValidFlag} 
+          email={email} 
+          password={password} 
+          handleEmail={handleEmail}
+          handlePassword={handlePassword} 
+          handleSignUp={handleSignUp}
+        />
     </>
   );
 };

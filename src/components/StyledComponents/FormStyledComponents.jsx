@@ -69,6 +69,7 @@ const StyledButton = S.button`
   border: none;
   align-items: center;
   justify-content: center;
+  position: relative;
   :hover {
     background-color: ${props =>props.secondary ? "#003c80" : "rgba(194, 194, 194, 0.4)"};
     cursor: pointer;

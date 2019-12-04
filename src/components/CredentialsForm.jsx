@@ -1,5 +1,7 @@
 import React,{useState} from "react";
 // import axios from "axios";
+import IsLoadingComponent from './StyledComponents/IsLoadingComponent.jsx';
+
 import {
   FormContainer,
   Form,
@@ -30,6 +32,7 @@ const CredentialsForm = props => {
 
   return (
     <FormContainer>
+    {props.isLoading ? <IsLoadingComponent /> : null}
       <Form action={props.isLoginPage ? 'login' : 'signup'} method="post" onSubmit={props.handleSignUp}>
         <Title>{props.isLoginPage === true ? "Log In" : "Sign Up"}</Title>
         {props.isValidFlag === false ? (
