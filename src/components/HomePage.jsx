@@ -1,5 +1,4 @@
-import React,{useState} from 'react';
-import S from 'styled-components';
+import React from 'react';
 
 import HeroSection from './HeroSection';
 

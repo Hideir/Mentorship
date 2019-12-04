@@ -1,7 +1,6 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState} from 'react';
 import axios from 'axios';
 import CredentialsForm from './CredentialsForm';
-import {Route} from 'react-router-dom';
 // import {apiKey} from './config';
 
   const SignupForm = (props) => {
@@ -9,6 +8,7 @@ import {Route} from 'react-router-dom';
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isValidFlag, setIsValidFlag] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     const handleEmail = (event) => {
       setEmail(event.target.value);
@@ -19,6 +19,7 @@ import {Route} from 'react-router-dom';
 
     const handleSignUp = (event) => {
       event.preventDefault();
+      setIsLoading(true);
       // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
         axios.post(`/signup`, {email, password}, {  
           headers: {
@@ -27,14 +28,16 @@ import {Route} from 'react-router-dom';
         })
         .then(function (response) {
           console.log(response);
-          props.setNewSignedUpUser({...props.newSignedUpUser, email: email, password: password})
+          props.setNewSignedUpUser({...props.newSignedUpUser, email: email})
           // When our server responds that we made a good request we push our user to the home component.
           props.history.push("/signup/interests");
         })
         .catch(function (error) {
+          setIsLoading(false);
           console.log(error);
         });
     }
+
     // useEffect( () => {
     //     axios.get(`http://localhost:8080/todo`)
     //     .then( response => {
@@ -48,7 +51,8 @@ import {Route} from 'react-router-dom';
 
     return(
       <>
-        <CredentialsForm 
+        <CredentialsForm
+          isLoading={isLoading}
           isLoginPage={false}
           isValidFlag={isValidFlag} 
           email={email} 

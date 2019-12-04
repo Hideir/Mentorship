@@ -1,9 +1,10 @@
-import React,{useState, useEffect} from 'react';
-import axios from 'axios';
+import React from 'react';
+
 import S from 'styled-components';
 import ProfileEditForm from './ProfileEditForm.jsx';
 
 const ProfileCreationPage = (props) => {
+    
     return(
         <MainPageContainer>
             <PageIntroContainer>

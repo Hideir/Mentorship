@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React,{useState} from "react";
 // import axios from "axios";
 import {
   FormContainer,
@@ -12,8 +12,22 @@ import {
   StyledButton,
   StyledText
 } from "./StyledComponents/FormStyledComponents";
-
+let buttonValue = '';
 const CredentialsForm = props => {
+
+
+  if(props.isLoginPage && props.isLoading === false){
+       buttonValue = "Log In";
+       
+  } else if(!props.isLoginPage && props.isLoading === false) {
+       buttonValue = "Get Started";
+  } else if( props.isLoading === true && !props.isLoginPage) {
+       buttonValue = "Signing Up";
+  } else if( props.isLoading === true && props.isLoginPage) {
+    buttonValue = "Logging In";
+}
+  console.log(buttonValue);
+
   return (
     <FormContainer>
       <Form action={props.isLoginPage ? 'login' : 'signup'} method="post" onSubmit={props.handleSignUp}>
@@ -47,7 +61,7 @@ const CredentialsForm = props => {
           />
         </StyledLabel>
         <StyledButton secondary="true">
-          {props.isLoginPage ? "Log In" : "Get Started"}
+          {buttonValue}
         </StyledButton>
         <StyledText>
           New to Friendlier?

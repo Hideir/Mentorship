@@ -1,5 +1,4 @@
-import React,{useState, useEffect} from 'react'
-import axios from 'axios';
+import React,{useState} from 'react'
 import S from 'styled-components';
 import '../App.css';
 
@@ -20,8 +19,6 @@ const InterestCard = (props) => {
         }
     }
     // Component Update
-    useEffect( () => {
-    },[])
     return(
         <CardContainer className={hasActiveClass ? "hasInterest" : null} data-interest-name={interests.interestName} onClick={clickHandler}>
             <Title>{interests.interestName.toUpperCase()}</Title>

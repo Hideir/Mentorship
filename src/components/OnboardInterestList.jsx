@@ -1,5 +1,4 @@
 import React,{useState, useEffect} from 'react'
-import axios from 'axios';
 import S from 'styled-components';
 import InterestCard from './InterestCard';
 import {interestsArray} from './interestData';
@@ -16,16 +15,11 @@ const OnboardInterestList = (props) => {
     },[selectedInterests]);
 
     // Test api call to make sure I can post outside of a form. Whcih I can!
-    const fakePostCall = () => {
-        axios.post("https://reqres.in/api/users/", {selectedInterests})
-        .then(res => {
-            console.log(res)
-            props.history.push("/signup/add-profile");
-        })
-        .catch(error => console.log(error))
+    const pushUser = () => {
+        props.history.push("/signup/add-profile");
     }
     return(
-        <GridContainer>
+        <CardContainer>
         {/* Create labels for selected interests*/ }
             <SelectedInterestTagsContainer>
                 <SelectedInterestUl>
@@ -34,7 +28,7 @@ const OnboardInterestList = (props) => {
                     })}
                 </SelectedInterestUl>
             </SelectedInterestTagsContainer>
-            {/* Loop through all the interests and pass in the interests data into the InterestCard component */}
+            <SelectedInterestTagsContainer>
             {interestsArray.map( (interests, index) => {
                 return(
                     <InterestCard
@@ -46,17 +40,20 @@ const OnboardInterestList = (props) => {
                     />
                 );
             })}
+            </SelectedInterestTagsContainer>
+            {/* Loop through all the interests and pass in the interests data into the InterestCard component */}
 
-            <NextButtonContainer onClick={fakePostCall}>
-                <NextButton style={{ backgroundColor: '#0077ff', color: '#fff', height: '3rem'}}>Next</NextButton>
+
+            <NextButtonContainer >
+                <NextButton onClick={pushUser} style={{ backgroundColor: '#0077ff', color: '#fff', height: '3rem'}}>Next</NextButton>
             </NextButtonContainer>
-        </GridContainer>
+        </CardContainer>
     );
 }
 
 export default withRouter(OnboardInterestList);
 
-const  GridContainer = S.section`
+const  CardContainer = S.section`
     display: flex;
     flex-flow: row wrap;
     width: 62%;
@@ -67,17 +64,25 @@ const  GridContainer = S.section`
 
 const SelectedInterestTagsContainer = S.div`
     width: 100%;
+    height: 100%;
     display: flex;
-    justify-content: space-around;
+    flex-flow: row wrap;
+    justify-content: space-between;
 `;
 const SelectedInterestUl = S.ul`
     display: flex;
-    justify-content: space-around;
     list-style: none;
     margin-bottom: 20px;
     width: 100%;
     flex-flow: row wrap;
     height: auto;
+    &::after {
+        content: 'nothing';
+        font-size: 0;
+        height: 55px;
+        width: 10px;
+        background-color: transparent;
+    }
 `;
 const SelectedInterestTags = S.li`
     font-size: 1.8rem;

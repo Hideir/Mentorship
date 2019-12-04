@@ -1,14 +1,12 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState} from 'react';
 import axios from 'axios';
 import S from 'styled-components';
-
-import { StyledText, ErrorMessage} from './StyledComponents/FormStyledComponents';
+import {withRouter} from 'react-router-dom';
+// import { StyledText, ErrorMessage} from './StyledComponents/FormStyledComponents';
 
 const ProfileEditForm = (props) => {
     // Set up State
-    const [profileObject, setProfileObject]= useState({...props.newSignedUpUser,        
-
-    });
+    const [profileObject, setProfileObject]= useState({...props.newSignedUpUser});
     const [profileInformation, setProfileInformation] = useState({
         firstName: '',
         lastName: '',
@@ -19,26 +17,34 @@ const ProfileEditForm = (props) => {
         state: ''
     });
 
-
     // Set up event functions
     const handleInputChange = async (event) => {
         await setProfileInformation({...profileInformation, [event.target.name]: event.target.value});
         await setProfileObject({...props.newSignedUpUser, profileInformation});
-        console.log({profileInformation});
-        console.log({profileObject});
     }
 
-        const fakePostCall = () => {
-            axios.post("https://reqres.in/api/users/", {profileObject})
-            .then(res => {
-                console.log(res)
-            })
-            .catch(error => console.log(error))
-        }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        localStorage.setItem('userEmail', profileObject.email);
+        console.log('I ran!');
+        // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
+          axios.post(`/signup/add-profile`, {profileObject}, {  
+            headers: {
+              'content-type': 'application/json' // Tell the server we are sending this over as JSON
+            },
+          })
+          .then(function (response) {
+            console.log(response.data);
+            props.history.push("/profile");
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
 
     return(
         <BigFormContainer>
-            <Form>
+            <Form action='/signup/add-profile' method="post" onSubmit={handleSubmit}>
                 <Title>Edit Profile Information</Title>
                 <Label>First Name
                     <Input onChange={handleInputChange} type="text" name="firstName"/>
@@ -62,22 +68,22 @@ const ProfileEditForm = (props) => {
                     <Input onChange={handleInputChange}  type="text" name="state"/>
                 </Label>
                 <NextButtonContainer >
-                    <NextButton  onClick={fakePostCall} style={{ backgroundColor: '#0077ff', color: '#fff'}}>Next</NextButton>
+                    <NextButton type="submit" style={{ backgroundColor: '#0077ff', color: '#fff'}}>Next</NextButton>
                 </NextButtonContainer>
             </Form>
         </BigFormContainer>
     );
 }
 
-export default ProfileEditForm;
+export default withRouter(ProfileEditForm);
 
 const BigFormContainer = S.div`
     width: 40%;
     margin: 40px auto;
 `;
 const Form = S.form`
-   display: flex;
-   flex-flow: row wrap;
+  display: flex;
+  flex-flow: row wrap;
    width: 100%;
    background-color: #c3c3c3;
    border-radius: 15px;
@@ -111,7 +117,7 @@ const NextButtonContainer = S.div`
     display: flex;
     justify-content: flex-end;
 `;
-const NextButton = S.div`
+const NextButton = S.button`
     display: flex;
     text-transform: uppercase;
     font-weight: 600;

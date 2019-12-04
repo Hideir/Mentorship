@@ -7,6 +7,8 @@ const LoginForm = props => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isValidFlag, setIsValidFlag] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
 
 
   const handleEmail = event => {
@@ -18,6 +20,7 @@ const LoginForm = props => {
 
   const handleSignUp = event => {
     event.preventDefault();
+    setIsLoading(true);
     // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
     axios
       .post(
@@ -39,12 +42,14 @@ const LoginForm = props => {
         console.log("here is the error" + error);
         if (error) {
           setIsValidFlag(false);
+          setIsLoading(false);
         }
       });
   };
   return (
     <>
-      <CredentialsForm 
+      <CredentialsForm           
+        isLoading={isLoading}
         isLoginPage={true}
         isValidFlag={isValidFlag} 
         email={email} 
