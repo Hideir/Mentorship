@@ -3,19 +3,19 @@ import './isLoading.css';
 
 const IsLoadingComponent = () => {
     return(
-        <div class="loaderContainer">
-            <ul class="loader">
-                <li class="center"></li>
-                <li class="item item-1"></li>
-                <li class="item item-2"></li>
-                <li class="item item-3"></li>
-                <li class="item item-4"></li>
-                <li class="item item-5"></li>
-                <li class="item item-6"></li>
-                <li class="item item-7"></li>
-                <li class="item item-8"></li>
+        <div className="loaderContainer">
+            <ul className="loader">
+                <li className="center"></li>
+                <li className="item item-1"></li>
+                <li className="item item-2"></li>
+                <li className="item item-3"></li>
+                <li className="item item-4"></li>
+                <li className="item item-5"></li>
+                <li className="item item-6"></li>
+                <li className="item item-7"></li>
+                <li className="item item-8"></li>
             </ul>
-            <h2 class="loadingTitle">Loading...</h2>
+            <h2 className="loadingTitle">Loading...</h2>
         </div>
     );
 }

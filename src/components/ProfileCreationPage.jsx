@@ -24,6 +24,7 @@ const MainPageContainer = S.main`
     display: flex;
     flex-flow: row wrap;
     margin: 50px auto;
+    margin-top: 140px;
 `;
 const PageIntroContainer = S.div`
     width: 62%;

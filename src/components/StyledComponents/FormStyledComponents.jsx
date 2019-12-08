@@ -50,7 +50,7 @@ const StyledInput = S.input`
   font-size: 2rem;
   padding: 10px;
   border: 1px solid #000;
-  border-radius: 50px;
+  border-radius: 10px;
 `;
 const StyledButton = S.button`
   display: flex;

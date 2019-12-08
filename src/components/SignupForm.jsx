@@ -33,6 +33,7 @@ import CredentialsForm from './CredentialsForm';
           props.history.push("/signup/interests");
         })
         .catch(function (error) {
+          setIsValidFlag(false);
           setIsLoading(false);
           console.log(error);
         });

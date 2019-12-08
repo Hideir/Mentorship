@@ -13,7 +13,7 @@ const ProfileEditForm = (props) => {
         tagLine: '',
         education: '',
         region: '',
-        zipCode: '',
+        city: '',
         state: ''
     });
 
@@ -61,8 +61,8 @@ const ProfileEditForm = (props) => {
                 <Label>Country/Region
                     <Input onChange={handleInputChange}  type="text" name="region"/>
                 </Label>
-                <Label>Zip Code
-                    <Input onChange={handleInputChange}  type="text" name="zipCode"/>
+                <Label>City
+                    <Input onChange={handleInputChange}  type="text" name="city"/>
                 </Label>
                 <Label>State
                     <Input onChange={handleInputChange}  type="text" name="state"/>
@@ -85,11 +85,12 @@ const Form = S.form`
   display: flex;
   flex-flow: row wrap;
    width: 100%;
-   background-color: #c3c3c3;
+   background-color: #fff;
    border-radius: 15px;
    padding: 2rem;
    justify-content: space-between;
    box-sizing: border-box;
+   box-shadow: 0px 10px 20px -3px #000;
 `;
 const Title = S.h2 `
     font-size: 3rem;

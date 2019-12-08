@@ -35,16 +35,21 @@ const CredentialsForm = props => {
     {props.isLoading ? <IsLoadingComponent /> : null}
       <Form action={props.isLoginPage ? 'login' : 'signup'} method="post" onSubmit={props.handleSignUp}>
         <Title>{props.isLoginPage === true ? "Log In" : "Sign Up"}</Title>
-        {props.isValidFlag === false ? (
+        {props.isValidFlag === false && props.isLoginPage ? (
           <ErrorMessage>
             That Friendlier account doesn't exist. Enter a different account or{" "}
             <StyledLink errorsignup="true" to="/signup">
               create a new account
             </StyledLink>
           </ErrorMessage>
-        ) : (
-          null
-        )}
+        ) : !props.isLoginPage && props.isValidFlag === false ? (
+          <ErrorMessage>
+            Your email and/or password have not met the minimum requirements{" "}
+            <StyledLink errorsignup="true" to="/">
+              need help?
+            </StyledLink>
+          </ErrorMessage>
+        ) : null}
         <StyledLabel secondary="true">
           Email
           <StyledInput
@@ -53,6 +58,7 @@ const CredentialsForm = props => {
             onChange={props.handleEmail}
             value={props.email.value}
           />
+          {!props.isLoginPage ? <p style={{fontSize: '14px', fontStyle: 'italic'}}>Email must have a minimum of 12 characters</p> : null}
         </StyledLabel>
         <StyledLabel secondary="true">
           Password
@@ -62,6 +68,7 @@ const CredentialsForm = props => {
             onChange={props.handlePassword}
             value={props.password.value}
           />
+          {!props.isLoginPage ? <p style={{fontSize: '14px', fontStyle: 'italic'}}>Password must have a minimum of 8 characters</p> : null}
         </StyledLabel>
         <StyledButton secondary="true">
           {buttonValue}
