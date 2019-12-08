@@ -1,20 +1,31 @@
 import React from 'react';
 import S from 'styled-components';
+import AppLogoImage from './AppLogoImage.svg';
+import {Link} from 'react-router-dom';
 
 
 const Logo = () => {
     return(
-        <div>
-            <StyledH1>Mentorship</StyledH1>
-        </div>
+        <StyledLink to="/">
+            <LogoContainerDiv>
+                <StyledLogo></StyledLogo>
+            </LogoContainerDiv>
+        </StyledLink>
     );
-
 }
 export default Logo;
+    const LogoContainerDiv = S.div`
 
-const StyledH1 = S.h1`
-    font-size: 3rem;
-    color: #000;
-    text-transform: uppercase;
-    font-style: italic;
+
+    `;
+const StyledLogo = S.div`
+    background-image: url(${AppLogoImage});
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    height: 100px;
+    width: 100px;
+`;
+const StyledLink = S(Link)`
+    text-decoration: none;
 `;

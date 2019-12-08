@@ -43,7 +43,7 @@ const StyledHeader = S.header`
     width: 100%;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    position: sticky;
+    position: fixed;
     top: 0;
 `;
 
