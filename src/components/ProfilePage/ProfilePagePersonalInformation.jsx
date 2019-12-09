@@ -11,7 +11,7 @@ const ProfilePagePersonalInformation = (props) => {
                         <Text primary={true}> {props.lastName}</Text>
                     </InformationContainer>
                     <InformationContainer personalInformation="true">
-                        <Text>{props.city}</Text>
+                        <Text>{props.city}</Text>,
                         <Text>{props.state}</Text>
                     </InformationContainer>
                     <InformationContainer>

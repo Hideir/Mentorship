@@ -1,17 +1,12 @@
 import React from 'react';
 import S from 'styled-components';
 
-const ProfilePageEducationSection = () => {
+const ProfilePageEducationSection = (props) => {
 	return(
         <EducationContainer>
             <TextContainer>
-                <Text primary={true}>{"Blachawk Technical College"}</Text>
-                <Text secondary={true}>{"Web Development Computer Science"}</Text>
-            </TextContainer>
-            <TextContainer>
-                <Text primary={true}>{"Lambda School"}</Text>
-                <Text secondary={true}>{"Full Stack Web Development"}</Text>
-            </TextContainer>
+                <Text primary={true}>{props.education}</Text>
+                </TextContainer>
         </EducationContainer>
 	);
 }

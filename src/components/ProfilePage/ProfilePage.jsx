@@ -10,7 +10,7 @@ import ProfilePageEducationSection from './ProfilePageEducationSection';
 const ProfilePage = (props) => {
 	const [profileData, setProfileData] = useState({})
 	const emailAddr = props.newSignedUpUserEmail;
-	const {firstName, lastName, interests,state, city, tagLine} = profileData;
+	const {firstName, lastName, interests,state, city, tagLine, education} = profileData;
 	useEffect( () => {
 			 axios.post('/profile', {emailAddr}, {  
 				headers: {
@@ -34,7 +34,7 @@ const ProfilePage = (props) => {
 				<MidHeading>Interests</MidHeading>
 				<ProfilePageInterests interests={interests}/>
 				<MidHeading>Education</MidHeading>	
-				<ProfilePageEducationSection />
+				<ProfilePageEducationSection education={education}/>
 			</ProfileContainer>
 		</PageWrapper>
 	);
@@ -46,6 +46,7 @@ const PageWrapper = S.main`
 	width 100%;
 	display: flex;
 	flex-flow: row wrap;
+	margin-top: 140px;
 `;
 const ProfileContainer = S.div`
 	width: 50%;
