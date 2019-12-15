@@ -74,10 +74,9 @@ const CredentialsForm = props => {
           {buttonValue}
         </StyledButton>
         <StyledText>
-          New to Friendlier?
-          <StyledSignup to="/signup" primary="true">
-            {props.isLoginPage ? "sign up now" : "log in"}
-          </StyledSignup>
+         {props.isLoginPage ? 'New to Friendlier?' : 'Already have an account?'}
+         {props.isLoginPage ? <StyledSignup to="/signup" primary="true">Sign Up</StyledSignup> : <StyledSignup to="/login" primary="true">Log In</StyledSignup>}
+          
         </StyledText>
         {!props.isLoginPage ? null : (
           <StyledLink to="/forgot-credentials">
