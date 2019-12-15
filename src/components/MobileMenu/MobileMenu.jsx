@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUser, faHome, faCompass, faStar } from "@fortawesome/free-solid-svg-icons";
+import { faUser, faHome, faCompass, faStar, faPlus } from "@fortawesome/free-solid-svg-icons";
 
 import "./MobileMenu.css";
 
@@ -29,9 +29,10 @@ const MobileMenu = () => {
         Profile
       </Link>
       <div id="hamburgerMenuContainer" className={isMobileActive ? 'toggle-active' : null} onClick={handleClick}>
-        <div className="hamburger-menu">
+        {/* <div className="hamburger-menu">
           <span></span>
-        </div>
+        </div> */}
+        <FontAwesomeIcon icon={faPlus}/>
       </div>
       <Link to="/discover" className="iconLinks">
       <FontAwesomeIcon icon={faStar}/>
