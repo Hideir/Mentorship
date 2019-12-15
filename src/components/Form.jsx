@@ -5,8 +5,8 @@ import S from "styled-components";
 const SearchForm = () => {
   return (
     <StyledForm>
-        <StyledInput type="text" placeholder="Search for a mentor" />
-        <Styledbutton type='submit'>Find Mentors</Styledbutton>
+        <StyledInput type="text" placeholder="Search for liked minded people" />
+        <Styledbutton type='submit'>Find People</Styledbutton>
     </StyledForm>
   );
 };

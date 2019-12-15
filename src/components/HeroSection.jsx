@@ -11,7 +11,7 @@ const HeroSection = () => {
         <ContentContainer>
             <TextContentContainer>
                 <StyledTitle>Friendlier</StyledTitle>
-                <StyledText>Get the guidance you want from industry professionals.</StyledText>
+                <StyledText>Search for individuals who have similar interests as you.</StyledText>
             </TextContentContainer>
             <SearchForm />
         </ContentContainer>
