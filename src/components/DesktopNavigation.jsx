@@ -45,6 +45,9 @@ const StyledHeader = S.header`
     padding-bottom: 2rem;
     position: fixed;
     top: 0;
+    @media (max-width: 860px) {
+        display: none;
+      }
 `;
 
 const StyledNavigationContainer = S.div`

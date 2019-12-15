@@ -10,11 +10,11 @@ const OnboardInterestList = (props) => {
     const [selectedInterests, setSelectedInterests] = useState([]);
 
     useEffect( () => {
-        // Add interests to the new signedup user object in the app component
+        // Add interests to the new signed up user object in the app component
         props.setNewSignedUpUser({...props.newSignedUpUser, interests: selectedInterests});
     },[selectedInterests]);
 
-    // Test api call to make sure I can post outside of a form. Whcih I can!
+    // Test api call to make sure I can post outside of a form. Which I can!
     const pushUser = () => {
         props.history.push("/signup/add-profile");
     }
@@ -42,8 +42,6 @@ const OnboardInterestList = (props) => {
             })}
             </SelectedInterestTagsContainer>
             {/* Loop through all the interests and pass in the interests data into the InterestCard component */}
-
-
             <NextButtonContainer >
                 <NextButton onClick={pushUser} style={{ backgroundColor: '#0077ff', color: '#fff', height: '3rem'}}>Next</NextButton>
             </NextButtonContainer>
