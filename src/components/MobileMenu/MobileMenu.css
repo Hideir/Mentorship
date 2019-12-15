@@ -1,0 +1,197 @@
+.hamburgerWrapper {
+    display: none;
+}
+
+@media screen and (max-width: 860px) {
+.hamburger-menu {
+    display: flex;
+}
+
+/* Hamburger Menu */
+#hamburgerMenuContainer {
+    display: none;
+}
+
+.hamburger-menu {
+    display: flex;
+    z-index: 10;
+    height: 25px;
+    transition: all 1s ease-in-out;
+    justify-content: center;
+}
+
+.hamburger-menu:hover {
+    cursor: pointer;
+}
+
+.hamburger-menu span:after,
+.hamburger-menu span:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 9px;
+}
+
+.hamburger-menu span:after {
+    top: 18px;
+}
+
+.hamburger-menu span {
+    position: relative;
+    display: block;
+}
+
+.hamburger-menu span,
+.hamburger-menu span:after,
+.hamburger-menu span:before {
+    width: 25px;
+    height: 3px;
+    background-color: #07f;
+    transition: all 0.3s;
+    backface-visibility: hidden;
+    border-radius: 2px;
+}
+
+
+#hamburgerMenuContainer.toggle-active .hamburger-menu span:before {
+    transform: rotate(400deg) translate(-1px, 0px);
+}
+
+#hamburgerMenuContainer.toggle-active .hamburger-menu span:after {
+    transform: rotate(-400deg) translate(6px, -7px);
+}
+
+#hamburgerMenuContainer.toggle-active .hamburger-menu span {
+    background-color: transparent;
+}
+
+
+#closeMobileMenuButton {
+    display: block;
+}
+
+#menuBarWrapper {
+    display: none;
+}
+
+.hamburgerWrapper {
+    position: fixed !important;
+    bottom: 0;
+    justify-content: center;
+    right: 0;
+    width: 100%;
+    z-index: 111;
+    display: flex;
+    background: #07f;
+    border-top: 1px solid #000;
+}
+
+.iconLinks {
+    color: #fff;
+    font-size: 1.6rem;
+    width: 25%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 10px 0;
+    text-decoration: none;
+}
+
+.iconLinks svg {
+    font-size: 2.4rem;
+}
+
+#hamburgerMenuContainer {
+    display: flex;
+    padding-top: 5px;
+    width: 50px;
+    align-items: center;
+    background: #fff;
+    justify-content: center;
+    border-radius: 50%;
+    height: 50px;
+    bottom: 25px;
+    box-shadow: 0px 2px 5px 2px #0000005c;
+    position: relative;
+}
+
+#closeMobileMenuButton.fa-times {
+    color: #fff;
+    right: 7%;
+    top: 20px;
+    position: fixed;
+    font-size: 3rem;
+    z-index: 11;
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+}
+
+#closeMobileMenuButton.fa-times.on {
+    opacity: 1;
+}
+
+
+#mobileMenuWrapper {
+    position: fixed;
+    z-index: 100;
+    height: 100%;
+    background: #07f;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    visibility: hidden;
+    transform: translateY(100%);
+    transition: transform 350ms ease-in-out;
+}
+
+#mobileMenuWrapper.mobileOn {
+    width: 100%;
+    visibility: visible;
+}
+
+#mobileMenuWrapper.translateUp {
+    transform: translateY(0%);
+}
+
+#secondaryMobileMenu.translateUpTwo {
+    transform: translateY(225px);
+    visibility: visible;
+}
+
+#mobileMenuOverlay {
+    width: 100%;
+    z-index: 10;
+    height: 100%;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.6);
+    right: 0;
+    opacity: 0;
+    visibility: hidden;
+}
+
+#mobileMenuOverlay.fadeIn {
+    visibility: visible;
+}
+
+#mobileMenu {
+    display: flex;
+    margin-top: 20px;
+    flex-direction: column;
+    width: 100%;
+}
+
+.mobileLi {
+    list-style: none;
+    font-size: 2rem;
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: 1px solid #d3d1d1;
+    position: relative;
+}
+
+.mobileLinks {
+    color: #000;
+    font-size: 2.4rem;
+}
+}

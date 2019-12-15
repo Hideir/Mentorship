@@ -10,6 +10,7 @@ import AboutPage from './components/About';
 import InterestListPage from './InterestListPage';
 import ProfileCreationPage from './components/ProfileCreationPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
+import MobileMenu from './components/MobileMenu/MobileMenu';
 
 function App() {
   // Utilize redux or context api to have global state or lift state up. Or else i will create a 'user' object in app to pass the data
@@ -17,11 +18,11 @@ function App() {
     email: '',
     interests: [],
   });
-  console.log('App rendered');
   return (
     <Router>
         <div className="App">
           <DesktopNavigation />
+          <MobileMenu />
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/about" component={AboutPage} />
