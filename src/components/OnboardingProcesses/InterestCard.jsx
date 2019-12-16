@@ -1,6 +1,6 @@
 import React,{useState} from 'react'
 import S from 'styled-components';
-import '../App.css';
+import '../../App.css';
 
 const InterestCard = (props) => {
     const {selectedInterests, setSelectedInterests, interests} = props;

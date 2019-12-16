@@ -2,15 +2,15 @@ import React,{useState} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 
-import DesktopNavigation from './components/DesktopNavigation';
+import DesktopNavigation from './components/Menus/DesktopNavigation';
 import HomePage from './components/HomePage';
-import LoginForm from './components/LoginForm';
-import SignupForm from './components/SignupForm';
+import LoginForm from './components/Forms/LoginForm/LoginForm';
+import SignupForm from './components/Forms/SignupForm/SignupForm';
 import AboutPage from './components/About';
-import InterestListPage from './InterestListPage';
-import ProfileCreationPage from './components/ProfileCreationPage';
+import InterestListPage from './components/OnboardingProcesses/InterestListPage';
+import ProfileCreationPage from './components/OnboardingProcesses/ProfileCreationPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
-import MobileMenu from './components/MobileMenu/MobileMenu';
+import MobileMenu from './components/Menus/MobileMenu/MobileMenu';
 
 function App() {
   // Utilize redux or context api to have global state or lift state up. Or else i will create a 'user' object in app to pass the data

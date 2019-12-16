@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import axios from 'axios';
-import CredentialsForm from './CredentialsForm';
+import CredentialsForm from '../CredentialsForm';
 // import {apiKey} from './config';
 
   const SignupForm = (props) => {

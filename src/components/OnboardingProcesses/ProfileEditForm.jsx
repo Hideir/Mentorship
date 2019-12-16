@@ -2,7 +2,6 @@ import React,{useState} from 'react';
 import axios from 'axios';
 import S from 'styled-components';
 import {withRouter} from 'react-router-dom';
-// import { StyledText, ErrorMessage} from './StyledComponents/FormStyledComponents';
 
 const ProfileEditForm = (props) => {
     // Set up State

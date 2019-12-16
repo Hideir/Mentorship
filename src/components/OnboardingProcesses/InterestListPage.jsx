@@ -1,6 +1,6 @@
 import React from "react";
 import S from "styled-components";
-import OnboardInterestList from "./components/OnboardInterestList";
+import OnboardInterestList from "./OnboardInterestList";
 
 
 const InterestListPage = ({setNewSignedUpUser, newSignedUpUser}) => {

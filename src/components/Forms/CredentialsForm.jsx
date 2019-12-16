@@ -1,6 +1,6 @@
-import React,{useState} from "react";
+import React from "react";
 // import axios from "axios";
-import IsLoadingComponent from './StyledComponents/IsLoadingComponent.jsx';
+import IsLoadingComponent from '../StyledComponents/IsLoadingComponent.jsx';
 
 import {
   FormContainer,
@@ -13,7 +13,7 @@ import {
   StyledSignup,
   StyledButton,
   StyledText
-} from "./StyledComponents/FormStyledComponents";
+} from "../StyledComponents/FormStyledComponents";
 let buttonValue = '';
 const CredentialsForm = props => {
 
