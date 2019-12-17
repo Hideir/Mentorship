@@ -24,9 +24,9 @@ const LoginForm = props => {
       )
       .then(function (response) {
         // When our server responds that we made a good request we push our user to the home component.
-        console.log(response.headers)
-        const token = response.headers.token;
-        localStorage.setItem('token', token);
+        const {token} = response.data;
+        // Set token to local storage
+        localStorage.setItem('auth-token', token);
         setIsValidFlag(true);
         props.history.push("/");
       })

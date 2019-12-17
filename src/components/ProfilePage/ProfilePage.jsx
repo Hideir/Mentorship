@@ -12,9 +12,12 @@ const ProfilePage = (props) => {
 	const emailAddr = props.newSignedUpUserEmail;
 	const {firstName, lastName, interests,state, city, tagLine, education} = profileData;
 	useEffect( () => {
+		// retrieve the token from local storage
+		let token = localStorage.getItem('auth-token');
 			 axios.post('/profile', {emailAddr}, {  
 				headers: {
-				  'content-type': 'application/json' // Tell the server we are sending this over as JSON
+				  'content-type': 'application/json', // Tell the server we are sending this over as JSON
+				  'authorization': token, // Send the token in the header from the client.
 				},
 			  })
 			.then( async response => {
