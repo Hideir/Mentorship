@@ -5,7 +5,8 @@ import S from 'styled-components';
 import Logo from '../Logos/Logo';
 
 
-const DesktopNavigation = () => {
+const DesktopNavigation = (props) => {
+
     return(
         <StyledHeader>
             <StyledNavigationContainer>
@@ -16,19 +17,16 @@ const DesktopNavigation = () => {
                             <StyledLink to="/">Home</StyledLink>
                         </StyledLi>
                         <StyledLi>
-                            <StyledLink to="/profile">Profile</StyledLink>
+                            {props.authToken ? <StyledLink to="/profile">Profile</StyledLink> : null }
                         </StyledLi>
                         <StyledLi>
                             <StyledLink to="/about">About</StyledLink>
                         </StyledLi>
                         <StyledLi>
-                            <StyledLink to="/signup/interests">Interests</StyledLink>
+                            {props.authToken ? <StyledLink onClick={props.signOut} to="/">Log Out</StyledLink> : <StyledLink to="/login">Login</StyledLink>}
                         </StyledLi>
                         <StyledLi>
-                            <StyledLink to="/login">Login</StyledLink>
-                        </StyledLi>
-                        <StyledLi>
-                            <StyledLink secondary="true" to="signup">Get Started</StyledLink>
+                            {props.authToken ? null : <StyledLink secondary="true" to="signup">Get Started</StyledLink>}
                         </StyledLi>
                     </StyledUL>
                 </StyledNavigation>

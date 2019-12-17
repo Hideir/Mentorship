@@ -11,6 +11,7 @@ const LoginForm = props => {
   const [isValidFlag, setIsValidFlag] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
+ 
   const handleSignUp = event => {
     event.preventDefault();
     setIsLoading(true);
@@ -27,6 +28,7 @@ const LoginForm = props => {
         const {token} = response.data;
         // Set token to local storage
         localStorage.setItem('auth-token', token);
+        props.signIn();
         setIsValidFlag(true);
         props.history.push("/");
       })
@@ -40,7 +42,7 @@ const LoginForm = props => {
   };
   return (
     <>
-        <CredentialsForm           
+        <CredentialsForm
           isLoading={isLoading}
           isLoginPage={true}
           isValidFlag={isValidFlag} 
