@@ -14,10 +14,10 @@ import {
   StyledButton,
   StyledText
 } from "../StyledComponents/FormStyledComponents";
+
 let buttonValue = '';
+
 const CredentialsForm = props => {
-
-
   if(props.isLoginPage && props.isLoading === false){
        buttonValue = "Log In";
        
@@ -28,7 +28,6 @@ const CredentialsForm = props => {
   } else if( props.isLoading === true && props.isLoginPage) {
     buttonValue = "Logging In";
 }
-  console.log(buttonValue);
 
   return (
     <FormContainer>
@@ -55,7 +54,7 @@ const CredentialsForm = props => {
           <StyledInput
             label="Email"
             type="email"
-            onChange={props.handleEmail}
+            onChange={(event) => props.handleEmail(event.target.value)}
             value={props.email.value}
           />
           {!props.isLoginPage ? <p style={{fontSize: '14px', fontStyle: 'italic'}}>Email must have a minimum of 12 characters</p> : null}
@@ -65,7 +64,7 @@ const CredentialsForm = props => {
           <StyledInput
             label="Password"
             type="password"
-            onChange={props.handlePassword}
+            onChange={(event) => props.handlePassword(event.target.value)}
             value={props.password.value}
           />
           {!props.isLoginPage ? <p style={{fontSize: '14px', fontStyle: 'italic'}}>Password must have a minimum of 8 characters</p> : null}

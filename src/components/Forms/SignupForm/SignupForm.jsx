@@ -1,21 +1,15 @@
 import React,{useState} from 'react';
 import axios from 'axios';
 import CredentialsForm from '../CredentialsForm';
+import { useFormInputControl } from "../../../hooks/useFormInputControl";
 // import {apiKey} from './config';
 
   const SignupForm = (props) => {
     // create a user object.
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [email, setEmail, handleEmail] = useFormInputControl('');
+    const [password, setPassword, handlePassword] = useFormInputControl('');
     const [isValidFlag, setIsValidFlag] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
-
-    const handleEmail = (event) => {
-      setEmail(event.target.value);
-    }
-    const handlePassword = (event) => {
-      setPassword(event.target.value);
-    }
 
     const handleSignUp = (event) => {
       event.preventDefault();
