@@ -35,8 +35,8 @@ function App() {
         setIsLoggedIn(false);
         localStorage.removeItem('auth-token');
       }
-
   }
+  
   return (
     <Router>
         <div className="App">
