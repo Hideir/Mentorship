@@ -1,7 +1,7 @@
 import React,{useState, useEffect} from 'react';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
-
+import {ProtectedRoute} from './ProtectedRoute';
 import DesktopNavigation from './components/Menus/DesktopNavigation';
 import HomePage from './components/HomePage';
 import LoginForm from './components/Forms/LoginForm/LoginForm';
@@ -28,6 +28,7 @@ function App() {
       // Delete token from local storage on sign out.
       setAuthToken(localStorage.removeItem('auth-token'));
   }
+  console.log(authToken);
   return (
     <Router>
         <div className="App">
@@ -36,7 +37,7 @@ function App() {
           <Switch>
             <Route exact path="/" component={HomePage} />
             <Route exact path="/about" component={AboutPage} />
-            <Route exact path="/profile" render={props => <ProfilePage {...props} newSignedUpUserEmail={newSignedUpUser.email}/> } />
+            <ProtectedRoute  path="/profile" component={ProfilePage}  newSignedUpUserEmail={newSignedUpUser.email} />
             <Route exact path="/login" render={props => <LoginForm {...props} signIn={signIn} /> } />
             <Route exact path="/signup" render={props => <SignupForm {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser} /> } />
             <Route exact path="/signup/interests" render={props => <InterestListPage {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser}/> } />
