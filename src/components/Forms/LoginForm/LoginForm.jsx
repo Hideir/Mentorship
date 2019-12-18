@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import axios from "axios";
 import CredentialsForm from '../CredentialsForm';
 import { useFormInputControl } from "../../../hooks/useFormInputControl";
-import { Redirect } from "react-router-dom";
 
 
 
@@ -11,7 +10,6 @@ const LoginForm = props => {
   const [password, setPassword, handlePassword] = useFormInputControl("");
   const [isValidFlag, setIsValidFlag] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
-  const [redirectToReferrer, setRedirectToReferrer] = useState(false);
 
  
   const handleSignUp = event => {
@@ -32,12 +30,6 @@ const LoginForm = props => {
         localStorage.setItem('auth-token', token);
         props.signIn();
         setIsValidFlag(true);
-        setRedirectToReferrer(true);
-        // Redirect them to the last page.
-        const {from}  = props.location.state || {from: {pathname: '/' } }
-        if(redirectToReferrer === true) {
-          return <Redirect to={from} />
-        }
         // Redirect them to the homepage on sucessfull login.
         props.history.push("/");
       })
