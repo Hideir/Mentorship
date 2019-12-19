@@ -1,7 +1,8 @@
 import React from 'react';
 import {Link}  from "react-router-dom";
 import S from 'styled-components';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Logo from '../Logos/Logo';
 
 
@@ -28,6 +29,12 @@ const DesktopNavigation = (props) => {
                         <StyledLi>
                             {props.IsLoggedIn ? null : <StyledLink secondary="true" to="signup">Get Started</StyledLink>}
                         </StyledLi>
+                        {props.IsLoggedIn 
+                            ?<StyledLi>
+                                <StyledLink  to="/search"><FontAwesomeIcon icon={faSearch}/></StyledLink> 
+                            </StyledLi>
+                            : null 
+                        }
                     </StyledUL>
                 </StyledNavigation>
             </StyledNavigationContainer>

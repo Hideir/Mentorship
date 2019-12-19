@@ -6,6 +6,7 @@ import DesktopNavigation from './components/Menus/DesktopNavigation';
 import HomePage from './components/HomePage';
 import LoginForm from './components/Forms/LoginForm/LoginForm';
 import SignupForm from './components/Forms/SignupForm/SignupForm';
+import SearchPage from './components/SearchPage';
 import AboutPage from './components/About';
 import InterestListPage from './components/OnboardingProcesses/InterestListPage';
 import ProfileCreationPage from './components/OnboardingProcesses/ProfileCreationPage';
@@ -44,6 +45,7 @@ function App() {
           <MobileMenu />
           <Switch>
             <Route exact path="/" component={HomePage} />
+            <ProtectedRoute exact path="/search" component={SearchPage} IsLoggedIn={IsLoggedIn}/>
             <Route exact path="/about" component={AboutPage} />
             <ProtectedRoute  path="/profile" component={ProfilePage} IsLoggedIn={IsLoggedIn}  newSignedUpUserEmail={newSignedUpUser.email} />
             <Route exact path="/login" render={props => <LoginForm {...props} signIn={signIn} /> } />
