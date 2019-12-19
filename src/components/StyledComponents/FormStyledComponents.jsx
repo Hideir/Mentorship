@@ -12,6 +12,7 @@ const FormContainer = S.div`
   height: 100vh;
   background-position: center;
   background-size: cover;
+  background-color: ${props => props.primary ? '#000' :'#fff' }
 `;
 const Form = S.form`
   width: 30%;
@@ -19,7 +20,7 @@ const Form = S.form`
   max-width: 500px;
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: ${props => props.primary ? '#000' :'#fff' }
   justify-content: center;
   align-items: center;
   border-radius: 25px;
@@ -32,14 +33,14 @@ const Form = S.form`
 `;
 const Title = S.h2`
   font-size: 40px;
-  color: #000;
+  color: ${props => props.primary ? '#fff' : '#000' };
   text-transform: uppercase;
   margin: 0 auto;
 `;
 const StyledLink = S(Link)`
   font-size: 18px;
   text-decoration: underline;
-  color: ${props => props.errorsignup ? '#0077ff' : '#666'};
+  color: ${props => props.primary ? '#0077ff' :'#666' };
   transition: all ease-in-out 100ms;
   :hover {
       color: #000;
@@ -58,7 +59,7 @@ const StyledButton = S.button`
   font-weight: 600;
   align-items: center;
   font-size: 2rem;
-  color: ${props => (props.secondary ? "#fff" : "#000")};
+  color: ${props => props.primary ? '#000' :'#fff' };
   padding: 1rem 2.4rem;
   border-radius: 20px;
   text-decoration: none;
@@ -93,13 +94,15 @@ const StyledSignup = S(Link)`
   }
 `;
 const StyledText = S.span`
-font-size: 1.8rem;
-display: flex;
-text-align: ${props => (props.secondary ? "left" : "center")}
-width: ${props => (props.secondary ? "80%" : "auto")}
-margin: 0 auto;
+  font-size: 1.8rem;
+  display: flex;
+  text-align: ${props => (props.secondary ? "left" : "center")}
+  width: ${props => (props.secondary ? "80%" : "auto")}
+  margin: 0 auto;
+  color: ${props => props.primary ? '#fff' : '#000'};
 `;
 const StyledLabel = S.label`
+  color: ${props => props.primary ? '#fff' : '#000'};
   font-size: 1.8rem;
   display: flex;
   flex-direction: column;

@@ -6,10 +6,6 @@ import {Route, Redirect} from 'react-router-dom';
 // pass in an object, with the Component as a value to 'component' then spread the rest of the object in.
 // We also pass in our individual props we prop drilled.
 export const ProtectedRoute = ({component: Component, newSignedUpUserEmail, IsLoggedIn, ...restOfProps}) => {
-    // const [isLoggedIn, setSome] = useState(false);
-    // if(authToken) {
-
-    // }
     return(
     <Route {...restOfProps} render={props => (
         IsLoggedIn 

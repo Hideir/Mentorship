@@ -1,7 +1,7 @@
 import React from 'react';
 import S from 'styled-components';
 import ProfileEditForm from './ProfileEditForm.jsx';
-
+import AppContext from '../../context';
 const ProfileCreationPage = (props) => {
     
     return(

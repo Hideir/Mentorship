@@ -5,7 +5,6 @@ import {interestsArray} from './interestData';
 import {withRouter} from 'react-router-dom';
 
 const OnboardInterestList = (props) => {
-    console.log(props);
     let cardCounter = 1;
     const [selectedInterests, setSelectedInterests] = useState([]);
 

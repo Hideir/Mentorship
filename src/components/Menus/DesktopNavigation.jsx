@@ -1,39 +1,55 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import {Link}  from "react-router-dom";
 import S from 'styled-components';
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Logo from '../Logos/Logo';
+import AppContext from '../../context';
 
 
 const DesktopNavigation = (props) => {
-
+    const darkMode = useContext(AppContext);
+    console.log(darkMode);
     return(
         <StyledHeader>
             <StyledNavigationContainer>
                 <Logo />
+                <div className="dark-mode__toggle">
+                    <div
+                    onClick={props.toggleMode}
+                    className={darkMode? 'toggle toggled' : 'toggle'}
+                    />
+                </div>
                 <StyledNavigation>
                     <StyledUL>
                         <StyledLi>
-                            <StyledLink to="/">Home</StyledLink>
+                            <StyledLink primary={darkMode} to="/">Home</StyledLink>
                         </StyledLi>
                         <StyledLi>
-                            {props.IsLoggedIn ? <StyledLink to="/profile">Profile</StyledLink> : null }
+                            {props.IsLoggedIn ? <StyledLink primary={darkMode} to="/profile">Profile</StyledLink> : null }
                         </StyledLi>
                         <StyledLi>
-                            <StyledLink to="/about">About</StyledLink>
+                            <StyledLink primary={darkMode} to="/about">About</StyledLink>
                         </StyledLi>
                         <StyledLi>
-                            {props.IsLoggedIn ? <StyledLink onClick={props.signOut} to="/">Log Out</StyledLink> : <StyledLink to="/login">Login</StyledLink>}
+                            {props.IsLoggedIn ? <StyledLink onClick={props.signOut} primary={darkMode} to="/">Log Out</StyledLink> : <StyledLink primary={darkMode} to="/login">Login</StyledLink>}
                         </StyledLi>
                         <StyledLi>
-                            {props.IsLoggedIn ? null : <StyledLink secondary="true" to="signup">Get Started</StyledLink>}
+                            {props.IsLoggedIn ? null : <StyledLink style={{color: '#fff'}}secondary="true" to="signup">Get Started</StyledLink>}
                         </StyledLi>
+                        {props.IsLoggedIn 
+                            ?<StyledLi>
+                                <StyledLink primary={darkMode} to="/search"><FontAwesomeIcon icon={faSearch}/></StyledLink> 
+                            </StyledLi>
+                            : null 
+                        }
                     </StyledUL>
                 </StyledNavigation>
             </StyledNavigationContainer>
         </StyledHeader>
     );
 }
+
 
 export default DesktopNavigation;
 
@@ -43,6 +59,7 @@ const StyledHeader = S.header`
     padding-bottom: 2rem;
     position: fixed;
     top: 0;
+    z-index: 10;
     @media (max-width: 860px) {
         display: none;
       }
@@ -78,7 +95,7 @@ const StyledLink = S(Link)`
     font-weight: 600;
     align-items: center;
     font-size: 1.6rem;
-    color: ${props => props.secondary ? '#fff' : '#000'};
+    color: ${props => props.primary ? '#fff' : '#000'};
     height: 2rem;
     padding: 1rem 2.4rem;
     border-radius: 20px;
@@ -92,4 +109,12 @@ const StyledLink = S(Link)`
         box-shadow: 0px 2px 5px 0px #464545;
         transform: scale(1.1);
     }
+`;
+const StyledInput = S.input`
+    display: ${props => props.enabled ? 'block' : 'none'};
+    height: 25px;
+    padding: 10px;
+    font-size: 16px;
+    outline: none;
+    border: 1px solid #000;
 `;

@@ -1,7 +1,7 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect, useContext} from 'react';
 import S from 'styled-components';
 import axios from 'axios';
-
+import AppContext from '../../context';
 import ProfilePagePersonalInformation from './ProfilePagePersonalInformation';
 import ProfilePageInterests from './ProfilePageInterests';
 import ProfilePageEducationSection from './ProfilePageEducationSection';
@@ -11,6 +11,7 @@ const ProfilePage = (props) => {
 	const [profileData, setProfileData] = useState({})
 	const emailAddr = props.newSignedUpUserEmail;
 	const {firstName, lastName, interests,state, city, tagLine, education} = profileData;
+	const darkMode = useContext(AppContext);
 	useEffect( () => {
 		// retrieve the token from local storage
 		let token = localStorage.getItem('auth-token');
@@ -27,7 +28,7 @@ const ProfilePage = (props) => {
 	},[])
 
 	return(
-		<PageWrapper>
+		<PageWrapper primary={darkMode}>
 			<ProfileContainer>
 				<ProfileHeaderContainer>
 					<ProfileHeaderTrim></ProfileHeaderTrim>
@@ -49,7 +50,8 @@ const PageWrapper = S.main`
 	width 100%;
 	display: flex;
 	flex-flow: row wrap;
-	margin-top: 140px;
+	padding-top: 140px;
+	background-color: ${props => props.primary ? '#000' : '#fff'};
 `;
 const ProfileContainer = S.div`
 	width: 50%;

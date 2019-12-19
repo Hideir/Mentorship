@@ -1,14 +1,14 @@
-import React from "react";
+import React,{useContext} from "react";
 import S from "styled-components";
 import OnboardInterestList from "./OnboardInterestList";
-
+import AppContext from '../../context';
 
 const InterestListPage = ({setNewSignedUpUser, newSignedUpUser}) => {
-
+  const darkMode = useContext(AppContext);
   return (
-    <StyledMainSection>
+    <StyledMainSection primary={darkMode}>
       <OnboardingAboutPageContainer>
-        <PageTitle>Select some things you are interested in.</PageTitle>
+        <PageTitle primary={darkMode}>Select some things you are interested in.</PageTitle>
         <SubHeading>
           Don't worry, you will be able to change these later.
         </SubHeading>
@@ -20,8 +20,9 @@ const InterestListPage = ({setNewSignedUpUser, newSignedUpUser}) => {
 export default InterestListPage;
 
 const StyledMainSection = S.main`
-  margin-top: 140px;
-  margin-bottom: 40px;
+  padding-top: 140px;
+  padding-bottom: 40px;
+  background-color: ${props => props.primary ? '#000' : '#fff'}
 `;
 const OnboardingAboutPageContainer = S.div`
     display: flex;
@@ -32,6 +33,7 @@ const OnboardingAboutPageContainer = S.div`
 const PageTitle = S.h2`
     font-size: 4rem;
     width: 100%;
+    color: ${props => props.primary ? '#fff' : '#000'}
 `;
 const SubHeading = S.p`
     font-size: 2.4rem;

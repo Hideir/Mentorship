@@ -1,14 +1,17 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import S from 'styled-components';
-import AppLogoImage from './AppLogoImage.svg';
+import AppLogoImage from './Logo.svg';
 import {Link} from 'react-router-dom';
+import AppContext from '../../context';
 
 
 const Logo = () => {
+    const darkMode = useContext(AppContext);
     return(
         <StyledLink to="/">
             <LogoContainerDiv>
                 <StyledLogo></StyledLogo>
+                <LogoText primary={darkMode}>Friendlier</LogoText>
             </LogoContainerDiv>
         </StyledLink>
     );
@@ -28,4 +31,9 @@ const StyledLogo = S.div`
 `;
 const StyledLink = S(Link)`
     text-decoration: none;
+`;
+const LogoText = S.p`
+    font-size: 2rem;
+    text-align: center;
+    color: ${props => props.primary ? '#fff' : '#000'};
 `;

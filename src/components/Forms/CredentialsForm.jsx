@@ -1,7 +1,7 @@
-import React from "react";
+import React,{useContext} from "react";
 // import axios from "axios";
 import IsLoadingComponent from '../StyledComponents/IsLoadingComponent.jsx';
-
+import AppContext from '../../context';
 import {
   FormContainer,
   Form,
@@ -15,9 +15,11 @@ import {
   StyledText
 } from "../StyledComponents/FormStyledComponents";
 
+
 let buttonValue = '';
 
 const CredentialsForm = props => {
+  const darkMode = useContext(AppContext);
   if(props.isLoginPage && props.isLoading === false){
        buttonValue = "Log In";
        
@@ -30,10 +32,10 @@ const CredentialsForm = props => {
 }
 
   return (
-    <FormContainer>
+    <FormContainer primary={darkMode} >
     {props.isLoading ? <IsLoadingComponent /> : null}
-      <Form action={props.isLoginPage ? 'login' : 'signup'} method="post" onSubmit={props.handleSignUp}>
-        <Title>{props.isLoginPage === true ? "Log In" : "Sign Up"}</Title>
+      <Form primary={darkMode} action={props.isLoginPage ? 'login' : 'signup'} method="post" onSubmit={props.handleSignUp}>
+        <Title primary={darkMode} >{props.isLoginPage === true ? "Log In" : "Sign Up"}</Title>
         {props.isValidFlag === false && props.isLoginPage ? (
           <ErrorMessage>
             That Friendlier account doesn't exist. Enter a different account or{" "}
@@ -49,7 +51,7 @@ const CredentialsForm = props => {
             </StyledLink>
           </ErrorMessage>
         ) : null}
-        <StyledLabel secondary="true">
+        <StyledLabel primary={darkMode}>
           Email
           <StyledInput
             label="Email"
@@ -59,7 +61,7 @@ const CredentialsForm = props => {
           />
           {!props.isLoginPage ? <p style={{fontSize: '14px', fontStyle: 'italic'}}>Email must have a minimum of 12 characters</p> : null}
         </StyledLabel>
-        <StyledLabel secondary="true">
+        <StyledLabel primary={darkMode}>
           Password
           <StyledInput
             label="Password"
@@ -72,7 +74,7 @@ const CredentialsForm = props => {
         <StyledButton secondary="true">
           {buttonValue}
         </StyledButton>
-        <StyledText>
+        <StyledText primary={darkMode}>
          {props.isLoginPage ? 'New to Friendlier?' : 'Already have an account?'}
          {props.isLoginPage ? <StyledSignup to="/signup" primary="true">Sign Up</StyledSignup> : <StyledSignup to="/login" primary="true">Log In</StyledSignup>}
         </StyledText>
