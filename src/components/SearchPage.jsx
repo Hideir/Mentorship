@@ -1,28 +1,76 @@
-import React,{useContext} from 'react';
+import React,{useState,useContext, useEffect} from 'react';
 import SearchForm from './Form';
 import S from 'styled-components';
 import {interestsArray} from './OnboardingProcesses/interestData';
-import BGImg from './homepage_background.svg';
+import axios from 'axios';
+import UserCard from './UserCard';
 
 
 
 const SearchPage = () => {
+    let token = localStorage.getItem('auth-token');
+    const [searchInput, setSearchInput] = useState('');
+    const [matchedUsers, setMatchedUsers] = useState([]);
+
+    useEffect( () => {
+        axios.post(`/search`, {params : {test: 'randomData'}},
+        {
+          headers: {
+            "content-type": "application/json", // Tell the server we are sending this over as JSON
+            'authorization': token // Send the token in the header from the client.
+        }
+      }
+    )
+    .then( (response) => {
+      // When our server responds that we made a good request we push our user to the home component.
+        console.log(response);
+    })
+    .catch( (error) => {
+      console.log("here is the error" + error);
+    });
+    },[]);
+    const handleSearch = (event) => {
+        event.preventDefault();
+        axios.post(`/search`,{ searchInput },
+        {
+          headers: {
+            "content-type": "application/json", // Tell the server we are sending this over as JSON
+            'authorization': token, // Send the token in the header from the client.
+        }
+      }
+    )
+    .then( (response) => {
+      // When our server responds that we made a good request we push our user to the home component.
+        setMatchedUsers(response.data.matchedRows);
+    })
+    .catch( (error) => {
+      console.log("here is the error" + error);
+    });
+    }
+    const handleChanges = async (event) => {
+         await setSearchInput(event.target.value);
+    }
+
     return(
-        <HeroSectionWrapper >
+    <HeroSectionWrapper >
         <ContentContainer >
             <TextContentContainer>
-            <StyledTitle >Search</StyledTitle>
+            <StyledTitle>Search</StyledTitle>
             </TextContentContainer>
-            <SearchForm />
+            <SearchForm handleChanges={handleChanges} handleSearch={handleSearch} />
             <SelectedInterestUl>
                     {interestsArray.map( (interests, index) => {
                         if(index <= 6){
                             return <SelectedInterestTags >{interests.interestName}</SelectedInterestTags>
                         }
                     })}
-
             </SelectedInterestUl>
         </ContentContainer>
+        <UserCardsContainer>
+            {matchedUsers && matchedUsers.map( (user) => {
+                return <UserCard user={user} />
+            })}
+        </UserCardsContainer>
     </HeroSectionWrapper>
     );
 }
@@ -37,8 +85,6 @@ const HeroSectionWrapper = S.section`
   align-items: center;
   flex-flow: row wrap;
   background-repeat: no-repeat;
-  background-image: url(${BGImg});
-  height: 100vh;
   background-position: center;
   background-size: cover;
 
@@ -91,4 +137,14 @@ const SelectedInterestTags = S.li`
     padding: 10px 20px;
     margin: 0 10px 10px 0;
     border-radius: 1rem;
+`;
+
+// Card Container 
+const UserCardsContainer = S.div`
+    display: flex;
+    flex-flow: column wrap;
+    width: 100%;
+    width: 40%;
+    border-radius: 10px;
+    margin: 20px auto;
 `;

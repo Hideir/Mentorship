@@ -15,7 +15,14 @@ import MobileMenu from './components/Menus/MobileMenu/MobileMenu';
 
 function App() {
   // Utilize redux or context api to have global state or lift state up. Or else i will create a 'user' object in app to pass the data
-  const [IsLoggedIn, setIsLoggedIn] = useState(false);
+  const [IsLoggedIn, setIsLoggedIn] = useState( () => {
+    if(localStorage.getItem('auth-token')) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  });
   const [newSignedUpUser, setNewSignedUpUser] = useState({
     email: '',
     interests: [],
@@ -27,7 +34,6 @@ function App() {
     if(authToken) {
       setIsLoggedIn(true);
     }
-
   }
   const signOut = () => {
       // Delete token from local storage on sign out.
@@ -37,7 +43,6 @@ function App() {
         localStorage.removeItem('auth-token');
       }
   }
-  
   return (
     <Router>
         <div className="App">

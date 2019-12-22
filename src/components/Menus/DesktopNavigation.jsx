@@ -50,6 +50,8 @@ const StyledHeader = S.header`
     padding-bottom: 2rem;
     position: fixed;
     top: 0;
+    background-color: white;
+    box-shadow: 1px 1px 6px #818181;
     @media (max-width: 860px) {
         display: none;
       }

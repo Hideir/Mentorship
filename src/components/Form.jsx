@@ -3,10 +3,10 @@ import S from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 
-const SearchForm = () => {
+const SearchForm = (props) => {
   return (
-    <StyledForm>
-        <StyledInput type="text" placeholder="Search for liked minded people" />
+    <StyledForm action="search" method="post" onSubmit={props.handleSearch}>
+        <StyledInput onChange={props.handleChanges} type="text" placeholder="Search for liked minded people" />
         <Styledbutton type='submit'><FontAwesomeIcon icon={faSearch}/></Styledbutton>
     </StyledForm>
   );
