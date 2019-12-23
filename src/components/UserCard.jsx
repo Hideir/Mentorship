@@ -1,19 +1,21 @@
 import React from 'react';
 import S from 'styled-components'
 import {Link} from 'react-router-dom';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const UserCard = (props) => {
-    console.log(props);
     return(
         <CardContainer>
         <ContentContainer>
             <ProfileImage></ProfileImage>
                 <ProfileContentContainer>
-                    <StyledLink>{props.user.firstName} {props.user.LastName}</StyledLink>
+                    <StyledLink>{props.user.firstName.charAt(0).toUpperCase() + props.user.firstName.substring(1)} {props.user.LastName}</StyledLink>
                     <StyledText primary={true}>{props.user.tagLine}</StyledText>
                     <StyledText primary={false}>{props.user.state} {props.user.city}</StyledText>
                 </ProfileContentContainer>
         </ContentContainer>
+        <StyledLink  to="/search"><FontAwesomeIcon icon={faEnvelope}/></StyledLink> 
             <InterestsUl>
                 {props.user.interests.map( (interest) => <InterestsTags>{interest}</InterestsTags>)}
             </InterestsUl>
@@ -28,6 +30,7 @@ const CardContainer = S.div`
     flex-flow: row wrap;
     margin-top: 20px;
     padding: 20px;
+    justify-content: space-between;
     border-bottom: 1px solid #b7b7b7;
 `;
 const ContentContainer = S.div`
@@ -44,12 +47,18 @@ const StyledLink = S(Link)`
     font-size: 2.6rem;
     color: #0077ff;
     text-align: left;
+    text-decoration: none;
+    width: fit-content;
+    &:hover {
+        cursor: pointer;
+        color: #000;
+    }
 `;
 const StyledText = S.p`
     font-size: ${props => props.primary ? '2.2rem' : '2rem'};
     color: #000;
     width: 100%;
-    margin: 10px 0;
+    margin-bottom: 5px;
     text-align: left;
 `;
 const InterestsUl = S.ul`
@@ -61,10 +70,9 @@ const InterestsUl = S.ul`
 `;
 const InterestsTags = S.li`
     width: auto;
-    border: 1px solid #000;
     list-style: none;
     font-size: 1.6rem;
-    margin-right: 10px;
+    margin-left: 10px;
     padding: 10px;
     border-radius: 5px;
     background-color: #0077ff;

@@ -52,6 +52,7 @@ const StyledHeader = S.header`
     top: 0;
     background-color: white;
     box-shadow: 1px 1px 6px #818181;
+    z-index: 10;
     @media (max-width: 860px) {
         display: none;
       }

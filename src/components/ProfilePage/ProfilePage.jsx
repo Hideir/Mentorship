@@ -55,10 +55,10 @@ const ProfileContainer = S.div`
 	width: 50%;
 	display: flex;
 	flex-flow: row wrap;
-	margin: 0 auto;
-	background-color: #d6d5d5
-	border-top-left-radius: 15px;
-	border-top-right-radius: 15px;
+	margin: 100px auto;
+	background-color: #ececec;
+	border-radius: 15px;
+	box-shadow: 0px 3px 10px #666;
 `;
 const ProfileHeaderContainer = S.div`
 	width: 100%;

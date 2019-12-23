@@ -35,6 +35,7 @@ const InterestCard = S.div`
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+    margin-top: 20px;
 `;
 const Text = S.p`
     font-size: 2rem;
