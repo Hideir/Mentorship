@@ -11,6 +11,7 @@ const SearchPage = () => {
     let token = localStorage.getItem('auth-token');
     const [searchInput, setSearchInput] = useState('');
     const [matchedUsers, setMatchedUsers] = useState([]);
+    const [wildCardSearch, setWildCardSearch] = useState(searchInput + '%');
 
     useEffect( () => {
         axios.post(`/search`, {params : {test: 'randomData'}},
@@ -29,8 +30,10 @@ const SearchPage = () => {
       console.log("here is the error" + error);
     });
     },[]);
+
     const handleSearch = (event) => {
         event.preventDefault();
+        setWildCardSearch(searchInput + '%');
         axios.post(`/search`,{ searchInput },
         {
           headers: {
@@ -50,7 +53,6 @@ const SearchPage = () => {
     const handleChanges = async (event) => {
          await setSearchInput(event.target.value);
     }
-
     return(
     <HeroSectionWrapper >
         <ContentContainer >
@@ -66,11 +68,12 @@ const SearchPage = () => {
                     })}
             </SelectedInterestUl>
         </ContentContainer>
-        <UserCardsContainer>
+        {matchedUsers.length > 0 ? <UserCardsContainer>
             {matchedUsers && matchedUsers.map( (user) => {
                 return <UserCard user={user} />
             })}
-        </UserCardsContainer>
+        </UserCardsContainer> : null}
+
     </HeroSectionWrapper>
     );
 }
@@ -93,7 +96,7 @@ const ContentContainer = S.div`
     padding: 20px;
     display: flex;
     flex-direction: column;
-    margin: 200px 0;
+    margin: 200px 0 100px 0;
     background-color: ${props => props.primary ? '#000' : '#fff'};
     box-shadow: 0px 3px 8px #000000;
     width: 60%;
@@ -144,7 +147,9 @@ const UserCardsContainer = S.div`
     display: flex;
     flex-flow: column wrap;
     width: 100%;
-    width: 40%;
-    border-radius: 10px;
+    width: 60%; 
+    border-radius: 5px;
     margin: 20px auto;
+    border: 1px solid #a5a5a5;
+    box-shadow: 0px 3px 8px #b7b7b7;
 `;
