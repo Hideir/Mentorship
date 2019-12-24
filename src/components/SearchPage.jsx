@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import '../App.css';
 import SearchForm from "./Form";
+import PossibleSearchTags from './PossibleSearchTags';
 import S from "styled-components";
 import { interestsArray } from "./OnboardingProcesses/interestData";
 import axios from "axios";
@@ -9,6 +10,8 @@ import UserCard from "./UserCard";
 const SearchPage = () => {
   let token = localStorage.getItem("auth-token");
   // State
+  const [selectedTags, setSelectedTags] = useState([]);
+  
   const [searchInput, setSearchInput] = useState(""); // Users search input
   const [matchedUsers, setMatchedUsers] = useState([]); // Users that match the searched input
   const [numberOfUsers, setNumberOfUsers] = useState( () => { // How many matched users there are.
@@ -62,6 +65,7 @@ const SearchPage = () => {
   const handleChanges = async event => {
     await setSearchInput(event.target.value);
   };
+
   return (
     <HeroSectionWrapper>
       <ContentContainer>
@@ -70,14 +74,12 @@ const SearchPage = () => {
         </TextContentContainer>
         <SearchForm handleChanges={handleChanges} handleSearch={handleSearch} />
         <SelectedInterestUl>
-          {interestsArray.map( (interests,index) => {
-              return (
-                <SelectedInterestTags>
-                  {interests.interestName}
-                </SelectedInterestTags>
-              );
+          {interestsArray.map( (interests, index) =>{
+            return  <PossibleSearchTags index={index} selectedTags={selectedTags} setSelectedTags={setSelectedTags} interests={interests}/>
+
           })}
         </SelectedInterestUl>
+
         {numberOfUsers !== 0 ? <h2 style={{color: 'blue', fontSize: '26px'}}>Number of users: {numberOfUsers}</h2> : null}
       </ContentContainer>
       {matchedUsers == false ? null : (
@@ -128,8 +130,6 @@ const StyledTitle = S.h2`
     text-align: left;
     margin-bottom: 40px;
 `;
-
-// Search Labels
 const SelectedInterestUl = S.ul`
     display: flex;
     list-style: none;
@@ -146,16 +146,6 @@ const SelectedInterestUl = S.ul`
         background-color: transparent;
     }
 `;
-const SelectedInterestTags = S.li`
-    font-size: 1.8rem;
-    background-color: ${props => (props.primary ? "#fff" : "#2f2c2c")};
-    color: ${props => (props.primary ? "#000" : "#fff")};;
-    width: auto;
-    padding: 10px 20px;
-    margin: 0 10px 10px 0;
-    border-radius: 1rem;
-`;
-
 // Card Container
 const UserCardsContainer = S.div`
     display: flex;

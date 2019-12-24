@@ -4,10 +4,8 @@ import '../../App.css';
 
 const InterestCard = (props) => {
     const {selectedInterests, setSelectedInterests, interests} = props;
-
     // State
     const [hasActiveClass, setHasActiveClass] = useState(false);
-
     // Event Handlers
     const clickHandler  =  async () => {
         if(!hasActiveClass) {
