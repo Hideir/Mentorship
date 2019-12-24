@@ -15,9 +15,9 @@ const UserCard = (props) => {
                     <StyledText primary={false}>{props.user.state} {props.user.city}</StyledText>
                 </ProfileContentContainer>
         </ContentContainer>
-        <StyledLink  to="/search"><FontAwesomeIcon icon={faEnvelope}/></StyledLink> 
+        <StyledLink  to="/"><FontAwesomeIcon icon={faEnvelope}/></StyledLink> 
             <InterestsUl>
-                {props.user.interests.map( (interest) => <InterestsTags>{interest}</InterestsTags>)}
+                {props.user.interests.map( (interest,index) => <InterestsTags key={index}>{interest}</InterestsTags>)}
             </InterestsUl>
         </CardContainer>
     );

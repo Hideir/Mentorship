@@ -1,4 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
+import '../App.css';
 import SearchForm from "./Form";
 import S from "styled-components";
 import { interestsArray } from "./OnboardingProcesses/interestData";
@@ -7,9 +8,10 @@ import UserCard from "./UserCard";
 
 const SearchPage = () => {
   let token = localStorage.getItem("auth-token");
-  const [searchInput, setSearchInput] = useState("");
-  const [matchedUsers, setMatchedUsers] = useState([]);
-  const [numberOfUsers, setNumberOfUsers] = useState( () => {
+  // State
+  const [searchInput, setSearchInput] = useState(""); // Users search input
+  const [matchedUsers, setMatchedUsers] = useState([]); // Users that match the searched input
+  const [numberOfUsers, setNumberOfUsers] = useState( () => { // How many matched users there are.
     if(matchedUsers.length <= 0) {
       return 0;
     }
@@ -33,7 +35,6 @@ const SearchPage = () => {
       .catch(error => {
         console.log("here is the error" + error);
       });
-
   }, []);
 
   const handleSearch = event => {
@@ -51,7 +52,6 @@ const SearchPage = () => {
       )
       .then(async response => {
         // When our server responds that we made a good request we push our user to the home component.
-        console.log(response.data.matchedRows);
         await setMatchedUsers(response.data.matchedRows);
         await setNumberOfUsers(response.data.matchedRows.length);
       })
@@ -70,14 +70,12 @@ const SearchPage = () => {
         </TextContentContainer>
         <SearchForm handleChanges={handleChanges} handleSearch={handleSearch} />
         <SelectedInterestUl>
-          {interestsArray.map((interests, index) => {
-            if (index <= 6) {
+          {interestsArray.map( (interests,index) => {
               return (
                 <SelectedInterestTags>
                   {interests.interestName}
                 </SelectedInterestTags>
               );
-            }
           })}
         </SelectedInterestUl>
         {numberOfUsers !== 0 ? <h2 style={{color: 'blue', fontSize: '26px'}}>Number of users: {numberOfUsers}</h2> : null}
@@ -90,11 +88,6 @@ const SearchPage = () => {
             })}
         </UserCardsContainer>
       )}
-      {/* {matchedUsers.length ? <UserCardsContainer>
-            {matchedUsers && matchedUsers.map( (user) => {
-                return <UserCard user={user} />
-            })}
-        </UserCardsContainer> : null} */}
     </HeroSectionWrapper>
   );
 };
