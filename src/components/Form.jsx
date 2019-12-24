@@ -45,4 +45,7 @@ const Styledbutton = S.button`
     border-radius: 50px;
     padding: .8rem;
     width: 45px;
+    &:hover {
+      cursor: pointer;
+    }
 `;
