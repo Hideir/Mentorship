@@ -12,7 +12,7 @@ const SearchPage = () => {
   // State
   const [selectedTags, setSelectedTags] = useState([]);
   
-  const [searchInput, setSearchInput] = useState(""); // Users search input
+  // const [searchInput, setSearchInput] = useState(""); // Users search input
   const [matchedUsers, setMatchedUsers] = useState([]); // Users that match the searched input
   const [numberOfUsers, setNumberOfUsers] = useState( () => { // How many matched users there are.
     if(matchedUsers.length <= 0) {
