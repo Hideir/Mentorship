@@ -45,7 +45,7 @@ const SearchPage = () => {
     axios
       .post(
         `/search`,
-        { searchInput },
+        { selectedTags },
         {
           headers: {
             "content-type": "application/json", // Tell the server we are sending this over as JSON
@@ -72,14 +72,13 @@ const SearchPage = () => {
         <TextContentContainer>
           <StyledTitle>Search</StyledTitle>
         </TextContentContainer>
-        <SearchForm handleChanges={handleChanges} handleSearch={handleSearch} />
         <SelectedInterestUl>
           {interestsArray.map( (interests, index) =>{
             return  <PossibleSearchTags index={index} selectedTags={selectedTags} setSelectedTags={setSelectedTags} interests={interests}/>
 
           })}
         </SelectedInterestUl>
-
+        <SearchForm handleChanges={handleChanges} handleSearch={handleSearch} />
         {numberOfUsers !== 0 ? <h2 style={{color: 'blue', fontSize: '26px'}}>Number of users: {numberOfUsers}</h2> : null}
       </ContentContainer>
       {matchedUsers == false ? null : (
