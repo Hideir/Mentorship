@@ -3,16 +3,16 @@ import '../App.css';
 import S from 'styled-components'
 
 const PossibleSearchTags = (props) => {
-    const {selectedTags, setSelectedTags, interests, mergedInput} = props;
+    const {selectedTags, setSelectedTags, interests} = props;
     const [hasActiveClass, setHasActiveClass] = useState(false);
 
 
   useEffect( () => {
-    if(mergedInput == " ") {
+    if(selectedTags.length <= 0) {
       setHasActiveClass(false);
     }
-  },[mergedInput]);
-  
+  },[selectedTags]);
+
     const storeSelectedTags = async () => {
         // await setSelectedTags([...selectedTags, event.target.getAttribute('name')]);
         if(!hasActiveClass) {

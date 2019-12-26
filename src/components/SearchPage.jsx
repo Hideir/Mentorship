@@ -11,18 +11,19 @@ const SearchPage = () => {
   let token = localStorage.getItem("auth-token");
   // State
   const [selectedTags, setSelectedTags] = useState([]); // Store the users selected tags
-  const [searchInput, setSearchInput] = useState(""); // Users search input
+  // const [searchInput, setSearchInput] = useState(""); // Users search input
   const [matchedUsers, setMatchedUsers] = useState([]); // Users that match the searched input
   const [numberOfUsers, setNumberOfUsers] = useState( () => { // How many matched users there are.
     if(matchedUsers.length <= 0) {
       return 0;
     }
   });
-  const [mergedInput, setMergedInput] = useState('');
+  // const [stringedTags, setMergedInput] = useState('');
 
-  useEffect( () => {
-    setMergedInput(selectedTags.join(" ") + " " + searchInput);
-  },[searchInput,selectedTags]);
+  // useEffect( () => {
+  //   setMergedInput(selectedTags.join(" ") + " " + searchInput);
+  // },[selectedTags]);
+
 
   useEffect(() => {
     axios
@@ -50,7 +51,7 @@ const SearchPage = () => {
     axios
       .post(
         `/search`,
-        { mergedInput },
+        { selectedTags },
         {
           headers: {
             "content-type": "application/json", // Tell the server we are sending this over as JSON
@@ -63,8 +64,8 @@ const SearchPage = () => {
         await setMatchedUsers(response.data.matchedRows);
         await setNumberOfUsers(response.data.matchedRows.length);
 
-        setSearchInput(''); // Reset value.
-        setMergedInput(''); // Reset value.
+        // setSearchInput(''); // Reset value.
+        // setMergedInput(''); // Reset value.
         setSelectedTags([]); // Reset value.
       })
       .catch(error => {
@@ -72,10 +73,9 @@ const SearchPage = () => {
       });
 
   };
-  const handleChanges = async event => {
-    console.log(event.target.value);
-    await setSearchInput(event.target.value);
-  };
+  // const handleChanges = async event => {
+  //   await setSearchInput(event.target.value);
+  // };
 
   return (
     <HeroSectionWrapper>
@@ -83,11 +83,11 @@ const SearchPage = () => {
         <TextContentContainer>
           <StyledTitle>Search</StyledTitle>
         </TextContentContainer>
-        <SearchForm handleChanges={handleChanges} handleSearch={handleSearch} searchInput={searchInput}/>
+        <SearchForm handleSearch={handleSearch} />
         <SelectedInterestUl>
           {interestsArray.map( (interests, index) =>{
             return <PossibleSearchTags 
-            mergedInput={mergedInput}
+            selectedTags={selectedTags}
             matchedUsers={matchedUsers} 
             key={index} 
             selectedTags={selectedTags} 

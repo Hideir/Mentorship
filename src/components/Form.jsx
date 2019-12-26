@@ -6,7 +6,7 @@ import { faSearch } from "@fortawesome/free-solid-svg-icons";
 const SearchForm = (props) => {
   return (
     <StyledForm action="search" method="post" onSubmit={props.handleSearch}>
-        <StyledInput onChange={props.handleChanges} value={props.searchInput} type ="text" placeholder="Search for liked minded people" />
+        {/* <StyledInput onChange={props.handleChanges} value={props.mergedInput} type ="text" placeholder="Search for liked minded people" /> */}
         <Styledbutton type='submit'><FontAwesomeIcon icon={faSearch}/></Styledbutton>
     </StyledForm>
   );
