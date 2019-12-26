@@ -19,6 +19,13 @@ const SearchPage = () => {
       return 0;
     }
   });
+  // const [stringedTags, setMergedInput] = useState('');
+
+  // useEffect( () => {
+  //   setMergedInput(selectedTags.join(" ") + " " + searchInput);
+  // },[selectedTags]);
+
+
   useEffect(() => {
     axios
       .post(
@@ -57,14 +64,19 @@ const SearchPage = () => {
         // When our server responds that we made a good request we push our user to the home component.
         await setMatchedUsers(response.data.matchedRows);
         await setNumberOfUsers(response.data.matchedRows.length);
+
+        // setSearchInput(''); // Reset value.
+        // setMergedInput(''); // Reset value.
+        setSelectedTags([]); // Reset value.
       })
       .catch(error => {
         console.log("here is the error" + error);
       });
+
   };
-  const handleChanges = async event => {
-    await setSearchInput(event.target.value);
-  };
+  // const handleChanges = async event => {
+  //   await setSearchInput(event.target.value);
+  // };
 
   return (
     <HeroSectionWrapper>
@@ -74,18 +86,24 @@ const SearchPage = () => {
         </TextContentContainer>
         <SelectedInterestUl>
           {interestsArray.map( (interests, index) =>{
-            return  <PossibleSearchTags index={index} selectedTags={selectedTags} setSelectedTags={setSelectedTags} interests={interests}/>
-
+            return <PossibleSearchTags 
+            selectedTags={selectedTags}
+            matchedUsers={matchedUsers} 
+            key={index} 
+            selectedTags={selectedTags} 
+            setSelectedTags={setSelectedTags} 
+            interests={interests}
+            />
           })}
         </SelectedInterestUl>
-        <SearchForm handleChanges={handleChanges} handleSearch={handleSearch} />
+        <SearchForm handleSearch={handleSearch} />
         {numberOfUsers !== 0 ? <h2 style={{color: 'blue', fontSize: '26px'}}>Number of users: {numberOfUsers}</h2> : null}
       </ContentContainer>
       {matchedUsers == false ? null : (
         <UserCardsContainer>
           {matchedUsers &&
-            matchedUsers.map(user => {
-              return <UserCard user={user} />;
+            matchedUsers.map((user,index) => {
+              return <UserCard key={index} user={user} />;
             })}
         </UserCardsContainer>
       )}
