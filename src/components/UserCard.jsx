@@ -10,7 +10,7 @@ const UserCard = (props) => {
         <ContentContainer>
             <ProfileImage></ProfileImage>
                 <ProfileContentContainer>
-                    <StyledLink>{props.user.firstName.charAt(0).toUpperCase() + props.user.firstName.substring(1)} {props.user.LastName}</StyledLink>
+                    <StyledLink primary={true}>{props.user.firstName.charAt(0).toUpperCase() + props.user.firstName.substring(1)} {props.user.LastName}</StyledLink>
                     <StyledText primary={true}>{props.user.tagLine}</StyledText>
                     <StyledText primary={false}>{props.user.state} {props.user.city}</StyledText>
                 </ProfileContentContainer>
@@ -37,11 +37,22 @@ const ContentContainer = S.div`
     display: flex;
     flex-flow: row wrap;
     justify-content: center;
+
+    @media only screen and (max-width: 600px) {
+        width: 100%;
+      }
+
 `;
 const ProfileContentContainer = S.div`
     display: flex;
     flex-direction: column;
     margin-left: 20px;
+
+    @media only screen and (max-width: 600px) {
+        width: 65%;
+      }
+
+
 `;
 const StyledLink = S(Link)`
     font-size: 2.6rem;
@@ -53,6 +64,13 @@ const StyledLink = S(Link)`
         cursor: pointer;
         color: #000;
     }
+
+    @media only screen and (max-width: 600px) {
+        display: ${props => props.primary ? 'block' : 'none;'};
+        font-size: 2.4rem;
+        color: #000;
+        font-weight: 600;
+      }
 `;
 const StyledText = S.p`
     font-size: ${props => props.primary ? '2.2rem' : '2rem'};
@@ -60,6 +78,10 @@ const StyledText = S.p`
     width: 100%;
     margin-bottom: 5px;
     text-align: left;
+
+    @media only screen and (max-width: 600px) {
+        font-size:${props => props.primary ? '1.6rem' : '1.4rem'};
+      }
 `;
 const InterestsUl = S.ul`
     display: flex;
@@ -84,4 +106,9 @@ const ProfileImage = S.div`
     width: 100px;
     height: 100px;
     background-color: #d3d3d3;
+
+    @media only screen and (max-width: 600px) {
+        width: 75px;
+        height: 75px;
+      }
 `;

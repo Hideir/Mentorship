@@ -97,7 +97,7 @@ const SearchPage = () => {
           })}
         </SelectedInterestUl>
         <SearchForm handleSearch={handleSearch} />
-        {numberOfUsers !== 0 ? <h2 style={{color: 'blue', fontSize: '26px'}}>Number of users: {numberOfUsers}</h2> : null}
+        {numberOfUsers !== 0 ? <StyledText> {numberOfUsers} Results</StyledText> : null}
       </ContentContainer>
       {matchedUsers == false ? null : (
         <UserCardsContainer>
@@ -125,6 +125,10 @@ const HeroSectionWrapper = S.section`
   background-size: cover;
 
 `;
+const StyledText = S.p`
+  font-size: 2.4rem;
+  color: #000;
+`;
 const ContentContainer = S.div`
     padding: 20px;
     display: flex;
@@ -134,18 +138,32 @@ const ContentContainer = S.div`
     box-shadow: 0px 3px 8px #000000;
     width: 60%;
     border-radius: 20px;
+    box-sizing: border-box;
+
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+      margin-top: 0;
+      border-radius: unset;
+    }
 `;
 const TextContentContainer = S.div`
     display: flex;
     flex-direction: column;
     margin: 25px auto 0 auto;
     width: 80%;
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+    }
 `;
 const StyledTitle = S.h2`
     font-size: 4rem;
     color: ${props => (props.primary ? "#fff" : "#000")};
     text-align: left;
     margin-bottom: 40px;
+
+    @media only screen and (max-width: 600px) {
+      
+    }
 `;
 const SelectedInterestUl = S.ul`
     display: flex;
@@ -154,7 +172,6 @@ const SelectedInterestUl = S.ul`
     width: 100%;
     flex-flow: row wrap;
     height: auto;
-    justify-content: center;
     &::after {
         content: 'nothing';
         font-size: 0;
@@ -173,4 +190,10 @@ const UserCardsContainer = S.div`
     margin: 20px auto;
     border: 1px solid #a5a5a5;
     box-shadow: 0px 3px 8px #b7b7b7;
+
+    @media only screen and (max-width: 600px) {
+      width: 100%;
+      border-right: 0;
+      border-left: 0;
+    }
 `;
