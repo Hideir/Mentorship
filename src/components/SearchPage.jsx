@@ -29,7 +29,7 @@ const SearchPage = () => {
   useEffect(() => {
     axios
       .post(
-        `/search`,
+        `https://ilyris.herokuapp.com/search`,
         { params: { test: "randomData" } },
         {
           headers: {
@@ -51,7 +51,7 @@ const SearchPage = () => {
     event.preventDefault();
     axios
       .post(
-        `/search`,
+        `https://ilyris.herokuapp.com/search`,
         { selectedTags },
         {
           headers: {

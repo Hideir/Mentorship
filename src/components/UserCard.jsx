@@ -5,19 +5,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const UserCard = (props) => {
+    const {user} = props;
     return(
         <CardContainer>
         <ContentContainer>
             <ProfileImage></ProfileImage>
                 <ProfileContentContainer>
-                    <StyledLink primary={true}>{props.user.firstName.charAt(0).toUpperCase() + props.user.firstName.substring(1)} {props.user.LastName}</StyledLink>
-                    <StyledText primary={true}>{props.user.tagLine}</StyledText>
-                    <StyledText primary={false}>{props.user.state} {props.user.city}</StyledText>
+                    <StyledLink primary="true" to={{pathname: "/", state: {user}}}>{user.firstName.charAt(0).toUpperCase() + user.firstName.substring(1)} {user.LastName}</StyledLink>
+                    <StyledText primary={true}>{user.tagLine}</StyledText>
+                    <StyledText primary={false}>{user.state} {user.city}</StyledText>
                 </ProfileContentContainer>
         </ContentContainer>
         <StyledLink  to="/"><FontAwesomeIcon icon={faEnvelope}/></StyledLink> 
             <InterestsUl>
-                {props.user.interests.map( (interest,index) => <InterestsTags key={index}>{interest}</InterestsTags>)}
+                {user.interests.map( (interest,index) => <InterestsTags key={index}>{interest}</InterestsTags>)}
             </InterestsUl>
         </CardContainer>
     );

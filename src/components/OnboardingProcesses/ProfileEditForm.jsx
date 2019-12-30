@@ -27,7 +27,7 @@ const ProfileEditForm = (props) => {
         localStorage.setItem('userEmail', profileObject.email);
         console.log('I ran!');
         // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
-          axios.post(`/signup/add-profile`, {profileObject}, {  
+          axios.post(`https://ilyris.herokuapp.com/signup/add-profile`, {profileObject}, {  
             headers: {
               'content-type': 'application/json' // Tell the server we are sending this over as JSON
             },
