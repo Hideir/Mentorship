@@ -17,10 +17,7 @@ import { useFormInputControl } from "../../../hooks/useFormInputControl";
       // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
         axios.post(`https://hideir.herokuapp.com/signup`, {email, password}, {  
           headers: {
-            'content-type': 'application/json',
-            crossDomain: true, // Tell the server we are sending this over as JSON
-            'Access-Control-Allow-Origin': '*'
-
+            'content-type': 'application/json'  // Tell the server we are sending this over as JSON
           },
         })
         .then(function (response) {
@@ -34,16 +31,6 @@ import { useFormInputControl } from "../../../hooks/useFormInputControl";
           console.log(error);
         });
     }
-
-    // useEffect( () => {
-    //     axios.get(`http://localhost:8080/todo`)
-    //     .then( response => {
-    //       console.log(response);
-    //     })
-    //     .catch( error => {
-    //       console.log(error);
-    //     })
-    // }, []);
 
 
     return(
