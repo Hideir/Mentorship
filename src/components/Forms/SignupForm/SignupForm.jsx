@@ -24,7 +24,6 @@ import { useFormInputControl } from "../../../hooks/useFormInputControl";
           },
         })
         .then(function (response) {
-          console.log(response);
           props.setNewSignedUpUser({...props.newSignedUpUser, email: email})
           // When our server responds that we made a good request we push our user to the home component.
           props.history.push("/signup/interests");
