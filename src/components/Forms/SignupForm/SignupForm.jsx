@@ -18,7 +18,9 @@ import { useFormInputControl } from "../../../hooks/useFormInputControl";
         axios.post(`https://ilyris.herokuapp.com/signup`, {email, password}, {  
           headers: {
             'content-type': 'application/json',
-            crossDomain: true // Tell the server we are sending this over as JSON
+            crossDomain: true, // Tell the server we are sending this over as JSON
+            'Access-Control-Allow-Origin': '*'
+
           },
         })
         .then(function (response) {
