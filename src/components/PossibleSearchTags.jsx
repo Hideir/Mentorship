@@ -23,7 +23,6 @@ const PossibleSearchTags = (props) => {
            setSelectedTags( selectedTags.filter( deselectedInterest  => deselectedInterest !== interests.interestName))
       }
       }
-
     return(
               <SelectedInterestTags className={hasActiveClass ? "hasInterest" : null}  onClick={storeSelectedTags} name={interests.interestName}>
                 {interests.interestName}
@@ -44,6 +43,7 @@ const SelectedInterestTags = S.li`
     margin: 0 10px 10px 0;
     border-radius: 1rem;
     transition: 250ms;
+    text-transform: capitalize;
     &:hover {
       cursor: pointer;
       background-color: #0077ff;
