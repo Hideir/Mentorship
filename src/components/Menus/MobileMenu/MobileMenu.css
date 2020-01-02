@@ -87,6 +87,7 @@
     z-index: 111;
     display: flex;
     background: #07f;
+    box-shadow: 0px -1px 5px #232323c7;
 }
 
 .iconLinks {
@@ -106,13 +107,16 @@
     border: 1px solid #fff;
     padding: 10px 20px ;
     background-color: #fff;
-    color: #000;
     margin: 10px 0;
     border-radius: 5px;
     text-transform: capitalize;
   }
   .iconLinks.defaultLinks:visited {
       color: #000;
+  }
+  .iconLinks.defaultLinks.call-to-action {
+      background-color: #ffa000;
+      border-color: #ffa000;
   }
 
 .iconLinks svg {

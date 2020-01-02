@@ -32,11 +32,11 @@ const MobileMenu = (props) => {
         : null  
         }  
         <StyledLi>
-            {props.IsLoggedIn ? <StyledLink className="iconLinks" onClick={props.signOut} to="/"> <FontAwesomeIcon icon={faSignOutAlt}/>Sign Out</StyledLink> : <StyledLink className="iconLinks defaultLinks" to="/login">Sign In</StyledLink>}
+            {props.IsLoggedIn ? <StyledLink className="iconLinks" onClick={props.signOut} to="/"> <FontAwesomeIcon icon={faSignOutAlt}/>Sign Out</StyledLink> : <StyledLink className="iconLinks defaultLinks"  secondary="false" to="/login">Sign In</StyledLink>}
         </StyledLi>
         {props.IsLoggedIn
         ? null 
-        : <StyledLi>  <StyledLink className="iconLinks defaultLinks" secondary="true" to="signup">Get Started</StyledLink> </StyledLi> 
+        : <StyledLi>  <StyledLink className="iconLinks defaultLinks call-to-action" secondary={true} to="signup">Get Started</StyledLink> </StyledLi> 
         }
         {props.IsLoggedIn 
           ? <StyledLi> <StyledLink  className="iconLinks" to="/search"><FontAwesomeIcon icon={faSearch}/>Search</StyledLink> </StyledLi>
@@ -66,9 +66,5 @@ const StyledLink = S(Link)`
     text-transform: capitalize;
     align-items: center;
     font-size: 1.4rem;
-    color: ${props => props.secondary ? '#fff' : '#000'};
     text-decoration: none;
-    :active {
-
-    }
 `;
