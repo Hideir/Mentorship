@@ -67,4 +67,5 @@ const StyledLink = S(Link)`
     align-items: center;
     font-size: 1.4rem;
     text-decoration: none;
+    color: #fff;
 `;
