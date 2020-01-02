@@ -26,8 +26,9 @@ const EducationContainer = S.div`
     border: 1px solid rgba(0,0,0,0.2);
     position: relative;
     background-color: #fff;
+
     @media only screen and (max-width: 860px) {
-        padding: 25px 0;
+        padding: 25px 10px;
 	  }
 `;
 const MidHeading = S.h3`
@@ -51,4 +52,8 @@ const Text = S.p`
     letter-spacing: 1px;
     font-weight: ${props => props.primary ? '600' : '400'};
     text-decoration: ${props => props.secondary ? 'underline' : null};
+
+    @media only screen and (max-width: 860px) {
+        font-size: ${props => props.primary ? '1.6rem' : '1.2rem'};
+    }
 `;
