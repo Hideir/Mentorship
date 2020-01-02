@@ -4,19 +4,20 @@ import S from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Logo from '../Logos/Logo';
+import '../../App.css';
 
 
 const DesktopNavigation = (props) => {
-
     return(
         <StyledHeader>
             <StyledNavigationContainer>
                 <Logo />
                 <StyledNavigation>
                     <StyledUL>
-                        <StyledLi>
-                            <StyledLink to="/">Home</StyledLink>
-                        </StyledLi>
+                        {props.IsLoggedIn
+                        ? <StyledLi> <StyledLink to ="/">Home</StyledLink> </StyledLi>
+                        : null
+                        }
                         <StyledLi>
                             {props.IsLoggedIn ? <StyledLink to="/profile">Profile</StyledLink> : null }
                         </StyledLi>
@@ -45,11 +46,11 @@ const StyledHeader = S.header`
     width: 100%;
     padding-top: 2rem;
     padding-bottom: 2rem;
-    position: fixed;
     top: 0;
     background-color: white;
     box-shadow: 1px 1px 6px #818181;
-    z-index: 10;
+    position: relative;
+    z-index: 5;
     @media (max-width: 860px) {
         display: none;
       }

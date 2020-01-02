@@ -15,3 +15,9 @@ html {
   background-color: #0077ff !important;
   color: #fff;
 }
+.noSticky {
+  position: relative;
+}
+.sticky {
+  position: fixed;
+}

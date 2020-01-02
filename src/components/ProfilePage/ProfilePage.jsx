@@ -46,7 +46,6 @@ const PageWrapper = S.main`
 	width 100%;
 	display: flex;
 	flex-flow: row wrap;
-	margin-top: 140px;
 	border-radius: 15px;
 	@media only screen and (max-width: 860px) {
 		margin-top: 0;

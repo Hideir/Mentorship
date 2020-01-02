@@ -22,8 +22,7 @@ const Section = S.section`
     flex-flow: row wrap;
     justify-content: center;
     align-items: center;
-    margin-top: 100px;
-    height: 90vh;
+    margin-top: 50px;
     @media only screen and (max-width: 860px) {
         margin-bottom: 50px;
         margin-top: 0;
@@ -37,7 +36,7 @@ const TitleContainer = S.div`
 
     @media only screen and (max-width: 860px) {
         width: 100%;
-        margin: 0;
+        margin: 50px 0;
         justify-content: center;
 	  }
 `;

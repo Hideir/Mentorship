@@ -8,7 +8,7 @@ const Logo = () => {
     return(
         <StyledLink to="/">
             <LogoContainerDiv>
-                <StyledLogo></StyledLogo>
+                <StyledLogo src={AppLogoImage}/>
             </LogoContainerDiv>
         </StyledLink>
     );
@@ -18,13 +18,8 @@ export default Logo;
 
 
     `;
-const StyledLogo = S.div`
-    background-image: url(${AppLogoImage});
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    height: 100px;
-    width: 100px;
+const StyledLogo = S.img`
+    width: 75px;
 `;
 const StyledLink = S(Link)`
     text-decoration: none;

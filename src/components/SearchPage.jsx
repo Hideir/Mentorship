@@ -133,7 +133,7 @@ const ContentContainer = S.div`
     padding: 20px;
     display: flex;
     flex-direction: column;
-    margin: 200px 0 100px 0;
+    margin: 100px 0;
     background-color: ${props => (props.primary ? "#000" : "#fff")};
     box-shadow: 0px 3px 8px #000000;
     width: 60%;
