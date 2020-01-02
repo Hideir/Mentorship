@@ -29,6 +29,10 @@ const CardContainer = S.div`
     width: 70%;
     display: flex;
     align-items: flex-end;
+
+    @media only screen and (max-width: 860px) {
+        width: 100%;
+	  }
 `;
 const InformationContainer = S.div`
     width: ${props => props.personalInformation ? '55%' : '100%'};
@@ -37,10 +41,21 @@ const InformationContainer = S.div`
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 10px;
+    
+    @media only screen and (max-width: 860px) {
+        justify-content: center;
+        width: 100%;
+        margin-bottom: 0;
+	  }
 `;
 const Text = S.p`
     font-size: ${props => props.primary ? '3rem' : '2rem' };
     padding-left: 10px;
     text-align: left;
     text-transform: capitalize;
+
+    @media only screen and (max-width: 860px) {
+        font-size: ${props => props.primary ? '2.2rem' : '1.6rem' };
+        padding: 0;
+	  }
 `;

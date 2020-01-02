@@ -5,6 +5,7 @@ const ProfilePageInterests = (props) => {
 	return(
 
         <InterestsContainer>
+            <MidHeading>Interests</MidHeading>
             {props.interests && props.interests.map( (interest,index) => {
                 return <InterestCard key={index}><Text>{interest}</Text></InterestCard>
             })}
@@ -15,32 +16,63 @@ const ProfilePageInterests = (props) => {
 export default ProfilePageInterests;
 
 const InterestsContainer = S.div`
-    margin: 25px;
-    display: flex;
     flex-flow: row wrap;
-    border-top: 2px solid #c3c3c3;
-    margin: 25px auto;
-    width: 80%;
+    width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 25px 0;
+    padding: 25px;
+    margin: 8px 10px 0 10px;
+    border-radius: 5px;
+    box-shadow: 0px 2px 10px #d1d1d1;
+    border: 1px solid rgba(0,0,0,0.2);
+    position: relative;
+    background-color: #fff;
+
+    @media only screen and (max-width: 860px) {
+        width: 100%;
+        justify-content: space-around;
+        padding: 25px 0;
+	  }
+`;
+const MidHeading = S.h3`
+	font-size: 4rem;
+	color: #000;
+    width: 100%;
+    padding-bottom: 20px;
+
+	@media only screen and (max-width: 860px) {
+        font-size: 2.6rem;
+	  }
+`;
+const InterestCard = S.div`
+    font-size: 2rem;
+    background-color: #2f2c2c;
+    color: #fff;
+    width: auto;
+    padding: 10px 20px;
+    border-radius: 1rem;
+    transition: 250ms;
+    text-transform: capitalize;
+
+    &:hover {
+      cursor: pointer;
+      background-color: #0077ff;
+    }
+
+    @media only screen and (max-width: 860px) {
+            margin-top: 10px;
+            font-size: 1.4rem;
+    }
 `;
 
-const InterestCard = S.div`
-    width: 150px;
-    height: 150px;
-    background-color: #07f;
-    margin-right: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    margin-top: 20px;
-`;
 const Text = S.p`
     font-size: 2rem;
     text-align: center;
     color: #fff;
     letter-spacing: 1px;
     text-transform: capitalize;
+
+    @media only screen and (max-width: 860px) {
+        font-size: 1.6rem;
+	  }
 `;

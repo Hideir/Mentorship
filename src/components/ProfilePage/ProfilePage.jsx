@@ -34,9 +34,7 @@ const ProfilePage = (props) => {
 					<ProfileImage></ProfileImage>
 					<ProfilePagePersonalInformation firstName={firstName} lastName={lastName} state={state} city={city} tagLine={tagLine}/>
 				</ProfileHeaderContainer>
-				<MidHeading>Interests</MidHeading>
 				<ProfilePageInterests interests={interests}/>
-				<MidHeading>Education</MidHeading>	
 				<ProfilePageEducationSection education={education}/>
 			</ProfileContainer>
 		</PageWrapper>
@@ -50,22 +48,44 @@ const PageWrapper = S.main`
 	display: flex;
 	flex-flow: row wrap;
 	margin-top: 140px;
+	border-radius: 15px;
+	@media only screen and (max-width: 860px) {
+		margin-top: 0;
+	  }
 `;
 const ProfileContainer = S.div`
 	width: 50%;
 	display: flex;
 	flex-flow: row wrap;
 	margin: 100px auto;
-	background-color: #ececec;
+	background-color: #fff;
 	border-radius: 15px;
-	box-shadow: 0px 3px 10px #666;
+
+	@media only screen and (max-width: 860px) {
+		width: 100%;
+		margin-top: 0;
+		border-bottom-right-radius: 0;
+    	border-bottom-left-radius: 0;
+	  }
 `;
 const ProfileHeaderContainer = S.div`
 	width: 100%;
 	display: flex;
 	flex-flow: row wrap;
 	position: relative;
-	height: 270px;
+	min-height: 270px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+	margin: 10px;
+    margin-bottom: 0;
+    box-shadow: 0px 2px 10px #d1d1d1;
+    border: 1px solid rgba(0,0,0,0.2);
+
+	@media only screen and (max-width: 860px) {
+		align-items: baseline;
+		justify-content: center;
+		min-height: 240px;
+	  }
 `;
 const ProfileHeaderTrim = S.div`
 	width: 100%;
@@ -74,6 +94,10 @@ const ProfileHeaderTrim = S.div`
 	position: absolute;
 	border-top-left-radius: 15px;
 	border-top-right-radius: 15px;
+
+	@media only screen and (max-width: 860px) {
+		height: 75px;
+	  }
 `;
 const ProfileImage = S.div`
 	width: 200px;
@@ -82,10 +106,13 @@ const ProfileImage = S.div`
     background-color: #c3c3c3;
     z-index: 1;
     margin: 25px 25px 0 25px;
-    box-shadow: 1px 2px 5px -1px #3e3d33;
+	box-shadow: 1px 2px 5px -1px #3e3d33;
+	
+	@media only screen and (max-width: 860px) {
+		height: 100px;
+		width: 100px;
+		margin: 0;
+		margin-top: 25px;
+	  }
 `;
-const MidHeading = S.h3`
-	font-size: 4rem;
-	color: #000;
-	width: 100%;
-`;
+

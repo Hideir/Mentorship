@@ -140,7 +140,7 @@ const ContentContainer = S.div`
     border-radius: 20px;
     box-sizing: border-box;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 860px) {
       width: 100%;
       margin-top: 0;
       border-radius: unset;
@@ -151,7 +151,7 @@ const TextContentContainer = S.div`
     flex-direction: column;
     margin: 25px auto 0 auto;
     width: 80%;
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 860px) {
       width: 100%;
     }
 `;
@@ -161,7 +161,7 @@ const StyledTitle = S.h2`
     text-align: left;
     margin-bottom: 40px;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 860px) {
       
     }
 `;
@@ -191,7 +191,7 @@ const UserCardsContainer = S.div`
     border: 1px solid #a5a5a5;
     box-shadow: 0px 3px 8px #b7b7b7;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 860px) {
       width: 100%;
       border-right: 0;
       border-left: 0;

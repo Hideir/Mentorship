@@ -39,7 +39,7 @@ const ContentContainer = S.div`
     flex-flow: row wrap;
     justify-content: center;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 860px) {
         width: 100%;
       }
 
@@ -49,7 +49,7 @@ const ProfileContentContainer = S.div`
     flex-direction: column;
     margin-left: 20px;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 860px) {
         width: 65%;
       }
 
@@ -66,7 +66,7 @@ const StyledLink = S(Link)`
         color: #000;
     }
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 860px) {
         display: ${props => props.primary ? 'block' : 'none;'};
         font-size: 2.4rem;
         color: #000;
@@ -80,7 +80,7 @@ const StyledText = S.p`
     margin-bottom: 5px;
     text-align: left;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 860px) {
         font-size:${props => props.primary ? '1.6rem' : '1.4rem'};
       }
 `;
@@ -108,7 +108,7 @@ const ProfileImage = S.div`
     height: 100px;
     background-color: #d3d3d3;
 
-    @media only screen and (max-width: 600px) {
+    @media only screen and (max-width: 860px) {
         width: 75px;
         height: 75px;
       }
