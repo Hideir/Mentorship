@@ -32,7 +32,6 @@ const HeroSectionWrapper = S.section`
   height: 100vh;
   background-position: center;
   background-size: cover;
-
 `;
 const ContentContainer = S.div`
     padding: 20px;
