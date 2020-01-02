@@ -65,7 +65,7 @@ const StyledLink = S(Link)`
     display: flex;
     text-transform: capitalize;
     align-items: center;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     color: ${props => props.secondary ? '#fff' : '#000'};
     text-decoration: none;
     :active {
