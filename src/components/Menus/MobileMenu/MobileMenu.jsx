@@ -7,7 +7,6 @@ import { faUser, faHome, faSignOutAlt,faSearch, faPlus } from "@fortawesome/free
 import "./MobileMenu.css";
 
 const MobileMenu = (props) => {
-  console.log(props);
   const [isMobileActive, setIsMobileActive] = useState(false);
 
   const handleClick = () => {
