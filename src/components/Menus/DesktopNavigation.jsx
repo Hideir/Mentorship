@@ -21,9 +21,6 @@ const DesktopNavigation = (props) => {
                             {props.IsLoggedIn ? <StyledLink to="/profile">Profile</StyledLink> : null }
                         </StyledLi>
                         <StyledLi>
-                            <StyledLink to="/about">About</StyledLink>
-                        </StyledLi>
-                        <StyledLi>
                             {props.IsLoggedIn ? <StyledLink onClick={props.signOut} to="/">Log Out</StyledLink> : <StyledLink to="/login">Login</StyledLink>}
                         </StyledLi>
                         <StyledLi>

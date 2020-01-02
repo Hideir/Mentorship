@@ -31,7 +31,7 @@ const InterestsContainer = S.div`
     @media only screen and (max-width: 860px) {
         width: 100%;
         justify-content: space-around;
-        padding: 25px 0;
+        padding: 25px 10px;
 	  }
 `;
 const MidHeading = S.h3`
@@ -53,6 +53,7 @@ const InterestCard = S.div`
     border-radius: 1rem;
     transition: 250ms;
     text-transform: capitalize;
+    margin-top: 10px;
 
     &:hover {
       cursor: pointer;
@@ -60,7 +61,6 @@ const InterestCard = S.div`
     }
 
     @media only screen and (max-width: 860px) {
-            margin-top: 10px;
             font-size: 1.4rem;
     }
 `;

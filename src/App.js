@@ -43,12 +43,12 @@ function App() {
         localStorage.removeItem('auth-token');
       }
   }
+  console.log(IsLoggedIn);
   return (
     <Router>
-  
         <div className="App">
           <DesktopNavigation signOut={signOut} IsLoggedIn={IsLoggedIn}/>
-          <MobileMenu />
+          <MobileMenu signOut={signOut} IsLoggedIn={IsLoggedIn} />
           <Switch>
             <Route exact path="/" component={HomePage} />
             <ProtectedRoute exact path="/search" component={SearchPage} IsLoggedIn={IsLoggedIn}/>
