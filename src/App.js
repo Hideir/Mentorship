@@ -45,6 +45,7 @@ function App() {
   }
   return (
     <Router>
+  
         <div className="App">
           <DesktopNavigation signOut={signOut} IsLoggedIn={IsLoggedIn}/>
           <MobileMenu />

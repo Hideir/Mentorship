@@ -42,4 +42,5 @@ const Text = S.p`
     font-size: ${props => props.primary ? '3rem' : '2rem' };
     padding-left: 10px;
     text-align: left;
+    text-transform: capitalize;
 `;

@@ -42,4 +42,5 @@ const Text = S.p`
     text-align: center;
     color: #fff;
     letter-spacing: 1px;
+    text-transform: capitalize;
 `;

@@ -89,6 +89,7 @@ const SelectedInterestTags = S.li`
     padding: 10px 20px;
     margin: 0 10px 10px 0;
     border-radius: 1rem;
+    text-transform: capitalize;
 `;
 const NextButtonContainer = S.div`
     width: 100%;

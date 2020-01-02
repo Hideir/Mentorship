@@ -2,6 +2,8 @@ import React,{useState} from 'react';
 import axios from 'axios';
 import S from 'styled-components';
 import {withRouter} from 'react-router-dom';
+import CountrySelectList from '../CountrySelectList';
+import StateSelectList from '../StateSelectList';
 
 const ProfileEditForm = (props) => {
     // Set up State
@@ -11,11 +13,10 @@ const ProfileEditForm = (props) => {
         lastName: '',
         tagLine: '',
         education: '',
-        region: '',
+        region: 'us',
         city: '',
         state: ''
     });
-
     // Set up event functions
     const handleInputChange = async (event) => {
         await setProfileInformation({...profileInformation, [event.target.name]: event.target.value});
@@ -25,7 +26,6 @@ const ProfileEditForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         localStorage.setItem('userEmail', profileObject.email);
-        console.log('I ran!');
         // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
           axios.post(`/signup/add-profile`, {profileObject}, {  
             headers: {
@@ -46,7 +46,7 @@ const ProfileEditForm = (props) => {
             <Form action='/signup/add-profile' method="post" onSubmit={handleSubmit}>
                 <Title>Edit Profile Information</Title>
                 <Label>First Name
-                    <Input onChange={handleInputChange} type="text" name="firstName"/>
+                    <Input onChange={handleInputChange} type="text" name="firstName" value={profileInformation.firstName}/>
                 </Label>
                 <Label>Last Name
                     <Input onChange={handleInputChange} type="text" name="lastName"/>
@@ -58,13 +58,13 @@ const ProfileEditForm = (props) => {
                     <Input onChange={handleInputChange}  type="text" name="education"/>
                 </Label>
                 <Label>Country/Region
-                    <Input onChange={handleInputChange}  type="text" name="region"/>
+                    <CountrySelectList handleInputChange={handleInputChange} profileInformation={profileInformation}/>
                 </Label>
                 <Label>City
                     <Input onChange={handleInputChange}  type="text" name="city"/>
                 </Label>
                 <Label>State
-                    <Input onChange={handleInputChange}  type="text" name="state"/>
+                    <StateSelectList handleInputChange={handleInputChange} profileInformation={profileInformation}/>
                 </Label>
                 <NextButtonContainer >
                     <NextButton type="submit" style={{ backgroundColor: '#0077ff', color: '#fff'}}>Next</NextButton>
