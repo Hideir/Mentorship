@@ -2,9 +2,9 @@ import React,{useState} from 'react';
 import axios from 'axios';
 import S from 'styled-components';
 import {withRouter} from 'react-router-dom';
-import CountrySelectList from '../CountrySelectList';
-import StateSelectList from '../StateSelectList';
 import MedFormButton from '../ReusedComponents/MedFormButton';
+import CountrySelectList from '../ReusedComponents/CountrySelectList';
+import StateSelectList from '../ReusedComponents/StateSelectList';
 
 
 const ProfileEditForm = (props) => {

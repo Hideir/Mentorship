@@ -61,7 +61,7 @@ const StyledNavigationContainer = S.div`
     align-items: center;
     justify-content: space-between;
     margin: 0 auto;
-    width: 62%;
+    width: 80%;
 `;
 const StyledNavigation = S.nav`
     display: flex;
