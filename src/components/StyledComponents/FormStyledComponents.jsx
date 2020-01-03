@@ -83,7 +83,7 @@ const StyledButton = S.button`
     padding: 0;
     letter-spacing: 1px;
     text-transform: capitalize;
-}
+  }
 `;
 
 const StyledSignup = S(Link)`

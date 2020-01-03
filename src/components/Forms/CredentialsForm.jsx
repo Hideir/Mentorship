@@ -1,7 +1,6 @@
 import React from "react";
 import IsLoadingComponent from '../StyledComponents/IsLoadingComponent.jsx';
 import S from 'styled-components';
-
 import {
   FormContainer,
   Form,
@@ -19,8 +18,7 @@ let buttonValue = '';
 
 const CredentialsForm = props => {
   if(props.isLoginPage && props.isLoading === false){
-       buttonValue = "Log In";
-       
+       buttonValue = "Log In"; 
   } else if(!props.isLoginPage && props.isLoading === false) {
        buttonValue = "Get Started";
   } else if( props.isLoading === true && !props.isLoginPage) {

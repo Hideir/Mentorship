@@ -3,6 +3,8 @@ import S from 'styled-components';
 import InterestCard from './InterestCard';
 import {interestsArray} from './interestData';
 import {withRouter} from 'react-router-dom';
+import MedFormButton from '../ReusedComponents/MedFormButton';
+
 
 const OnboardInterestList = (props) => {
     let cardCounter = 1;
@@ -40,10 +42,7 @@ const OnboardInterestList = (props) => {
                 );
             })}
             </SelectedInterestTagsContainer>
-            {/* Loop through all the interests and pass in the interests data into the InterestCard component */}
-            <NextButtonContainer >
-                <NextButton onClick={pushUser} style={{ backgroundColor: '#0077ff', color: '#fff', height: '3rem'}}>Next</NextButton>
-            </NextButtonContainer>
+            <MedFormButton  handleClick={pushUser} buttonValue={'Next'}/>
         </CardContainer>
     );
 }

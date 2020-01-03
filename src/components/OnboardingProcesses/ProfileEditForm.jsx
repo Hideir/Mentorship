@@ -4,6 +4,8 @@ import S from 'styled-components';
 import {withRouter} from 'react-router-dom';
 import CountrySelectList from '../CountrySelectList';
 import StateSelectList from '../StateSelectList';
+import MedFormButton from '../ReusedComponents/MedFormButton';
+
 
 const ProfileEditForm = (props) => {
     // Set up State
@@ -66,9 +68,7 @@ const ProfileEditForm = (props) => {
                 <Label>State
                     <StateSelectList handleInputChange={handleInputChange} profileInformation={profileInformation}/>
                 </Label>
-                <NextButtonContainer >
-                    <NextButton type="submit" style={{ backgroundColor: '#0077ff', color: '#fff'}}>Next</NextButton>
-                </NextButtonContainer>
+                <MedFormButton buttonValue={'Next'}/>
             </Form>
         </BigFormContainer>
     );
@@ -136,8 +136,7 @@ const NextButton = S.button`
     padding: .8rem 2.4rem;
     border-radius: 50px;
     text-decoration: none;
-    background-color: ${props =>
-        props.secondary ? "#0077ff" : "transparent"}
+    background-color: ${props => props.secondary ? "#0077ff" : "transparent"}
     transition: all ease-in-out 120ms;
     width: 100px;
     border: none;
