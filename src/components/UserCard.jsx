@@ -11,7 +11,7 @@ const UserCard = (props) => {
         <ContentContainer>
             <ProfileImage></ProfileImage>
                 <ProfileContentContainer>
-                    <StyledLink primary="true" to={{pathname: "/", state: {user}}}>{user.firstName.charAt(0).toUpperCase() + user.firstName.substring(1)} {user.LastName}</StyledLink>
+                    <StyledLink primary="true" to={{pathname: `/profile/${user.id}`, state: {user}}}>{user.firstName.charAt(0).toUpperCase() + user.firstName.substring(1)} {user.LastName}</StyledLink>
                     <StyledText primary={true}>{user.tagLine}</StyledText>
                     <StyledText primary={false}>{user.state} {user.city}</StyledText>
                 </ProfileContentContainer>

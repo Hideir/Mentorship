@@ -129,11 +129,6 @@ const StyledText = S.p`
         box-shadow: 0px 0px 5px #232323c7;
 	  }
 `;
-
-const ImageContainer = S.div`
-      display: flex;
-      align-items: center;
-`;
 const StyledImg = S.img`
     width: 50%;
     min-width: 300px;

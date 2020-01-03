@@ -43,7 +43,7 @@ function App() {
         localStorage.removeItem('auth-token');
       }
   }
-  console.log(IsLoggedIn);
+  console.log('user is logged in: ' + IsLoggedIn);
   return (
     <Router>
         <div className="App">
@@ -54,6 +54,7 @@ function App() {
             <ProtectedRoute exact path="/search" component={SearchPage} IsLoggedIn={IsLoggedIn}/>
             <Route exact path="/about" component={AboutPage} />
             <ProtectedRoute  path="/profile" component={ProfilePage} IsLoggedIn={IsLoggedIn}  newSignedUpUserEmail={newSignedUpUser.email} />
+            <ProtectedRoute  path="/profile/:id" component={ProfilePage} IsLoggedIn={IsLoggedIn}  newSignedUpUserEmail={newSignedUpUser.email} />
             <Route exact path="/login" render={props => <LoginForm {...props} signIn={signIn} /> } />
             <Route exact path="/signup" render={props => <SignupForm {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser} /> } />
             <Route exact path="/signup/interests" render={props => <InterestListPage {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser}/> } />

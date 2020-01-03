@@ -64,6 +64,7 @@ const SearchPage = () => {
         // When our server responds that we made a good request we push our user to the home component.
         await setMatchedUsers(response.data.matchedRows);
         await setNumberOfUsers(response.data.matchedRows.length);
+        console.log(response.data.matchedRows);
 
         // setSearchInput(''); // Reset value.
         // setMergedInput(''); // Reset value.

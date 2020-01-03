@@ -7,23 +7,46 @@ import ProfilePageInterests from './ProfilePageInterests';
 import ProfilePageEducationSection from './ProfilePageEducationSection';
 
 const ProfilePage = (props) => {
+	// console.log(props.location.state);
 	const [profileData, setProfileData] = useState({})
+	const routedEmail = props.location.state == undefined ? false : props.location.state.user.email;
 	const emailAddr = props.newSignedUpUserEmail;
 	const {firstName, lastName, interests,state, city, tagLine, education} = profileData;
+
+
+
+	// useEffect(  () => {
+	// 	console.log(props.location.state.user.email);
+	// 	console.log( routedEmail);
+		
+	// },[]);
+
 	useEffect( () => {
 		// retrieve the token from local storage
 		let token = localStorage.getItem('auth-token');
-			 axios.post('https://hideir.herokuapp.com/profile', {emailAddr}, {  
+		const getProfileData = (filter) => {
+			console.log('yeah I ran');
+			axios.post('https://hideir.herokuapp.com/profile', {filter}, {  
 				headers: {
 				  'content-type': 'application/json', // Tell the server we are sending this over as JSON
 				  'authorization': token, // Send the token in the header from the client.
 				},
 			  })
 			.then( async response => {
+				console.log(response.data.usersProfileData);
 				await setProfileData(response.data.usersProfileData[0]);
 			})
 			.catch(error => console.log(error))
-	},[])
+		}
+		if(routedEmail) {
+			console.log(routedEmail);
+			getProfileData(routedEmail);
+		 } else { 
+			 console.log('second ran');
+			 getProfileData(emailAddr);
+		 }
+
+	},[]);
 
 	return(
 		<PageWrapper>
