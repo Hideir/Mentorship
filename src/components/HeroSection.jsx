@@ -27,7 +27,6 @@ const HeroSectionWrapper = S.section`
     margin-top: 50px;
     @media only screen and (max-width: 860px) {
         margin-bottom: 50px;
-        margin-top: 0;
     }
 `;
 const ContentContainer = S.div`
@@ -125,6 +124,6 @@ const StyledImg = S.img`
     min-width: 300px;
     @media only screen and (max-width: 860px) {
         width: 80%;
-        margin: 0 auto;
+        margin: 50px auto 0 auto;
 	  }
 `;
