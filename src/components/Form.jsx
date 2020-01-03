@@ -26,15 +26,7 @@ const StyledForm = S.form`
     justify-content: center;
     padding: 10px;
 `;
-  // const StyledInput = S.input`
-  //   font-size: 2.2rem;
-  //   width: 70%;
-  //   background-color: transparent;
-  //   border: none;
-  //   height: 50px;
-  //   color: #000;
-  //   outline: none;
-  // `;
+
 const Styledbutton = S.button`
     font-size: 2.4rem;
     color: #fff;

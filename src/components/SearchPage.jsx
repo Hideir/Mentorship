@@ -135,7 +135,7 @@ const ContentContainer = S.div`
     flex-direction: column;
     margin: 100px 0;
     background-color: ${props => (props.primary ? "#000" : "#fff")};
-    box-shadow: 0px 3px 8px #000000;
+    box-shadow: 0px 0px 5px #232323c7;
     width: 60%;
     border-radius: 20px;
     box-sizing: border-box;
@@ -189,7 +189,7 @@ const UserCardsContainer = S.div`
     border-radius: 5px;
     margin: 20px auto;
     border: 1px solid #a5a5a5;
-    box-shadow: 0px 3px 8px #b7b7b7;
+    box-shadow: 0px 0px 5px #232323c7;
 
     @media only screen and (max-width: 860px) {
       width: 100%;

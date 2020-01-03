@@ -23,7 +23,7 @@ const InterestsContainer = S.div`
     padding: 25px;
     margin: 8px 10px 0 10px;
     border-radius: 5px;
-    box-shadow: 0px 2px 10px #d1d1d1;
+    box-shadow: 0px 0px 5px #232323c7;
     border: 1px solid rgba(0,0,0,0.2);
     position: relative;
     background-color: #fff;

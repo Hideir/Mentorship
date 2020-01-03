@@ -1,6 +1,6 @@
 import React from "react";
-// import axios from "axios";
 import IsLoadingComponent from '../StyledComponents/IsLoadingComponent.jsx';
+import S from 'styled-components';
 
 import {
   FormContainer,
@@ -69,9 +69,11 @@ const CredentialsForm = props => {
           />
           {!props.isLoginPage ? <p style={{fontSize: '14px', fontStyle: 'italic'}}>Password must have a minimum of 8 characters</p> : null}
         </StyledLabel>
-        <StyledButton secondary="true">
-          {buttonValue}
-        </StyledButton>
+        <ButtonContainer>
+          <StyledButton secondary="true">
+            {buttonValue}
+          </StyledButton>
+        </ButtonContainer>
         <StyledText>
          {props.isLoginPage ? 'New to Friendlier?' : 'Already have an account?'}
          {props.isLoginPage ? <StyledSignup to="/signup" primary="true">Sign Up</StyledSignup> : <StyledSignup to="/login" primary="true">Log In</StyledSignup>}
@@ -86,3 +88,10 @@ const CredentialsForm = props => {
   );
 };
 export default CredentialsForm;
+
+const ButtonContainer = S.div`
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

@@ -24,7 +24,7 @@ const Form = S.form`
   align-items: center;
   border-radius: 25px;
   padding: 20px;
-  box-shadow: 0px 10px 20px -3px #000;
+  box-shadow: 0px 0px 5px #232323c7;
   margin: 0 auto;
   height: 500px;
   display: flex;
@@ -54,8 +54,6 @@ const StyledInput = S.input`
 `;
 const StyledButton = S.button`
   display: flex;
-  text-transform: uppercase;
-  font-weight: 600;
   align-items: center;
   font-size: 2rem;
   color: ${props => (props.secondary ? "#fff" : "#000")};
@@ -75,9 +73,17 @@ const StyledButton = S.button`
     cursor: pointer;
   }
   :active {
-    box-shadow: 0px 2px 5px 0px #464545;
+    box-shadow: 0px 0px 5px #232323c7;
     transform: scale(1.1);
   }
+
+  @media only screen and (max-width: 860px) {
+    width: 125px;
+    font-size: 1.6rem;
+    padding: 0;
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
 `;
 
 const StyledSignup = S(Link)`

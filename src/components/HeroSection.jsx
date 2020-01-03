@@ -39,7 +39,7 @@ const ContentContainer = S.div`
     flex-direction: column;
     margin: 200px 0;
     background-color: #fff;
-    box-shadow: 0px 3px 8px #000000;
+    box-shadow: 0 1px 6px rgba(32, 33, 36, 0.28);
     width: 60%;
     border-radius: 50px;
 `;

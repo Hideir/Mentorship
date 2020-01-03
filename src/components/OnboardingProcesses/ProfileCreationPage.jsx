@@ -29,11 +29,21 @@ const PageIntroContainer = S.div`
     display: flex;
     flex-flow: row wrap;
     margin: 0 auto;
+
+    @media only screen and (max-width: 860px) {
+        width: 90%;
+      }
 `;
 const PageTitle = S.h2`
     font-size: 4rem;
     width: 100%;
     text-align: center;
+
+    @media only screen and (max-width: 860px) {
+        font-size: 3rem;
+        width: 90%;
+        margin: 0 auto;
+      }
 `;
 const SubHeading = S.p`
     font-size: 2.4rem;
@@ -41,4 +51,10 @@ const SubHeading = S.p`
     color: #0077ff;
     font-style: italic;
     text-align: center;
+
+    @media only screen and (max-width: 860px) {
+        font-size: 2.2rem;
+        width: 90%;
+        margin: 0 auto;
+      }
 `;

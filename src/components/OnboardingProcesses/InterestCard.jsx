@@ -40,7 +40,7 @@ const  CardContainer = S.div`
         cursor: pointer;
     }
     :active {
-        box-shadow: 0px 2px 5px 0px #464545;
+        box-shadow: 0px 0px 5px #232323c7;
         transform: scale(1.15);
       }
       @media only screen and (max-width: 860px) {

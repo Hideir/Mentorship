@@ -115,7 +115,7 @@ const NextButtonContainer = S.div`
 `;
 const NextButton = S.div`
     display: flex;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 600;
     align-items: center;
     font-size: 2rem;
@@ -135,7 +135,7 @@ const NextButton = S.div`
         cursor: pointer;
     }
     :active {
-        box-shadow: 0px 2px 5px 0px #464545;
+        box-shadow: 0px 0px 5px #232323c7;
         transform: scale(1.1);
     }
     @media only screen and (max-width: 860px) {

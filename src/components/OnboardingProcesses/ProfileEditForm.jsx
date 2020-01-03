@@ -79,22 +79,31 @@ export default withRouter(ProfileEditForm);
 const BigFormContainer = S.div`
     width: 40%;
     margin: 40px auto;
+
+    @media only screen and (max-width: 860px) {
+        width: 90%;
+        margin-bottom: 100px;
+	  }
 `;
 const Form = S.form`
   display: flex;
   flex-flow: row wrap;
    width: 100%;
    background-color: #fff;
-   border-radius: 15px;
+   border-radius: 5px;
    padding: 2rem;
    justify-content: space-between;
    box-sizing: border-box;
-   box-shadow: 0px 10px 20px -3px #000;
+   box-shadow: 0px 0px 5px #232323c7;
 `;
 const Title = S.h2 `
     font-size: 3rem;
     width: 100%;
     text-align: left;
+
+    @media only screen and (max-width: 860px) {
+        font-size: 2.6rem;
+      }
 `;
 const Label = S.label`
     width: ${props => props.primary ? "100%" : "49%"};
@@ -119,7 +128,7 @@ const NextButtonContainer = S.div`
 `;
 const NextButton = S.button`
     display: flex;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 600;
     align-items: center;
     font-size: 2rem;
@@ -140,7 +149,7 @@ const NextButton = S.button`
         cursor: pointer;
     }
     :active {
-        box-shadow: 0px 2px 5px 0px #464545;
+        box-shadow: 0px 0px 5px #232323c7;
         transform: scale(1.1);
     }
 `;

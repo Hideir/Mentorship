@@ -76,7 +76,7 @@ const ProfileHeaderContainer = S.div`
     border-top-right-radius: 15px;
 	margin: 10px;
     margin-bottom: 0;
-    box-shadow: 0px 2px 10px #d1d1d1;
+	box-shadow: 0px 0px 5px #232323c7;
     border: 1px solid rgba(0,0,0,0.2);
 
 	@media only screen and (max-width: 860px) {
@@ -104,7 +104,7 @@ const ProfileImage = S.div`
     background-color: #c3c3c3;
     z-index: 1;
     margin: 25px 25px 0 25px;
-	box-shadow: 1px 2px 5px -1px #3e3d33;
+	box-shadow: 0px 0px 5px #232323c7;
 	
 	@media only screen and (max-width: 860px) {
 		height: 100px;

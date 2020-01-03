@@ -48,7 +48,7 @@ const StyledHeader = S.header`
     padding-bottom: 2rem;
     top: 0;
     background-color: white;
-    box-shadow: 1px 1px 6px #818181;
+    box-shadow: 0px 0px 5px #232323c7;
     position: relative;
     z-index: 5;
     @media (max-width: 860px) {
@@ -82,7 +82,7 @@ const StyledLi = S.li`
 const StyledLink = S(Link)`
     display: flex;
     height: 2rem;
-    text-transform: uppercase;
+    text-transform: capitalize;
     font-weight: 600;
     align-items: center;
     font-size: 1.6rem;
@@ -97,7 +97,7 @@ const StyledLink = S(Link)`
         background-color: ${props => props.secondary ? '#003c80' : 'rgba(194, 194, 194, 0.4)'}
     }
     :active {
-        box-shadow: 0px 2px 5px 0px #464545;
+        box-shadow: 0px 0px 5px #232323c7;
         transform: scale(1.1);
     }
 `;
