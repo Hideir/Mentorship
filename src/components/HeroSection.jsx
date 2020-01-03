@@ -81,12 +81,12 @@ const TextContainer = S.div`
         margin-bottom: 50px;
 
         &::before {
-            top: 38px;
+            top: 50px;
             right: 0;
         }
 
         &::after {
-            left: 0;
+            display: none;
         }
 	  }
 `;
@@ -99,7 +99,6 @@ const Title = S.h1`
         font-size: 4rem;
     }
     @media only screen and (max-width: 860px) {
-        font-size: 3rem;
         text-align: center;
 	  }
 `; 
@@ -115,8 +114,10 @@ const StyledText = S.p`
     }
     @media only screen and (max-width: 860px) {
         text-align: center;
-        font-size: 1.8rem;
+        font-size: 2.4rem;
         width: 100%;
+        padding: 0 20px;
+        box-sizing: border-box;
 	  }
 `;
 const StyledImg = S.img`
