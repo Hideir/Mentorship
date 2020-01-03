@@ -30,7 +30,7 @@ export default InterestCard;
 const  CardContainer = S.div`
     width: 150px;
     height: 150px;
-    border-radius: 5%;
+    border-radius: 5px;
     background-color: #c3c3c3;
     padding: 15px;
     margin: 0 5px 15px 5px;
@@ -38,15 +38,23 @@ const  CardContainer = S.div`
     position: relative;
     :hover {
         cursor: pointer;
-        
     }
     :active {
         box-shadow: 0px 2px 5px 0px #464545;
         transform: scale(1.15);
       }
+      @media only screen and (max-width: 860px) {
+        width: 90px;
+        height: 90px;
+        margin: 0 8px 15px 8px;
+	  }
 `;
 const Title = S.h6`
     font-size: 2.4rem;
+
+    @media only screen and (max-width: 860px) {
+        font-size: 1.6rem;
+	  }
 `;
 
 
