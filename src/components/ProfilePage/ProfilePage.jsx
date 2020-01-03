@@ -13,7 +13,7 @@ const ProfilePage = (props) => {
 	useEffect( () => {
 		// retrieve the token from local storage
 		let token = localStorage.getItem('auth-token');
-			 axios.post('/profile', {emailAddr}, {  
+			 axios.post('https://hideir.herokuapp.com/profile', {emailAddr}, {  
 				headers: {
 				  'content-type': 'application/json', // Tell the server we are sending this over as JSON
 				  'authorization': token, // Send the token in the header from the client.
