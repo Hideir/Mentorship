@@ -14,6 +14,7 @@ const HeroSection = () => {
             </TextContainer>
             <StyledImg src={HomeIllustraction} />
         </ContentContainer>
+
     </HeroSectionWrapper>
   );
 };
@@ -27,6 +28,7 @@ const HeroSectionWrapper = S.section`
     margin-top: 50px;
     @media only screen and (max-width: 860px) {
         margin-bottom: 50px;
+        margin-top: 25px;
     }
 `;
 const ContentContainer = S.div`
@@ -57,6 +59,8 @@ const TextContainer = S.div`
         top: 62px;
         right: 50px;
         z-index: -1;
+        box-shadow: 0px 0px 5px #232323c7;
+        border-radius: 5px;
     }
     &::after {
         background-color: #c1deffc9;
@@ -66,12 +70,14 @@ const TextContainer = S.div`
         height: 100%;
         left: 100px;
         z-index: -2;
+        border-radius: 5px;
     }
     @media only screen and (max-width: 1200px) {
         &::before {
             height: 150px;
             top: 50px;
             right: 35px;
+            margin: 0 auto;
         }
     }
     @media only screen and (max-width: 860px) {
@@ -80,8 +86,7 @@ const TextContainer = S.div`
         margin-bottom: 50px;
 
         &::before {
-            top: 50px;
-            right: 0;
+            display: none;
         }
 
         &::after {
@@ -112,18 +117,29 @@ const StyledText = S.p`
         font-size: 2rem;
     }
     @media only screen and (max-width: 860px) {
-        text-align: center;
         font-size: 2.4rem;
-        width: 100%;
-        padding: 0 20px;
+        padding: 10px 10px 20px 10px;
+        margin-bottom: 0;
+        background-color: #0077ff;
+        width: 90%;
+        text-align: center;
         box-sizing: border-box;
+        border-radius: 5px;
+        margin: 0 auto;
+        box-shadow: 0px 0px 5px #232323c7;
 	  }
+`;
+
+const ImageContainer = S.div`
+      display: flex;
+      align-items: center;
 `;
 const StyledImg = S.img`
     width: 50%;
     min-width: 300px;
     @media only screen and (max-width: 860px) {
         width: 80%;
-        margin: 50px auto 0 auto;
+        margin: 0 auto;
 	  }
 `;
+
