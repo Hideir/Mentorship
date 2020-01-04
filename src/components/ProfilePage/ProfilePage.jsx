@@ -7,8 +7,8 @@ import ProfilePageInterests from './ProfilePageInterests';
 import ProfilePageEducationSection from './ProfilePageEducationSection';
 
 const ProfilePage = (props) => {
-	// console.log(props.location.state.user);
-	// console.log(props.location.state.loggedInUser);
+	console.log(props.location.state.user);
+	console.log(props.location.state.loggedInUser);
 	const [profileData, setProfileData] = useState({})
 	const routedEmail = props.location.state.loggedInUser ? props.location.state.loggedInUser.email  : props.location.state.user.email;
 	const userId = props.location.state.loggedInUser ? props.location.state.loggedInUser.id : props.location.state.user.userId;
@@ -19,7 +19,6 @@ const ProfilePage = (props) => {
 		// retrieve the token from local storage
 		let token = localStorage.getItem('auth-token');
 		const getProfileData = (profileId, filter) => {
-			console.log(filter);
 			axios.post(`https://hideir.herokuapp.com/profile/${profileId}`, {filter}, {  
 				headers: {
 				  'content-type': 'application/json', // Tell the server we are sending this over as JSON
@@ -32,13 +31,8 @@ const ProfilePage = (props) => {
 			})
 			.catch(error => console.log(error))
 		}
-		if(routedEmail) {
-			console.log(routedEmail);
-			getProfileData(userId,routedEmail);
-		 } else { 
-			 console.log(emailAddr);
-			 getProfileData(emailAddr);
-		 }
+
+		if(routedEmail) getProfileData(userId,routedEmail);
 
 	},[userId]);
 
