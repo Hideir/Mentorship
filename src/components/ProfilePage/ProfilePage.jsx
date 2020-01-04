@@ -18,7 +18,7 @@ const ProfilePage = (props) => {
 	useEffect( () => {
 		// retrieve the token from local storage
 		console.log(routedEmail);
-		console.loog(userId);
+		console.log(userId);
 		let token = localStorage.getItem('auth-token');
 		const getProfileData = (profileId, filter) => {
 			axios.post(`https://hideir.herokuapp.com/profile/${profileId}`, {filter}, {  
