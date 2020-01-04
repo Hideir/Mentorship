@@ -8,7 +8,9 @@ import '../../App.css';
 
 
 const DesktopNavigation = (props) => {
+
     const {loggedInUser} = props;
+    console.log(loggedInUser)
     return(
         <StyledHeader>
             <StyledNavigationContainer>
