@@ -1,4 +1,5 @@
 import React,{useState, useEffect} from 'react';
+import axios from 'axios';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {ProtectedRoute} from './ProtectedRoute';
@@ -15,6 +16,7 @@ import MobileMenu from './components/Menus/MobileMenu/MobileMenu';
 
 function App() {
   // Utilize redux or context api to have global state or lift state up. Or else i will create a 'user' object in app to pass the data
+  const [loggedInUser,setLoggedInUser] = useState({})
   const [IsLoggedIn, setIsLoggedIn] = useState( () => {
     if(localStorage.getItem('auth-token')) {
       return true;
@@ -43,18 +45,36 @@ function App() {
         localStorage.removeItem('auth-token');
       }
   }
-  console.log('user is logged in: ' + IsLoggedIn);
+  useEffect( () => {
+    let authToken = localStorage.getItem('auth-token'); 
+		const getUserInformation = () => {
+			axios.get(`/loggedInUser`, {  
+				headers: {
+				  'content-type': 'application/json', // Tell the server we are sending this over as JSON
+				  'authorization': authToken, // Send the token in the header from the client.
+				},
+			  })
+			.then( async response => {
+        console.log(response.data);
+        await setLoggedInUser(response.data.loggedInUserData[0]);
+			})
+			.catch(error => console.log(error))
+    }
+    if(IsLoggedIn) getUserInformation();
+
+  },[IsLoggedIn]); 
+
   return (
     <Router>
         <div className="App">
-          <DesktopNavigation signOut={signOut} IsLoggedIn={IsLoggedIn}/>
-          <MobileMenu signOut={signOut} IsLoggedIn={IsLoggedIn} />
+          <DesktopNavigation signOut={signOut} IsLoggedIn={IsLoggedIn} loggedInUser={loggedInUser}/>
+          <MobileMenu signOut={signOut} IsLoggedIn={IsLoggedIn} loggedInUser={loggedInUser}/>
           <Switch>
-            <Route exact path="/" component={HomePage} />
+            <Route exact path="/" component={HomePage} IsLoggedIn={IsLoggedIn} loggedInUser={loggedInUser} />
             <ProtectedRoute exact path="/search" component={SearchPage} IsLoggedIn={IsLoggedIn}/>
             <Route exact path="/about" component={AboutPage} />
-            <ProtectedRoute  path="/profile" component={ProfilePage} IsLoggedIn={IsLoggedIn}  newSignedUpUserEmail={newSignedUpUser.email} />
-            <ProtectedRoute  path="/profile/:id" component={ProfilePage} IsLoggedIn={IsLoggedIn}  newSignedUpUserEmail={newSignedUpUser.email} />
+            {/* <ProtectedRoute  path="/profile" component={ProfilePage} IsLoggedIn={IsLoggedIn}  newSignedUpUserEmail={newSignedUpUser.email} /> */}
+            <ProtectedRoute  path="/profile/:id" component={ProfilePage} loggedInUser={loggedInUser} IsLoggedIn={IsLoggedIn}  newSignedUpUserEmail={newSignedUpUser.email} />
             <Route exact path="/login" render={props => <LoginForm {...props} signIn={signIn} /> } />
             <Route exact path="/signup" render={props => <SignupForm {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser} /> } />
             <Route exact path="/signup/interests" render={props => <InterestListPage {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser}/> } />

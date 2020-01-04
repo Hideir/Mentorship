@@ -11,25 +11,17 @@ const SearchPage = () => {
   let token = localStorage.getItem("auth-token");
   // State
   const [selectedTags, setSelectedTags] = useState([]);
-  
-  // const [searchInput, setSearchInput] = useState(""); // Users search input
   const [matchedUsers, setMatchedUsers] = useState([]); // Users that match the searched input
   const [numberOfUsers, setNumberOfUsers] = useState( () => { // How many matched users there are.
     if(matchedUsers.length <= 0) {
       return 0;
     }
   });
-  // const [stringedTags, setMergedInput] = useState('');
-
-  // useEffect( () => {
-  //   setMergedInput(selectedTags.join(" ") + " " + searchInput);
-  // },[selectedTags]);
-
 
   useEffect(() => {
     axios
       .post(
-        `https://hideir.herokuapp.com/search`,
+        `/search`,
         { params: { test: "randomData" } },
         {
           headers: {
@@ -51,7 +43,7 @@ const SearchPage = () => {
     event.preventDefault();
     axios
       .post(
-        `https://hideir.herokuapp.com/search`,
+        `/search`,
         { selectedTags },
         {
           headers: {
@@ -64,10 +56,6 @@ const SearchPage = () => {
         // When our server responds that we made a good request we push our user to the home component.
         await setMatchedUsers(response.data.matchedRows);
         await setNumberOfUsers(response.data.matchedRows.length);
-        console.log(response.data.matchedRows);
-
-        // setSearchInput(''); // Reset value.
-        // setMergedInput(''); // Reset value.
         setSelectedTags([]); // Reset value.
       })
       .catch(error => {
@@ -75,10 +63,6 @@ const SearchPage = () => {
       });
 
   };
-  // const handleChanges = async event => {
-  //   await setSearchInput(event.target.value);
-  // };
-
   return (
     <HeroSectionWrapper>
       <ContentContainer>

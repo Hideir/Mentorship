@@ -8,6 +8,7 @@ import '../../App.css';
 
 
 const DesktopNavigation = (props) => {
+    const {loggedInUser} = props;
     return(
         <StyledHeader>
             <StyledNavigationContainer>
@@ -19,7 +20,7 @@ const DesktopNavigation = (props) => {
                         : null
                         }
                         <StyledLi>
-                            {props.IsLoggedIn ? <StyledLink to="/profile">Profile</StyledLink> : null }
+                            {props.IsLoggedIn ? <StyledLink to={{pathname: `/profile/${props.loggedInUser.id}`, state: {loggedInUser}}}>Profile</StyledLink> : null }
                         </StyledLi>
                         <StyledLi>
                             {props.IsLoggedIn ? <StyledLink onClick={props.signOut} to="/">Log Out</StyledLink> : <StyledLink to="/login">Login</StyledLink>}

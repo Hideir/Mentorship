@@ -29,14 +29,14 @@ const ProfileEditForm = (props) => {
         event.preventDefault();
         localStorage.setItem('userEmail', profileObject.email);
         // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
-          axios.post(`https://hideir.herokuapp.com/signup/add-profile`, {profileObject}, {  
+          axios.post(`/signup/add-profile`, {profileObject}, {  
             headers: {
               'content-type': 'application/json' // Tell the server we are sending this over as JSON
             },
           })
           .then(function (response) {
             console.log(response.data);
-            props.history.push("/profile");
+            props.history.push("/");
           })
           .catch(function (error) {
             console.log(error);
@@ -120,35 +120,4 @@ const Input = S.input`
     border: #000 1px solid;
     outline: none;
     margin-top: 5px;
-`;
-const NextButtonContainer = S.div`
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-`;
-const NextButton = S.button`
-    display: flex;
-    text-transform: capitalize;
-    font-weight: 600;
-    align-items: center;
-    font-size: 2rem;
-    color: ${props => (props.secondary ? "#fff" : "#000")};
-    padding: .8rem 2.4rem;
-    border-radius: 50px;
-    text-decoration: none;
-    background-color: ${props => props.secondary ? "#0077ff" : "transparent"}
-    transition: all ease-in-out 120ms;
-    width: 100px;
-    border: none;
-    align-items: center;
-    justify-content: center;
-    :hover {
-    background-color: ${props =>
-        props.secondary ? "#003c80" : "rgba(194, 194, 194, 0.4)"};
-        cursor: pointer;
-    }
-    :active {
-        box-shadow: 0px 0px 5px #232323c7;
-        transform: scale(1.1);
-    }
 `;

@@ -7,26 +7,20 @@ import ProfilePageInterests from './ProfilePageInterests';
 import ProfilePageEducationSection from './ProfilePageEducationSection';
 
 const ProfilePage = (props) => {
-	// console.log(props.location.state);
+	// console.log(props.location.state.user);
+	// console.log(props.location.state.loggedInUser);
 	const [profileData, setProfileData] = useState({})
-	const routedEmail = props.location.state == undefined ? false : props.location.state.user.email;
+	const routedEmail = props.location.state.loggedInUser ? props.location.state.loggedInUser.email  : props.location.state.user.email;
+	const userId = props.location.state.loggedInUser ? props.location.state.loggedInUser.id : props.location.state.user.userId;
 	const emailAddr = props.newSignedUpUserEmail;
 	const {firstName, lastName, interests,state, city, tagLine, education} = profileData;
-
-
-
-	// useEffect(  () => {
-	// 	console.log(props.location.state.user.email);
-	// 	console.log( routedEmail);
-		
-	// },[]);
 
 	useEffect( () => {
 		// retrieve the token from local storage
 		let token = localStorage.getItem('auth-token');
-		const getProfileData = (filter) => {
-			console.log('yeah I ran');
-			axios.post('https://hideir.herokuapp.com/profile', {filter}, {  
+		const getProfileData = (profileId, filter) => {
+			console.log(filter);
+			axios.post(`/profile/${profileId}`, {filter}, {  
 				headers: {
 				  'content-type': 'application/json', // Tell the server we are sending this over as JSON
 				  'authorization': token, // Send the token in the header from the client.
@@ -40,13 +34,13 @@ const ProfilePage = (props) => {
 		}
 		if(routedEmail) {
 			console.log(routedEmail);
-			getProfileData(routedEmail);
+			getProfileData(userId,routedEmail);
 		 } else { 
-			 console.log('second ran');
+			 console.log(emailAddr);
 			 getProfileData(emailAddr);
 		 }
 
-	},[]);
+	},[userId]);
 
 	return(
 		<PageWrapper>

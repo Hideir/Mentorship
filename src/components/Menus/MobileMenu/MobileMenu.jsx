@@ -8,6 +8,7 @@ import "./MobileMenu.css";
 
 const MobileMenu = (props) => {
   const [isMobileActive, setIsMobileActive] = useState(false);
+  const {loggedInUser} = props;
 
   const handleClick = () => {
     if(isMobileActive === true) {
@@ -24,7 +25,7 @@ const MobileMenu = (props) => {
         : null
         }
         {props.IsLoggedIn
-        ? <StyledLi> <StyledLink to="/profile" className="iconLinks"> <FontAwesomeIcon icon={faUser}/> Profile</StyledLink> </StyledLi>
+        ? <StyledLi> <StyledLink to={{pathname: `/profile/${props.loggedInUser.id}`, state: {loggedInUser}}} className="iconLinks"> <FontAwesomeIcon icon={faUser}/> Profile</StyledLink> </StyledLi>
         : null
         }
         {props.IsLoggedIn
