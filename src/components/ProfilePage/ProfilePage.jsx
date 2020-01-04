@@ -12,11 +12,13 @@ const ProfilePage = (props) => {
 	const [profileData, setProfileData] = useState({})
 	const routedEmail = props.location.state.loggedInUser ? props.location.state.loggedInUser.email  : props.location.state.user.email;
 	const userId = props.location.state.loggedInUser ? props.location.state.loggedInUser.id : props.location.state.user.userId;
-	const emailAddr = props.newSignedUpUserEmail;
+	// const emailAddr = props.newSignedUpUserEmail;
 	const {firstName, lastName, interests,state, city, tagLine, education} = profileData;
 
 	useEffect( () => {
 		// retrieve the token from local storage
+		console.log(routedEmail);
+		console.loog(userId);
 		let token = localStorage.getItem('auth-token');
 		const getProfileData = (profileId, filter) => {
 			axios.post(`https://hideir.herokuapp.com/profile/${profileId}`, {filter}, {  
