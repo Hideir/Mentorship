@@ -14,7 +14,6 @@ const PossibleSearchTags = (props) => {
   },[selectedTags]);
 
     const storeSelectedTags = async () => {
-        // await setSelectedTags([...selectedTags, event.target.getAttribute('name')]);
         if(!hasActiveClass) {
           await setHasActiveClass(true);
            setSelectedTags([...selectedTags, interests.interestName]);
