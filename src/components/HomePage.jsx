@@ -7,7 +7,6 @@ const HomePage = (props) => {
     const [user, setUser] = useState([]);
     useEffect( () => {
         let authToken = localStorage.getItem('auth-token'); 
-
             const getUserInformation = () => {
                 axios.get(`https://hideir.herokuapp.com/loggedInUser`, {  
                     headers: {
@@ -16,11 +15,10 @@ const HomePage = (props) => {
                     },
                   })
                 .then( async response => {
-            console.log(response.data);
-            await setUser(response.data.loggedInUserData[0]);
+                  await setUser(response.data.loggedInUserData[0]);
                 })
                 .catch(error => console.log(error))
-        }
+            }
         if(props.IsLoggedIn) getUserInformation();
     
       },[]); 

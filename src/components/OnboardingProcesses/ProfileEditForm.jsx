@@ -35,7 +35,6 @@ const ProfileEditForm = (props) => {
             },
           })
           .then(function (response) {
-            console.log(response.data);
             props.history.push("/");
           })
           .catch(function (error) {

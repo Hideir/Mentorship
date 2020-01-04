@@ -32,7 +32,6 @@ const SearchPage = () => {
       )
       .then(response => {
         // When our server responds that we made a good request we push our user to the home component.
-        console.log(response);
       })
       .catch(error => {
         console.log("here is the error" + error);
