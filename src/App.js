@@ -15,7 +15,6 @@ import ProfilePage from './components/ProfilePage/ProfilePage';
 import MobileMenu from './components/Menus/MobileMenu/MobileMenu';
 
 function App() {
-  // Utilize redux or context api to have global state or lift state up. Or else i will create a 'user' object in app to pass the data
   const [loggedInUser,setLoggedInUser] = useState({})
   const [IsLoggedIn, setIsLoggedIn] = useState( () => {
     if(localStorage.getItem('auth-token')) {
@@ -73,7 +72,6 @@ function App() {
             <Route exact path="/" component={HomePage} IsLoggedIn={IsLoggedIn} loggedInUser={loggedInUser} />
             <ProtectedRoute exact path="/search" component={SearchPage} IsLoggedIn={IsLoggedIn}/>
             <Route exact path="/about" component={AboutPage} />
-            {/* <ProtectedRoute  path="/profile" component={ProfilePage} IsLoggedIn={IsLoggedIn}  newSignedUpUserEmail={newSignedUpUser.email} /> */}
             <ProtectedRoute  path="/profile/:id" component={ProfilePage} loggedInUser={loggedInUser} IsLoggedIn={IsLoggedIn}  newSignedUpUserEmail={newSignedUpUser.email} />
             <Route exact path="/login" render={props => <LoginForm {...props} signIn={signIn} /> } />
             <Route exact path="/signup" render={props => <SignupForm {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser} /> } />
