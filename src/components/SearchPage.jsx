@@ -21,7 +21,7 @@ const SearchPage = () => {
   useEffect(() => {
     axios
       .post(
-        `https://hideir.herokuapp.com/search`,
+        `/search`,
         { params: { test: "randomData" } },
         {
           headers: {
@@ -42,7 +42,7 @@ const SearchPage = () => {
     event.preventDefault();
     axios
       .post(
-        `https://hideir.herokuapp.com/search`,
+        `/search`,
         { selectedTags },
         {
           headers: {
