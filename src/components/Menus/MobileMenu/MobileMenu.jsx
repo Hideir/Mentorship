@@ -8,15 +8,17 @@ import {store} from '../../../store';
 import "./MobileMenu.css";
 
 const MobileMenu = (props) => {
+  const globalState = useContext(store); // Pull in our Global State 
+
   const [isMobileActive, setIsMobileActive] = useState(false);
-  // const {loggedInUser} = props;
-
-  const globalState = useContext(store);
-  console.log({globalState});
-
-  const loggedInUser = globalState.state.loggedInUser;
-  const isLoggedIn = globalState.state.isLoggedIn;
-
+  const {loggedInUser,isLoggedIn} = globalState.state;
+  
+  const signOut = () => {
+    if(isLoggedIn) {
+      props.dispatch({type: 'LOG_OUT', payload: false});
+      localStorage.removeItem('auth-token');
+    }
+}
   const handleClick = () => {
     if(isMobileActive === true) {
       setIsMobileActive(false);
@@ -40,7 +42,7 @@ const MobileMenu = (props) => {
         : null  
         }  
         <StyledLi>
-            {isLoggedIn ? <StyledLink className="iconLinks" onClick={props.signOut} to="/"> <FontAwesomeIcon icon={faSignOutAlt}/>Sign Out</StyledLink> : <StyledLink className="iconLinks defaultLinks"  secondary="false" to="/login">Sign In</StyledLink>}
+            {isLoggedIn ? <StyledLink className="iconLinks" onClick={signOut} to="/"> <FontAwesomeIcon icon={faSignOutAlt}/>Sign Out</StyledLink> : <StyledLink className="iconLinks defaultLinks"  secondary="false" to="/login">Sign In</StyledLink>}
         </StyledLi>
         {isLoggedIn
         ? null 

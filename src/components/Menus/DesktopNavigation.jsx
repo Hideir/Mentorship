@@ -14,6 +14,13 @@ const DesktopNavigation = (props) => {
     const globalState = useContext(store);
     const {isLoggedIn, loggedInUser} = globalState.state;
 
+    const signOut = () => {
+        if(isLoggedIn) {
+          props.dispatch({type: 'LOG_OUT', payload: false});
+          localStorage.removeItem('auth-token');
+        }
+    }
+
     return(
         <StyledHeader>
             <StyledNavigationContainer>
@@ -28,7 +35,7 @@ const DesktopNavigation = (props) => {
                             {isLoggedIn ? <StyledLink to={{pathname: `/profile/${loggedInUser.id}`, state: {loggedInUser}}}>Profile</StyledLink> : null }
                         </StyledLi>
                         <StyledLi>
-                            {isLoggedIn ? <StyledLink onClick={props.signOut} to="/">Log Out</StyledLink> : <StyledLink to="/login">Login</StyledLink>}
+                            {isLoggedIn ? <StyledLink onClick={signOut} to="/">Log Out</StyledLink> : <StyledLink to="/login">Login</StyledLink>}
                         </StyledLi>
                         <StyledLi>
                             {isLoggedIn ? null : <StyledLink secondary="true" to="signup">Get Started</StyledLink>}

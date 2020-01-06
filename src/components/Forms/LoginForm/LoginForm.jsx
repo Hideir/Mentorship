@@ -11,6 +11,13 @@ const LoginForm = props => {
   const [isValidFlag, setIsValidFlag] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
+  const signIn = () => {
+    // Store token in state to let the app know the user is logged in
+    let authToken = localStorage.getItem('auth-token');
+    if(authToken) {
+      props.dispatch({type: 'IS_LOGGED_IN', payload: true});
+    }
+  }
  
   const handleSignUp = event => {
     event.preventDefault();
@@ -28,7 +35,7 @@ const LoginForm = props => {
         const {token} = response.data;
         // Set token to local storage
         localStorage.setItem('auth-token', token);
-        props.signIn();
+        signIn();
         setIsValidFlag(true);
         // Redirect them to the homepage on sucessfull login.
         props.history.push("/");
