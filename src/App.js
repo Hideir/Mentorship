@@ -77,10 +77,10 @@ function App() {
           <DesktopNavigation signOut={signOut}/>
           <MobileMenu signOut={signOut}/>
           <Switch>
-            <Route exact path="/" component={HomePage} IsLoggedIn={IsLoggedIn} loggedInUser={loggedInUser} />
+            <Route exact path="/" component={HomePage} />
             <ProtectedRoute exact path="/search" component={SearchPage} IsLoggedIn={IsLoggedIn}/>
             <Route exact path="/about" component={AboutPage} />
-            <ProtectedRoute  path="/profile/:id" component={ProfilePage} loggedInUser={loggedInUser} IsLoggedIn={IsLoggedIn}  newSignedUpUserEmail={newSignedUpUser.email} />
+            <ProtectedRoute  path="/profile/:id" component={ProfilePage} loggedInUser={loggedInUser} IsLoggedIn={IsLoggedIn}  userEmail={loggedInUser.email} />
             <Route exact path="/login" render={props => <LoginForm {...props} signIn={signIn} /> } />
             <Route exact path="/signup" render={props => <SignupForm {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser} /> } />
             <Route exact path="/signup/interests" render={props => <InterestListPage {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser}/> } />

@@ -1,15 +1,19 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState,useEffect, useContext} from 'react';
 import S from 'styled-components';
 import axios from 'axios';
 
 import ProfilePagePersonalInformation from './ProfilePagePersonalInformation';
 import ProfilePageInterests from './ProfilePageInterests';
 import ProfilePageEducationSection from './ProfilePageEducationSection';
+import {store} from '../../store';
 
 const ProfilePage = (props) => {
+	const globalState = useContext(store); // Call in our store
+	const {loggedInUser} = globalState.state;
+
 	const [profileData, setProfileData] = useState({});
-	const routedEmail = props.location.state.loggedInUser ? props.location.state.loggedInUser.email  : props.location.state.user.email;
-	const userId = props.location.state.loggedInUser ? props.location.state.loggedInUser.id : props.location.state.user.userId;
+	const routedEmail = props.location.state.user ? props.location.state.user.email : loggedInUser.email; // check if we have user state ( from Search page)
+	const userId = props.location.state.user ?  props.location.state.user.userId : loggedInUser.id; // check if we have user state ( from Search page)
 	// const emailAddr = props.newSignedUpUserEmail;
 	const {firstName, lastName, interests,state, city, tagLine, education} = profileData;
 

@@ -12,11 +12,8 @@ import {store} from '../../store.js';
 
 const DesktopNavigation = (props) => {
     const globalState = useContext(store);
-    console.log({globalState});
-    const loggedInUser = globalState.state.loggedInUser;
-    const isLoggedIn = globalState.state.isLoggedIn;
+    const {isLoggedIn, loggedInUser} = globalState.state;
 
-    // const {loggedInUser} = props;
     return(
         <StyledHeader>
             <StyledNavigationContainer>
