@@ -1,38 +1,45 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import {Link}  from "react-router-dom";
 import S from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Logo from '../Logos/Logo';
 import '../../App.css';
+import {store} from '../../store.js';
+
+
 
 
 const DesktopNavigation = (props) => {
+    const globalState = useContext(store);
+    console.log({globalState});
+    const loggedInUser = globalState.state.loggedInUser;
+    const isLoggedIn = globalState.state.isLoggedIn;
 
-    const {loggedInUser} = props;
+    // const {loggedInUser} = props;
     return(
         <StyledHeader>
             <StyledNavigationContainer>
                 <Logo />
                 <StyledNavigation>
                     <StyledUL>
-                        {props.IsLoggedIn
+                        {isLoggedIn
                         ? <StyledLi> <StyledLink to ="/">Home</StyledLink> </StyledLi>
                         : null
                         }
                         <StyledLi>
-                            {props.IsLoggedIn ? <StyledLink to={{pathname: `/profile/${props.loggedInUser.id}`, state: {loggedInUser}}}>Profile</StyledLink> : null }
+                            {isLoggedIn ? <StyledLink to={{pathname: `/profile/${loggedInUser.id}`, state: {loggedInUser}}}>Profile</StyledLink> : null }
                         </StyledLi>
                         <StyledLi>
-                            {props.IsLoggedIn ? <StyledLink onClick={props.signOut} to="/">Log Out</StyledLink> : <StyledLink to="/login">Login</StyledLink>}
+                            {isLoggedIn ? <StyledLink onClick={props.signOut} to="/">Log Out</StyledLink> : <StyledLink to="/login">Login</StyledLink>}
                         </StyledLi>
                         <StyledLi>
-                            {props.IsLoggedIn ? null : <StyledLink secondary="true" to="signup">Get Started</StyledLink>}
+                            {isLoggedIn ? null : <StyledLink secondary="true" to="signup">Get Started</StyledLink>}
                         </StyledLi>
-                        {props.IsLoggedIn 
-                            ?<StyledLi>
+                        {isLoggedIn 
+                            ? <StyledLi>
                                 <StyledLink  to="/search"><FontAwesomeIcon icon={faSearch}/></StyledLink> 
-                            </StyledLi>
+                              </StyledLi>
                             : null 
                         }
                     </StyledUL>

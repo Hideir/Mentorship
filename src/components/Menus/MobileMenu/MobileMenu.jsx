@@ -1,14 +1,21 @@
-import React, {useState} from "react";
+import React, {useState, useContext} from "react";
 import S from 'styled-components';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faHome, faSignOutAlt,faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
+import {store} from '../../../store';
 
 import "./MobileMenu.css";
 
 const MobileMenu = (props) => {
   const [isMobileActive, setIsMobileActive] = useState(false);
-  const {loggedInUser} = props;
+  // const {loggedInUser} = props;
+
+  const globalState = useContext(store);
+  console.log({globalState});
+
+  const loggedInUser = globalState.state.loggedInUser;
+  const isLoggedIn = globalState.state.isLoggedIn;
 
   const handleClick = () => {
     if(isMobileActive === true) {
@@ -20,26 +27,26 @@ const MobileMenu = (props) => {
   return (
     <div className="hamburgerWrapper">
       <StyledUL>
-        {props.IsLoggedIn
+        {isLoggedIn
         ? <StyledLi> <StyledLink to ="/"  className="iconLinks"> <FontAwesomeIcon icon={faHome}/> Home </StyledLink> </StyledLi>
         : null
         }
-        {props.IsLoggedIn
-        ? <StyledLi> <StyledLink to={{pathname: `/profile/${props.loggedInUser.id}`, state: {loggedInUser}}} className="iconLinks"> <FontAwesomeIcon icon={faUser}/> Profile</StyledLink> </StyledLi>
+        {isLoggedIn
+        ? <StyledLi> <StyledLink to={{pathname: `/profile/${loggedInUser.id}`, state: {loggedInUser}}} className="iconLinks"> <FontAwesomeIcon icon={faUser}/> Profile</StyledLink> </StyledLi>
         : null
         }
-        {props.IsLoggedIn
+        {isLoggedIn
         ?<div id="hamburgerMenuContainer" className={isMobileActive ? 'toggle-active' : null} onClick={handleClick}>{/* <div className="hamburger-menu"><span></span></div> */}<FontAwesomeIcon icon={faPlus}/></div>
         : null  
         }  
         <StyledLi>
-            {props.IsLoggedIn ? <StyledLink className="iconLinks" onClick={props.signOut} to="/"> <FontAwesomeIcon icon={faSignOutAlt}/>Sign Out</StyledLink> : <StyledLink className="iconLinks defaultLinks"  secondary="false" to="/login">Sign In</StyledLink>}
+            {isLoggedIn ? <StyledLink className="iconLinks" onClick={props.signOut} to="/"> <FontAwesomeIcon icon={faSignOutAlt}/>Sign Out</StyledLink> : <StyledLink className="iconLinks defaultLinks"  secondary="false" to="/login">Sign In</StyledLink>}
         </StyledLi>
-        {props.IsLoggedIn
+        {isLoggedIn
         ? null 
         : <StyledLi>  <StyledLink className="iconLinks defaultLinks call-to-action" secondary={true} to="signup">Get Started</StyledLink> </StyledLi> 
         }
-        {props.IsLoggedIn 
+        {isLoggedIn 
           ? <StyledLi> <StyledLink  className="iconLinks" to="/search"><FontAwesomeIcon icon={faSearch}/>Search</StyledLink> </StyledLi>
           : null 
         }

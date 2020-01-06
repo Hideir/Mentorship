@@ -7,7 +7,7 @@ import ProfilePageInterests from './ProfilePageInterests';
 import ProfilePageEducationSection from './ProfilePageEducationSection';
 
 const ProfilePage = (props) => {
-	const [profileData, setProfileData] = useState({})
+	const [profileData, setProfileData] = useState({});
 	const routedEmail = props.location.state.loggedInUser ? props.location.state.loggedInUser.email  : props.location.state.user.email;
 	const userId = props.location.state.loggedInUser ? props.location.state.loggedInUser.id : props.location.state.user.userId;
 	// const emailAddr = props.newSignedUpUserEmail;

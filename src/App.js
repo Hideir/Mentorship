@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, useContext} from 'react';
 import axios from 'axios';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
@@ -13,8 +13,13 @@ import InterestListPage from './components/OnboardingProcesses/InterestListPage'
 import ProfileCreationPage from './components/OnboardingProcesses/ProfileCreationPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import MobileMenu from './components/Menus/MobileMenu/MobileMenu';
+import {store} from './store.js';
 
 function App() {
+  const globalState = useContext(store);
+  const {dispatch} = globalState;
+  console.log({globalState});
+  
   const [loggedInUser,setLoggedInUser] = useState({})
   const [IsLoggedIn, setIsLoggedIn] = useState( () => {
     if(localStorage.getItem('auth-token')) {
@@ -34,16 +39,18 @@ function App() {
     let authToken = localStorage.getItem('auth-token');
     if(authToken) {
       setIsLoggedIn(true);
+      dispatch({type: 'IS_LOGGED_IN', payload: true});
     }
   }
   const signOut = () => {
-      // Delete token from local storage on sign out.
       let authToken = localStorage.getItem('auth-token'); 
       if(authToken) {
         setIsLoggedIn(false);
+        dispatch({type: 'LOG_OUT', payload: false});
         localStorage.removeItem('auth-token');
       }
   }
+
   useEffect( () => {
     let authToken = localStorage.getItem('auth-token'); 
 		const getUserInformation = () => {
@@ -56,6 +63,7 @@ function App() {
 			.then( async response => {
         console.log(response.data);
         await setLoggedInUser(response.data.loggedInUserData[0]);
+        await dispatch({type: 'SET_LOGGEDIN_USER', payload: response.data.loggedInUserData[0]})
 			})
 			.catch(error => console.log(error))
     }
@@ -66,8 +74,8 @@ function App() {
   return (
     <Router>
         <div className="App">
-          <DesktopNavigation signOut={signOut} IsLoggedIn={IsLoggedIn} loggedInUser={loggedInUser}/>
-          <MobileMenu signOut={signOut} IsLoggedIn={IsLoggedIn} loggedInUser={loggedInUser}/>
+          <DesktopNavigation signOut={signOut}/>
+          <MobileMenu signOut={signOut}/>
           <Switch>
             <Route exact path="/" component={HomePage} IsLoggedIn={IsLoggedIn} loggedInUser={loggedInUser} />
             <ProtectedRoute exact path="/search" component={SearchPage} IsLoggedIn={IsLoggedIn}/>
