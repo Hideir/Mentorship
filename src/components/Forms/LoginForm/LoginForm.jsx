@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import {useDispatch} from 'react-redux';
 import axios from "axios";
 import CredentialsForm from '../CredentialsForm';
 import { useFormInputControl } from "../../../hooks/useFormInputControl";
@@ -11,11 +12,13 @@ const LoginForm = props => {
   const [isValidFlag, setIsValidFlag] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
+  const dispatch = useDispatch();
+
   const signIn = () => {
     // Store token in state to let the app know the user is logged in
     let authToken = localStorage.getItem('auth-token');
     if(authToken) {
-      props.dispatch({type: 'IS_LOGGED_IN', payload: true});
+      dispatch({type: 'IS_LOGGED_IN', payload: true});
     }
   }
  

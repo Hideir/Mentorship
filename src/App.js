@@ -1,4 +1,5 @@
-import React,{useState, useEffect, useContext} from 'react';
+import React,{useState, useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux'
 import axios from 'axios';
 import './App.css';
 import { BrowserRouter as Router, Switch, Route} from "react-router-dom";
@@ -8,24 +9,24 @@ import HomePage from './components/HomePage';
 import LoginForm from './components/Forms/LoginForm/LoginForm';
 import SignupForm from './components/Forms/SignupForm/SignupForm';
 import SearchPage from './components/SearchPage';
-import AboutPage from './components/About';
 import InterestListPage from './components/OnboardingProcesses/InterestListPage';
 import ProfileCreationPage from './components/OnboardingProcesses/ProfileCreationPage';
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import MobileMenu from './components/Menus/MobileMenu/MobileMenu';
-import {store} from './store.js';
 
 function App() {
-  const globalState = useContext(store);
-  const {dispatch} = globalState; // Pull out the dispatch
-  const {isLoggedIn} = globalState.state; // Pulled out the logged in user state
-  console.log({globalState});
+  const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const dispatch = useDispatch();
 
   const [newSignedUpUser, setNewSignedUpUser] = useState({
     email: '',
     interests: [],
   });
 
+  // this useEffect is to make sure we get the user information on Load. PRobably store their loggedin email in password
+  // then when the user clicks on the profilePage we use their email to get the profile information instead of
+  // making a request every render.
+  
   useEffect( () => {
     let authToken = localStorage.getItem('auth-token'); 
 		const getUserInformation = () => {
@@ -36,29 +37,27 @@ function App() {
 				},
 			})
 			.then( async response => {
-        console.log(response.data);
         await dispatch({type: 'SET_LOGGEDIN_USER', payload: response.data.loggedInUserData[0]})
 			})
 			.catch(error => console.log(error))
     }
     if(isLoggedIn) getUserInformation();
 
-  },[isLoggedIn]); 
+  },[isLoggedIn, dispatch]); 
 
   return (
     <Router>
         <div className="App">
-          <DesktopNavigation dispatch={dispatch} />
-          <MobileMenu dispatch={dispatch} />
+          <DesktopNavigation />
+          <MobileMenu  />
           <Switch>
             <Route exact path="/" component={HomePage} />
             <ProtectedRoute exact path="/search" component={SearchPage} IsLoggedIn={isLoggedIn}/>
-            {/* <Route exact path="/about" component={AboutPage} /> */}
             <ProtectedRoute  path="/profile/:id" component={ProfilePage} IsLoggedIn={isLoggedIn}  />
-            <Route exact path="/login" render={props => <LoginForm {...props}  dispatch={dispatch} /> } />
+            <Route exact path="/login" component={LoginForm} />
             <Route exact path="/signup" render={props => <SignupForm {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser} /> } />
-            <Route exact path="/signup/interests" render={props => <InterestListPage {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser}/> } />
-            <Route exact path="/signup/add-profile" render={props => <ProfileCreationPage {...props} newSignedUpUser={newSignedUpUser} setNewSignedUpUser={setNewSignedUpUser} /> } />
+            <Route exact path="/signup/interests" component={InterestListPage} />
+            <Route exact path="/signup/add-profile"  component={ProfileCreationPage} />
           </Switch>
         </div>
     </Router>

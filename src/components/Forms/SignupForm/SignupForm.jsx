@@ -1,10 +1,12 @@
 import React,{useState} from 'react';
+import {useDispatch} from 'react-redux';
 import axios from 'axios';
 import CredentialsForm from '../CredentialsForm';
 import { useFormInputControl } from "../../../hooks/useFormInputControl";
 // import {apiKey} from './config';
 
   const SignupForm = (props) => {
+    const dispatch = useDispatch();
     // create a user object.
     const [email, setEmail, handleEmail] = useFormInputControl('');
     const [password, setPassword, handlePassword] = useFormInputControl('');
@@ -21,7 +23,7 @@ import { useFormInputControl } from "../../../hooks/useFormInputControl";
           },
         })
         .then(function (response) {
-          props.setNewSignedUpUser({...props.newSignedUpUser, email: email})
+          dispatch({type: 'SET_NEW_USER_EMAIL', payload: email})
           // When our server responds that we made a good request we push our user to the home component.
           props.history.push("/signup/interests");
         })

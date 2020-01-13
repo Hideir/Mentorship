@@ -1,18 +1,21 @@
-import React, {useState, useContext} from "react";
+import React, {useState} from "react";
+import {useSelector} from 'react-redux';
 import S from 'styled-components';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUser, faHome, faSignOutAlt,faSearch, faPlus } from "@fortawesome/free-solid-svg-icons";
-import {store} from '../../../store';
+// import {store} from '../../../rootReducer';
 
 import "./MobileMenu.css";
 
 const MobileMenu = (props) => {
-  const globalState = useContext(store); // Pull in our Global State 
+  // const globalState = useContext(store); // Pull in our Global State 
 
   const [isMobileActive, setIsMobileActive] = useState(false);
-  const {loggedInUser,isLoggedIn} = globalState.state;
   
+  const loggedInUser = useSelector(state => state.loggedInUser);
+  const isLoggedIn = useSelector(state => state.loggedInUser);
+
   const signOut = () => {
     if(isLoggedIn) {
       props.dispatch({type: 'LOG_OUT', payload: false});

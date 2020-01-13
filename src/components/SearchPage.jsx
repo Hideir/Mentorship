@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import '../App.css';
 import SearchForm from "./Form";
 import PossibleSearchTags from './PossibleSearchTags';
@@ -17,7 +17,7 @@ const SearchPage = () => {
       return 0;
     }
   });
-
+  console.log(matchedUsers);
   useEffect(() => {
     axios
       .post(
@@ -36,7 +36,7 @@ const SearchPage = () => {
       .catch(error => {
         console.log("here is the error" + error);
       });
-  }, []);
+  }, [token]);
 
   const handleSearch = event => {
     event.preventDefault();
@@ -71,19 +71,18 @@ const SearchPage = () => {
         <SelectedInterestUl>
           {interestsArray.map( (interests, index) =>{
             return <PossibleSearchTags 
-            selectedTags={selectedTags}
-            matchedUsers={matchedUsers} 
-            key={index} 
-            selectedTags={selectedTags} 
-            setSelectedTags={setSelectedTags} 
-            interests={interests}
+              matchedUsers={matchedUsers} 
+              key={index} 
+              selectedTags={selectedTags} 
+              setSelectedTags={setSelectedTags} 
+              interests={interests}
             />
           })}
         </SelectedInterestUl>
         <SearchForm handleSearch={handleSearch} />
         {numberOfUsers !== 0 ? <StyledText> {numberOfUsers} Results</StyledText> : null}
       </ContentContainer>
-      {matchedUsers == false ? null : (
+      {matchedUsers.length < 1 ? null : (
         <UserCardsContainer>
           {matchedUsers &&
             matchedUsers.map((user,index) => {

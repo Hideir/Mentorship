@@ -1,50 +1,55 @@
-import React,{useContext} from 'react';
-import {Link}  from "react-router-dom";
+import React from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import { Link } from "react-router-dom";
 import S from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import Logo from '../Logos/Logo';
 import '../../App.css';
-import {store} from '../../store.js';
 
 
 
 
 const DesktopNavigation = (props) => {
-    const globalState = useContext(store);
-    const {isLoggedIn, loggedInUser} = globalState.state;
+    const isLoggedIn = useSelector( state => state.isLoggedIn);
+    const loggedInUser = useSelector( state => state.loggedInUser);
 
+    const dispatch = useDispatch();
     const signOut = () => {
-        if(isLoggedIn) {
-          props.dispatch({type: 'LOG_OUT', payload: false});
-          localStorage.removeItem('auth-token');
+        if (isLoggedIn) {
+            dispatch({ type: 'LOG_OUT', payload: false });
+            localStorage.removeItem('auth-token');
         }
     }
-
-    return(
+    return (
         <StyledHeader>
             <StyledNavigationContainer>
                 <Logo />
                 <StyledNavigation>
                     <StyledUL>
                         {isLoggedIn
-                        ? <StyledLi> <StyledLink to ="/">Home</StyledLink> </StyledLi>
-                        : null
+                            ? <StyledLi>
+                                <StyledLink to="/">Home</StyledLink> 
+                              </StyledLi>
+                            : null
                         }
-                        <StyledLi>
-                            {isLoggedIn ? <StyledLink to={{pathname: `/profile/${loggedInUser.id}`, state: {loggedInUser}}}>Profile</StyledLink> : null }
-                        </StyledLi>
+                        {isLoggedIn
+                            ? <StyledLi>
+                                <StyledLink to={{ pathname: `/profile/${loggedInUser.id}`, state: { loggedInUser } }}>Profile</StyledLink>
+                              </StyledLi>
+                            : null
+                         }
                         <StyledLi>
                             {isLoggedIn ? <StyledLink onClick={signOut} to="/">Log Out</StyledLink> : <StyledLink to="/login">Login</StyledLink>}
                         </StyledLi>
                         <StyledLi>
                             {isLoggedIn ? null : <StyledLink secondary="true" to="signup">Get Started</StyledLink>}
                         </StyledLi>
-                        {isLoggedIn 
+                        {isLoggedIn
                             ? <StyledLi>
-                                <StyledLink  to="/search"><FontAwesomeIcon icon={faSearch}/></StyledLink> 
-                              </StyledLi>
-                            : null 
+                                <StyledLink to="/search"><FontAwesomeIcon icon={faSearch} /></StyledLink>
+                            </StyledLi>
+                            : null
                         }
                     </StyledUL>
                 </StyledNavigation>

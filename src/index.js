@@ -4,14 +4,20 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
+import {createStore} from 'redux';
+import {Provider} from 'react-redux';
+import {rootReducer} from './rootReducer';
+
+const store = createStore(rootReducer);
+
 // Import our Global State Provider
-import {GlobalStateProvider} from './store';
+// import {GlobalStateProvider} from './store';
 
 // Wrap our App component in the GlobalStateProvider component
 const app = (
-    <GlobalStateProvider>
+    <Provider store={store}>
         <App />
-    </GlobalStateProvider>
+    </Provider>
 )
 
 // Pump the newly wrapped App in the ReactDOM Render

@@ -1,4 +1,5 @@
-import React,{useState, useEffect} from 'react'
+import React from 'react'
+import {useSelector} from 'react-redux';
 import S from 'styled-components';
 import InterestCard from './InterestCard';
 import {interestsArray} from './interestData';
@@ -7,15 +8,10 @@ import MedFormButton from '../ReusedComponents/MedFormButton';
 
 
 const OnboardInterestList = (props) => {
+
+    const usersInterests = useSelector(state => state.newSignedUpUser.interests);
     let cardCounter = 1;
-    const [selectedInterests, setSelectedInterests] = useState([]);
 
-    useEffect( () => {
-        // Add interests to the new signed up user object in the app component
-        props.setNewSignedUpUser({...props.newSignedUpUser, interests: selectedInterests});
-    },[selectedInterests]);
-
-    // Test api call to make sure I can post outside of a form. Which I can!
     const pushUser = () => {
         props.history.push("/signup/add-profile");
     }
@@ -24,7 +20,7 @@ const OnboardInterestList = (props) => {
         {/* Create labels for selected interests*/ }
             <SelectedInterestTagsContainer>
                 <SelectedInterestUl>
-                    {selectedInterests.map( (interests, index) => {
+                    {usersInterests.map( (interests, index) => {
                         return <SelectedInterestTags key={index}>{interests}</SelectedInterestTags>
                     })}
                 </SelectedInterestUl>
@@ -33,8 +29,7 @@ const OnboardInterestList = (props) => {
             {interestsArray.map( (interests, index) => {
                 return(
                     <InterestCard
-                        selectedInterests={selectedInterests}
-                        setSelectedInterests={setSelectedInterests}
+                        usersInterests={usersInterests}
                         interestCardCounter={cardCounter++}
                         key={index}
                         interests={interests}
@@ -100,44 +95,5 @@ const SelectedInterestTags = S.li`
 
     @media only screen and (max-width: 860px) {
         font-size: 1.4rem;
-	  }
-`;
-const NextButtonContainer = S.div`
-    width: 100%;
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 20px;
-
-    @media only screen and (max-width: 860px) {
-        margin-bottom: 100px;
-	  }
-`;
-const NextButton = S.div`
-    display: flex;
-    text-transform: capitalize;
-    font-weight: 600;
-    align-items: center;
-    font-size: 2rem;
-    color: ${props => (props.secondary ? "#fff" : "#000")};
-    padding: 1rem 2.4rem;
-    border-radius: 20px;
-    text-decoration: none;
-    background-color: ${props => (props.secondary ? "#0077ff" : "transparent")}
-    transition: all ease-in-out 120ms;
-    height: 4rem;
-    width: 200px;
-    border: none;
-    align-items: center;
-    justify-content: center;
-    :hover {
-        background-color: ${props =>props.secondary ? "#003c80" : "rgba(194, 194, 194, 0.4)"};
-        cursor: pointer;
-    }
-    :active {
-        box-shadow: 0px 0px 5px #232323c7;
-        transform: scale(1.1);
-    }
-    @media only screen and (max-width: 860px) {
-        width: 100px;
 	  }
 `;

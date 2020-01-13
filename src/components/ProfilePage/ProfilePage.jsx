@@ -1,16 +1,14 @@
-import React, {useState,useEffect, useContext} from 'react';
+import React, {useState,useEffect} from 'react';
+import {useSelector} from 'react-redux';
 import S from 'styled-components';
 import axios from 'axios';
-
 import ProfilePagePersonalInformation from './ProfilePagePersonalInformation';
 import ProfilePageInterests from './ProfilePageInterests';
 import ProfilePageEducationSection from './ProfilePageEducationSection';
-import {store} from '../../store';
 
 const ProfilePage = (props) => {
-	const globalState = useContext(store); // Call in our store
-	const {loggedInUser} = globalState.state;
-
+	
+	const loggedInUser = useSelector(state => state.loggedInUser);
 	const [profileData, setProfileData] = useState({});
 	const routedEmail = props.location.state.user ? props.location.state.user.email : loggedInUser.email; // check if we have user state ( from Search page)
 	const userId = props.location.state.user ?  props.location.state.user.userId : loggedInUser.id; // check if we have user state ( from Search page)
@@ -34,7 +32,7 @@ const ProfilePage = (props) => {
 
 		if(routedEmail) getProfileData(userId,routedEmail);
 
-	},[userId]);
+	},[userId,routedEmail]);
 
 	return(
 		<PageWrapper>

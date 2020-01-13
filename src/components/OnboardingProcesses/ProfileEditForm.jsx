@@ -1,4 +1,5 @@
 import React,{useState} from 'react';
+import {useSelector} from 'react-redux';
 import axios from 'axios';
 import S from 'styled-components';
 import {withRouter} from 'react-router-dom';
@@ -9,7 +10,9 @@ import StateSelectList from '../ReusedComponents/StateSelectList';
 
 const ProfileEditForm = (props) => {
     // Set up State
-    const [profileObject, setProfileObject]= useState({...props.newSignedUpUser});
+    const newSignedUpUser = useSelector(state => state.newSignedUpUser);
+    // Create a new profile object to disconnect from global state.
+    const [profileObject, setProfileObject]= useState({...newSignedUpUser});
     const [profileInformation, setProfileInformation] = useState({
         firstName: '',
         lastName: '',
@@ -19,10 +22,13 @@ const ProfileEditForm = (props) => {
         city: '',
         state: ''
     });
+
     // Set up event functions
     const handleInputChange = async (event) => {
+        // update the profile information based off user input.
         await setProfileInformation({...profileInformation, [event.target.name]: event.target.value});
-        await setProfileObject({...props.newSignedUpUser, profileInformation});
+        // pass that updated information object into the profile object, plus whatever is in the newSignedUpUsder object.
+        await setProfileObject({...newSignedUpUser, profileInformation});
     }
 
     const handleSubmit = (event) => {

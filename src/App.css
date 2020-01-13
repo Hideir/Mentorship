@@ -4,6 +4,15 @@
 html {
   font-size: 62.65%;
 }
+body::-webkit-scrollbar-thumb {
+  background-color: #0077ff;
+}
+body::-webkit-scrollbar {
+  width: 12px;
+}
+body::-webkit-scrollbar-track {
+  background-color: #fff;
+}
 * {
   margin: 0;
   padding: 0;

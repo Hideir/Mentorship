@@ -1,19 +1,21 @@
 import React,{useState} from 'react'
+import {useDispatch} from 'react-redux';
 import S from 'styled-components';
 import '../../App.css';
 
 const InterestCard = (props) => {
-    const {selectedInterests, setSelectedInterests, interests} = props;
+    const dispatch = useDispatch();
+    const {interests} = props;
     // State
     const [hasActiveClass, setHasActiveClass] = useState(false);
     // Event Handlers
     const clickHandler  =  async () => {
         if(!hasActiveClass) {
             await setHasActiveClass(true);
-            setSelectedInterests([...selectedInterests, interests.interestName]);
+            dispatch({type:'SET_NEW_USER_INTERESTS', payload:  interests.interestName});
         } else if(hasActiveClass) {
              await setHasActiveClass(false);
-             setSelectedInterests( selectedInterests.filter( deselectedInterest  => deselectedInterest !== interests.interestName))
+             dispatch({type:'REMOVE_NEW_USER_INTERESTS', payload:  interests.interestName});
         }
     }
     // Component Update
