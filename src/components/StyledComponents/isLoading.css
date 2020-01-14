@@ -9,9 +9,10 @@
     background-color: rgba(0,0,0,0.9);
     position: fixed;
     z-index: 10;
-    animation-timing-function: linear;
+    animation-timing-function: ease;
     animation-name: fadeIn;
-    animation-delay: 2s;
+    animation-delay: 1s;
+    opacity: 0;
   }
   .loader {
     position: absolute;
@@ -21,9 +22,11 @@
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 11;
-    animation-timing-function: linear;
+    animation-timing-function: ease;
     animation-name: fadeIn;
-    animation-delay: 2s;
+    animation-delay: 1s;
+    opacity: 0;
+    
   }
   .loader .center {
     width: 40px;
