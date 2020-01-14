@@ -15,6 +15,7 @@
     bottom: 0;
     animation-timing-function: linear;
     animation-name: fadeIn;
+    animation-delay: 2s;
   }
   .loader {
     position: absolute;
@@ -26,6 +27,7 @@
     z-index: 11;
     animation-timing-function: linear;
     animation-name: fadeIn;
+    animation-delay: 2s;
   }
   .loader .center {
     width: 40px;
