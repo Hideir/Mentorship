@@ -7,15 +7,14 @@ import S from "styled-components";
 import { interestsArray } from "./OnboardingProcesses/interestData";
 import axios from "axios";
 import UserCard from "./UserCard";
-import IsLoadingComponent from './StyledComponents/IsLoadingComponent';
-
+import {toggleIsLoggedIn} from '../actions';
 
 const SearchPage = () => {
   const dispatch = useDispatch();
   let token = localStorage.getItem("auth-token");
   // State
   const selectedTags = useSelector( state => state.searchPage.selectedTags);
-  const isLoading = useSelector(state => state.root.isLoading);
+  // const isLoading = useSelector(state => state.root.isLoading);
   // const [selectedTags, setSelectedTags] = useState([]);
   const [matchedUsers, setMatchedUsers] = useState([]); // Users that match the searched input
   const [numberOfUsers, setNumberOfUsers] = useState( () => { // How many matched users there are.
@@ -46,7 +45,7 @@ const SearchPage = () => {
 
   const handleSearch = event => {
     event.preventDefault();
-    dispatch({type: 'SET_ISLOADING', payload: true})
+    dispatch(toggleIsLoggedIn(true))
     axios
       .post(
         `https://hideir.herokuapp.com/search`,
@@ -64,17 +63,16 @@ const SearchPage = () => {
         await setNumberOfUsers(response.data.matchedRows.length);
         // setSelectedTags([]); // Reset value.
         dispatch({type: 'SET_SELECTED_TAGS', payload: []}); // reset the selected tags
-        dispatch({type: 'REMOVE_ISLOADING', payload: false})
+        dispatch(toggleIsLoggedIn(false))
       })
       .catch(error => {
-        dispatch({type: 'REMOVE_ISLOADING', payload: false})
+        dispatch(toggleIsLoggedIn(false))
         console.log("here is the error" + error);
       });
 
   };
   return (
     <>
-    {isLoading ? <IsLoadingComponent /> : null}
     <HeroSectionWrapper>
       <ContentContainer>
         <TextContentContainer>

@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import CredentialsForm from '../CredentialsForm';
 import { useFormInputControl } from "../../../hooks/useFormInputControl";
+import {toggleIsLoggedIn} from '../../../actions';
 
   const SignupForm = (props) => {
     const dispatch = useDispatch();
@@ -16,7 +17,7 @@ import { useFormInputControl } from "../../../hooks/useFormInputControl";
     const handleSignUp = (event) => {
       event.preventDefault();
       // setIsLoading(true);
-      dispatch({type: 'SET_ISLOADING', payload: true});
+      dispatch(toggleIsLoggedIn(true));
       // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
         axios.post(`https://hideir.herokuapp.com/signup`, {email, password}, {  
           headers: {
@@ -25,13 +26,14 @@ import { useFormInputControl } from "../../../hooks/useFormInputControl";
         })
         .then(function (response) {
           dispatch({type: 'SET_NEW_USER_EMAIL', payload: email})
+          dispatch(toggleIsLoggedIn(false))
           // When our server responds that we made a good request we push our user to the home component.
           props.history.push("/signup/interests");
         })
         .catch(function (error) {
           setIsValidFlag(false);
           // setIsLoading(false);
-          dispatch({type: 'REMOVE_ISLOADING', payload: false});
+          dispatch(toggleIsLoggedIn(false));
           console.log(error);
         });
     }

@@ -5,7 +5,6 @@ import axios from 'axios';
 import ProfilePagePersonalInformation from './ProfilePagePersonalInformation';
 import ProfilePageInterests from './ProfilePageInterests';
 import ProfilePageEducationSection from './ProfilePageEducationSection';
-import IsLoading from '../StyledComponents/IsLoadingComponent';
 import {toggleIsLoggedIn} from '../../actions';
 
 const ProfilePage = (props) => {
@@ -43,8 +42,6 @@ const ProfilePage = (props) => {
 	},[userId,routedEmail]);
 
 	return(
-		<>
-		{isLoading ? <IsLoading /> : null}
 		<PageWrapper>
 			<ProfileContainer>
 				<ProfileHeaderContainer>
@@ -56,7 +53,6 @@ const ProfilePage = (props) => {
 				<ProfilePageEducationSection education={education}/>
 			</ProfileContainer>
 		</PageWrapper>
-		</>
 	);
 }
 

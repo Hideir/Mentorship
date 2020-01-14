@@ -3,6 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import axios from "axios";
 import CredentialsForm from '../CredentialsForm';
 import { useFormInputControl } from "../../../hooks/useFormInputControl";
+import {toggleIsLoggedIn} from '../../../actions';
 
 
 
@@ -25,7 +26,7 @@ const LoginForm = props => {
   const handleSignUp = event => {
     event.preventDefault();
     // setIsLoading(true);
-    dispatch({type: 'SET_ISLOADING', payload: true});
+    dispatch(toggleIsLoggedIn(true));
     // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
     axios.post(`https://hideir.herokuapp.com/login`,{ email, password },
           {
@@ -41,7 +42,7 @@ const LoginForm = props => {
         localStorage.setItem('auth-token', token);
         await signIn();
         setIsValidFlag(true);
-        await  dispatch({type: 'REMOVE_ISLOADING', payload: false});
+        await  dispatch(toggleIsLoggedIn(false));
         // Redirect them to the homepage on sucessfull login.
         props.history.push("/");
       })
@@ -50,7 +51,7 @@ const LoginForm = props => {
         if (error) {
           setIsValidFlag(false);
           // setIsLoading(false);
-          dispatch({type: 'REMOVE_ISLOADING', payload: false});
+          dispatch(toggleIsLoggedIn(false));
         }
       });
   };

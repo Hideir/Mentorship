@@ -48,9 +48,9 @@ function App() {
   return (
     <Router>
         <div className="App">
+        {isLoading ? <IsLoadingComponent /> : null }
           <DesktopNavigation />
           <MobileMenu  />
-          {isLoading ? <IsLoadingComponent /> : null }
           <Switch>
             <Route exact path="/" component={HomePage} />
             <ProtectedRoute exact path="/search" component={SearchPage} IsLoggedIn={isLoggedIn}/>
