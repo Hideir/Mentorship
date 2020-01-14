@@ -10,7 +10,7 @@ import StateSelectList from '../ReusedComponents/StateSelectList';
 
 const ProfileEditForm = (props) => {
     // Set up State
-    const newSignedUpUser = useSelector(state => state.newSignedUpUser);
+    const newSignedUpUser = useSelector(state => state.root.newSignedUpUser);
     // Create a new profile object to disconnect from global state.
     const [profileObject, setProfileObject]= useState({...newSignedUpUser});
     const [profileInformation, setProfileInformation] = useState({

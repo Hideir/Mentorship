@@ -7,7 +7,8 @@ export const initialState = {
     newSignedUpUser: {
         email: '',
         interests: [],
-    }
+    },
+    isLoading: false,
 };
 
 
@@ -36,7 +37,11 @@ export const rootReducer = (state = initialState, action) => {
             ...state, 
             newSignedUpUser: {
                 ...state.newSignedUpUser, interests:  state.newSignedUpUser.interests.filter( deselectedInterest  => deselectedInterest !== action.payload)
-            }};    
+            }};
+            case 'SET_ISLOADING':
+                return {...state, isLoading: true};
+            case 'REMOVE_ISLOADING':
+                return {...state, isLoading: false};    
         default:
             return state;
     }

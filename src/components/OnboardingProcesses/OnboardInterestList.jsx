@@ -9,7 +9,7 @@ import MedFormButton from '../ReusedComponents/MedFormButton';
 
 const OnboardInterestList = (props) => {
 
-    const usersInterests = useSelector(state => state.newSignedUpUser.interests);
+    const usersInterests = useSelector(state => state.root.newSignedUpUser.interests);
     let cardCounter = 1;
 
     const pushUser = () => {

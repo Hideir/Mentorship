@@ -9,12 +9,10 @@ import { faUser, faHome, faSignOutAlt,faSearch, faPlus } from "@fortawesome/free
 import "./MobileMenu.css";
 
 const MobileMenu = (props) => {
-  // const globalState = useContext(store); // Pull in our Global State 
 
   const [isMobileActive, setIsMobileActive] = useState(false);
-  
-  const loggedInUser = useSelector(state => state.loggedInUser);
-  const isLoggedIn = useSelector(state => state.loggedInUser);
+  const loggedInUser = useSelector(state => state.root.loggedInUser);
+  const isLoggedIn = useSelector(state => state.root.loggedInUser);
 
   const signOut = () => {
     if(isLoggedIn) {

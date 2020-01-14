@@ -6,9 +6,10 @@ import * as serviceWorker from './serviceWorker';
 
 import {createStore} from 'redux';
 import {Provider} from 'react-redux';
-import {rootReducer} from './rootReducer';
+import {reducer} from './reducers/index.js';
+import {composeWithDevTools} from 'redux-devtools-extension';
 
-const store = createStore(rootReducer);
+const store = createStore(reducer, composeWithDevTools());
 
 // Import our Global State Provider
 // import {GlobalStateProvider} from './store';

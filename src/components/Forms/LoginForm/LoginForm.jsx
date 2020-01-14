@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import axios from "axios";
 import CredentialsForm from '../CredentialsForm';
 import { useFormInputControl } from "../../../hooks/useFormInputControl";
@@ -10,8 +10,8 @@ const LoginForm = props => {
   const [email, setEmail, handleEmail] = useFormInputControl(" ");
   const [password, setPassword, handlePassword] = useFormInputControl("");
   const [isValidFlag, setIsValidFlag] = useState(true);
-  const [isLoading, setIsLoading] = useState(false);
-
+  // const [isLoading, setIsLoading] = useState(false);
+  const isLoading = useSelector(state => state.root.isLoading);
   const dispatch = useDispatch();
 
   const signIn = () => {
@@ -24,7 +24,8 @@ const LoginForm = props => {
  
   const handleSignUp = event => {
     event.preventDefault();
-    setIsLoading(true);
+    // setIsLoading(true);
+    dispatch({type: 'SET_ISLOADING', payload: true});
     // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
     axios.post(`https://hideir.herokuapp.com/login`,{ email, password },
           {
@@ -33,13 +34,14 @@ const LoginForm = props => {
           }
         }
       )
-      .then(function (response) {
+      .then(async function (response) {
         // When our server responds that we made a good request we push our user to the home component.
         const {token} = response.data;
         // Set token to local storage
         localStorage.setItem('auth-token', token);
-        signIn();
+        await signIn();
         setIsValidFlag(true);
+        await  dispatch({type: 'REMOVE_ISLOADING', payload: false});
         // Redirect them to the homepage on sucessfull login.
         props.history.push("/");
       })
@@ -47,7 +49,8 @@ const LoginForm = props => {
         console.log("here is the error" + error);
         if (error) {
           setIsValidFlag(false);
-          setIsLoading(false);
+          // setIsLoading(false);
+          dispatch({type: 'REMOVE_ISLOADING', payload: false});
         }
       });
   };
