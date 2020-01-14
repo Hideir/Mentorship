@@ -9,7 +9,6 @@ import IsLoading from '../StyledComponents/IsLoadingComponent';
 import {toggleIsLoggedIn} from '../../actions';
 
 const ProfilePage = (props) => {
-	
 	const loggedInUser = useSelector(state => state.root.loggedInUser);
 	const isLoading = useSelector(state => state.root.isLoading);
 	const [profileData, setProfileData] = useState({});
