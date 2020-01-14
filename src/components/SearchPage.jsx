@@ -74,7 +74,7 @@ const SearchPage = () => {
   };
   return (
     <>
-    {/* {isLoading ? <IsLoadingComponent /> : null} */}
+    {isLoading ? <IsLoadingComponent /> : null}
     <HeroSectionWrapper>
       <ContentContainer>
         <TextContentContainer>
