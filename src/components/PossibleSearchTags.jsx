@@ -1,9 +1,11 @@
 import React,{useState, useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import '../App.css';
 import S from 'styled-components'
 
 const PossibleSearchTags = (props) => {
-    const {selectedTags, setSelectedTags, interests} = props;
+    const dispatch = useDispatch();
+    const {selectedTags, interests} = props;
     const [hasActiveClass, setHasActiveClass] = useState(false);
 
 
@@ -16,10 +18,12 @@ const PossibleSearchTags = (props) => {
     const storeSelectedTags = async () => {
         if(!hasActiveClass) {
           await setHasActiveClass(true);
-           setSelectedTags([...selectedTags, interests.interestName]);
+          //  setSelectedTags([...selectedTags, interests.interestName]);
+           dispatch({type: 'SET_SELECTED_TAGS', payload: [...selectedTags, interests.interestName]})
       } else if(hasActiveClass) {
           await setHasActiveClass(false);
-           setSelectedTags( selectedTags.filter( deselectedInterest  => deselectedInterest !== interests.interestName))
+          //  setSelectedTags( selectedTags.filter( deselectedInterest  => deselectedInterest !== interests.interestName))
+           dispatch({type: 'SET_SELECTED_TAGS', payload: selectedTags.filter( deselectedInterest => deselectedInterest !== interests.interestName)})
       }
       }
     return(

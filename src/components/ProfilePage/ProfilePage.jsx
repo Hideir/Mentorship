@@ -1,22 +1,27 @@
 import React, {useState,useEffect} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import S from 'styled-components';
 import axios from 'axios';
 import ProfilePagePersonalInformation from './ProfilePagePersonalInformation';
 import ProfilePageInterests from './ProfilePageInterests';
 import ProfilePageEducationSection from './ProfilePageEducationSection';
+import IsLoading from '../StyledComponents/IsLoadingComponent';
+import {toggleIsLoggedIn} from '../../actions';
 
 const ProfilePage = (props) => {
 	
-	const loggedInUser = useSelector(state => state.loggedInUser);
+	const loggedInUser = useSelector(state => state.root.loggedInUser);
+	const isLoading = useSelector(state => state.root.isLoading);
 	const [profileData, setProfileData] = useState({});
 	const routedEmail = props.location.state.user ? props.location.state.user.email : loggedInUser.email; // check if we have user state ( from Search page)
 	const userId = props.location.state.user ?  props.location.state.user.userId : loggedInUser.id; // check if we have user state ( from Search page)
 	const {firstName, lastName, interests,state, city, tagLine, education} = profileData;
+	const dispatch = useDispatch();
 
 	useEffect( () => {
 		// retrieve the token from local storage
 		let token = localStorage.getItem('auth-token');
+		dispatch(toggleIsLoggedIn(true));
 		const getProfileData = (profileId, filter) => {
 			axios.post(`/profile/${profileId}`, {filter}, {  
 				headers: {
@@ -25,9 +30,13 @@ const ProfilePage = (props) => {
 				},
 			  })
 			.then( async response => {
+				await dispatch(toggleIsLoggedIn(false));
 				await setProfileData(response.data.usersProfileData[0]);
 			})
-			.catch(error => console.log(error))
+			.catch(error =>  {
+				console.log(error);
+				dispatch(toggleIsLoggedIn(false));
+			})
 		}
 
 		if(routedEmail) getProfileData(userId,routedEmail);
@@ -35,6 +44,8 @@ const ProfilePage = (props) => {
 	},[userId,routedEmail]);
 
 	return(
+		<>
+		{isLoading ? <IsLoading /> : null}
 		<PageWrapper>
 			<ProfileContainer>
 				<ProfileHeaderContainer>
@@ -46,6 +57,7 @@ const ProfilePage = (props) => {
 				<ProfilePageEducationSection education={education}/>
 			</ProfileContainer>
 		</PageWrapper>
+		</>
 	);
 }
 

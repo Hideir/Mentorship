@@ -1,21 +1,22 @@
 import React,{useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import axios from 'axios';
 import CredentialsForm from '../CredentialsForm';
 import { useFormInputControl } from "../../../hooks/useFormInputControl";
-// import {apiKey} from './config';
 
   const SignupForm = (props) => {
     const dispatch = useDispatch();
+    const isLoading = useSelector( state => state.root.isLoading);
     // create a user object.
     const [email, setEmail, handleEmail] = useFormInputControl('');
     const [password, setPassword, handlePassword] = useFormInputControl('');
     const [isValidFlag, setIsValidFlag] = useState(true);
-    const [isLoading, setIsLoading] = useState(false);
+    // const [isLoading, setIsLoading] = useState(false);
 
     const handleSignUp = (event) => {
       event.preventDefault();
-      setIsLoading(true);
+      // setIsLoading(true);
+      dispatch({type: 'SET_ISLOADING', payload: true});
       // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
         axios.post(`/signup`, {email, password}, {  
           headers: {
@@ -29,7 +30,8 @@ import { useFormInputControl } from "../../../hooks/useFormInputControl";
         })
         .catch(function (error) {
           setIsValidFlag(false);
-          setIsLoading(false);
+          // setIsLoading(false);
+          dispatch({type: 'REMOVE_ISLOADING', payload: false});
           console.log(error);
         });
     }

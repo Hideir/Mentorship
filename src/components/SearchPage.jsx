@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {useSelector, useDispatch} from 'react-redux';
 import '../App.css';
 import SearchForm from "./Form";
 import PossibleSearchTags from './PossibleSearchTags';
@@ -6,18 +7,23 @@ import S from "styled-components";
 import { interestsArray } from "./OnboardingProcesses/interestData";
 import axios from "axios";
 import UserCard from "./UserCard";
+import IsLoadingComponent from './StyledComponents/IsLoadingComponent';
+
 
 const SearchPage = () => {
+  const dispatch = useDispatch();
   let token = localStorage.getItem("auth-token");
   // State
-  const [selectedTags, setSelectedTags] = useState([]);
+  const selectedTags = useSelector( state => state.searchPage.selectedTags);
+  const isLoading = useSelector(state => state.root.isLoading);
+  // const [selectedTags, setSelectedTags] = useState([]);
   const [matchedUsers, setMatchedUsers] = useState([]); // Users that match the searched input
   const [numberOfUsers, setNumberOfUsers] = useState( () => { // How many matched users there are.
     if(matchedUsers.length <= 0) {
       return 0;
     }
   });
-  console.log(matchedUsers);
+  
   useEffect(() => {
     axios
       .post(
@@ -40,6 +46,7 @@ const SearchPage = () => {
 
   const handleSearch = event => {
     event.preventDefault();
+    dispatch({type: 'SET_ISLOADING', payload: true})
     axios
       .post(
         `/search`,
@@ -55,14 +62,19 @@ const SearchPage = () => {
         // When our server responds that we made a good request we push our user to the home component.
         await setMatchedUsers(response.data.matchedRows);
         await setNumberOfUsers(response.data.matchedRows.length);
-        setSelectedTags([]); // Reset value.
+        // setSelectedTags([]); // Reset value.
+        dispatch({type: 'SET_SELECTED_TAGS', payload: []}); // reset the selected tags
+        dispatch({type: 'REMOVE_ISLOADING', payload: false})
       })
       .catch(error => {
+        dispatch({type: 'REMOVE_ISLOADING', payload: false})
         console.log("here is the error" + error);
       });
 
   };
   return (
+    <>
+    {/* {isLoading ? <IsLoadingComponent /> : null} */}
     <HeroSectionWrapper>
       <ContentContainer>
         <TextContentContainer>
@@ -74,7 +86,6 @@ const SearchPage = () => {
               matchedUsers={matchedUsers} 
               key={index} 
               selectedTags={selectedTags} 
-              setSelectedTags={setSelectedTags} 
               interests={interests}
             />
           })}
@@ -91,6 +102,7 @@ const SearchPage = () => {
         </UserCardsContainer>
       )}
     </HeroSectionWrapper>
+    </>
   );
 };
 

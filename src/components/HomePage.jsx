@@ -5,7 +5,7 @@ import axios from 'axios';
 
 
 const HomePage = () => {
-  const isLoggedIn = useSelector(state => state.isLoggedIn);
+  const isLoggedIn = useSelector(state => state.root.isLoggedIn);
   const dispatch = useDispatch();
 
   useEffect( () => {

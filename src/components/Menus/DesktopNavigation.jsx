@@ -11,8 +11,8 @@ import '../../App.css';
 
 
 const DesktopNavigation = (props) => {
-    const isLoggedIn = useSelector( state => state.isLoggedIn);
-    const loggedInUser = useSelector( state => state.loggedInUser);
+    const isLoggedIn = useSelector( state => state.root.isLoggedIn);
+    const loggedInUser = useSelector( state => state.root.loggedInUser);
 
     const dispatch = useDispatch();
     const signOut = () => {
