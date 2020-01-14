@@ -12,7 +12,7 @@ const MobileMenu = (props) => {
 
   const [isMobileActive, setIsMobileActive] = useState(false);
   const loggedInUser = useSelector(state => state.root.loggedInUser);
-  const isLoggedIn = useSelector(state => state.root.loggedInUser);
+  const isLoggedIn = useSelector(state => state.root.isLoggedIn);
 
   const dispatch = useDispatch();
 
