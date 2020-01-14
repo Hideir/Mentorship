@@ -1,9 +1,9 @@
-/*  
+ 
   .fadeIn {
     -webkit-animation-name: fadeIn;
     animation-name: fadeIn;
-  } */
-  .loaderContainer {
+  }
+  .loaderContainer.fadeIn {
     width: 100vw;
     height: 100vh;
     background-color: rgba(0,0,0,0.9);
@@ -12,9 +12,8 @@
     animation-timing-function: ease;
     animation-name: fadeIn;
     animation-delay: 1s;
-    opacity: 0;
   }
-  .loader {
+  .loader.fadeIn {
     position: absolute;
     width: 40px;
     height: 40px;
@@ -25,8 +24,7 @@
     animation-timing-function: ease;
     animation-name: fadeIn;
     animation-delay: 1s;
-    opacity: 0;
-    
+
   }
   .loader .center {
     width: 40px;
