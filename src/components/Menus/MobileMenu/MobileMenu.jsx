@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import S from 'styled-components';
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -14,9 +14,11 @@ const MobileMenu = (props) => {
   const loggedInUser = useSelector(state => state.root.loggedInUser);
   const isLoggedIn = useSelector(state => state.root.loggedInUser);
 
+  const dispatch = useDispatch();
+
   const signOut = () => {
     if(isLoggedIn) {
-      props.dispatch({type: 'LOG_OUT', payload: false});
+      dispatch({type: 'LOG_OUT', payload: false});
       localStorage.removeItem('auth-token');
     }
 }
