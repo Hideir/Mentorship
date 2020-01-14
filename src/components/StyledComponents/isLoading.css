@@ -1,9 +1,5 @@
  
-  .fadeIn {
-    -webkit-animation-name: fadeIn;
-    animation-name: fadeIn;
-  }
-  .loaderContainer.fadeIn {
+  .loaderContainer{
     width: 100vw;
     height: 100vh;
     background-color: rgba(0,0,0,0.9);
@@ -13,7 +9,7 @@
     animation-name: fadeIn;
     animation-delay: 1s;
   }
-  .loader.fadeIn {
+  .loader {
     position: absolute;
     width: 40px;
     height: 40px;

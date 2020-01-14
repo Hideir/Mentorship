@@ -3,8 +3,8 @@ import './isLoading.css';
 
 const IsLoadingComponent = () => {
     return(
-        <div className="loaderContainer fadeIn">
-            <ul className="loader fadeIn">
+        <div className="loaderContainer">
+            <ul className="loader">
                 <li className="center"></li>
                 <li className="item item-1"></li>
                 <li className="item item-2"></li>
