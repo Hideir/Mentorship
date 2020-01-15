@@ -9,6 +9,7 @@ export const initialState = {
         interests: [],
     },
     isLoading: false,
+    messageSessions: [],
 };
 
 
@@ -41,7 +42,9 @@ export const rootReducer = (state = initialState, action) => {
             case 'SET_ISLOADING':
                 return {...state, isLoading: true};
             case 'REMOVE_ISLOADING':
-                return {...state, isLoading: false};    
+                return {...state, isLoading: false};
+            case 'START_MESSAGE_SESSION':
+                return {...state, messageSessions: [...state.messageSessions, action.payload]};   
         default:
             return state;
     }

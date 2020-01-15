@@ -14,13 +14,16 @@ import ProfileCreationPage from './components/OnboardingProcesses/ProfileCreatio
 import ProfilePage from './components/ProfilePage/ProfilePage';
 import MobileMenu from './components/Menus/MobileMenu/MobileMenu';
 import IsLoadingComponent from './components/StyledComponents/IsLoadingComponent';
+import Messages from './components/ReusedComponents/Messages.jsx';
 import {setLoggedInUser} from './actions';
+import S from 'styled-components';
 
 
 function App() {
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
   const isLoading = useSelector(state => state.root.isLoading);
-
+  const messages = useSelector(state => state.root.messageSessions);
+  console.log(messages);
   const dispatch = useDispatch();
 
   // this useEffect is to make sure we get the user information on Load. PRobably store their loggedin email in password
@@ -60,6 +63,12 @@ function App() {
             <Route exact path="/signup/interests" component={InterestListPage} />
             <Route exact path="/signup/add-profile"  component={ProfileCreationPage} />
           </Switch>
+          {messages.length > 0 
+          ? <MessageSessionsContainer> {messages.length > 0 ? messages.map( (messages,index) => {
+            return <Messages messages={messages} key={index}/>
+          }) : null}</MessageSessionsContainer> 
+          : null}
+
         </div>
     </Router>
 
@@ -67,3 +76,11 @@ function App() {
 }
 
 export default App;
+
+const MessageSessionsContainer = S.div`
+display: flex;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    justify-content: flex-end;
+`;

@@ -14,8 +14,6 @@ const SearchPage = () => {
   let token = localStorage.getItem("auth-token");
   // State
   const selectedTags = useSelector( state => state.searchPage.selectedTags);
-  // const isLoading = useSelector(state => state.root.isLoading);
-  // const [selectedTags, setSelectedTags] = useState([]);
   const [matchedUsers, setMatchedUsers] = useState([]); // Users that match the searched input
   const [numberOfUsers, setNumberOfUsers] = useState( () => { // How many matched users there are.
     if(matchedUsers.length <= 0) {
@@ -69,8 +67,11 @@ const SearchPage = () => {
         dispatch(toggleIsLoggedIn(false))
         console.log("here is the error" + error);
       });
-
   };
+  const startMessage = (userInformation) => {
+    dispatch({type: 'START_MESSAGE_SESSION', paylod: userInformation});
+  }
+
   return (
     <>
     <HeroSectionWrapper>
@@ -95,7 +96,7 @@ const SearchPage = () => {
         <UserCardsContainer>
           {matchedUsers &&
             matchedUsers.map((user,index) => {
-              return <UserCard key={index} user={user} />;
+              return <UserCard key={index} startMessage={startMessage} user={user} />;
             })}
         </UserCardsContainer>
       )}

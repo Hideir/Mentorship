@@ -6,6 +6,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const UserCard = (props) => {
     const {user} = props;
+
     return(
         <CardContainer>
         <ContentContainer>
@@ -16,7 +17,7 @@ const UserCard = (props) => {
                     <StyledText primary={false}>{user.state} {user.city}</StyledText>
                 </ProfileContentContainer>
         </ContentContainer>
-        <StyledLink  to="/"><FontAwesomeIcon icon={faEnvelope}/></StyledLink> 
+        <MessageButton  onClick={() => props.startMessage(user)} to="/"><FontAwesomeIcon icon={faEnvelope}/></MessageButton> 
             <InterestsUl>
                 {user.interests.map( (interest,index) => <InterestsTags key={index}>{interest}</InterestsTags>)}
             </InterestsUl>
@@ -56,6 +57,24 @@ const ProfileContentContainer = S.div`
 
 `;
 const StyledLink = S(Link)`
+    font-size: 2.6rem;
+    color: #0077ff;
+    text-align: left;
+    text-decoration: none;
+    width: fit-content;
+    &:hover {
+        cursor: pointer;
+        color: #000;
+    }
+
+    @media only screen and (max-width: 860px) {
+        display: ${props => props.primary ? 'block' : 'none;'};
+        font-size: 2.4rem;
+        color: #000;
+        font-weight: 600;
+      }
+`;
+const MessageButton = S.div`
     font-size: 2.6rem;
     color: #0077ff;
     text-align: left;

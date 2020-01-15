@@ -9,7 +9,6 @@ import {toggleIsLoggedIn} from '../../actions';
 
 const ProfilePage = (props) => {
 	const loggedInUser = useSelector(state => state.root.loggedInUser);
-	const isLoading = useSelector(state => state.root.isLoading);
 	const [profileData, setProfileData] = useState({});
 	const routedEmail = props.location.state.user ? props.location.state.user.email : loggedInUser.email; // check if we have user state ( from Search page)
 	const userId = props.location.state.user ?  props.location.state.user.userId : loggedInUser.id; // check if we have user state ( from Search page)
@@ -47,7 +46,7 @@ const ProfilePage = (props) => {
 				<ProfileHeaderContainer>
 					<ProfileHeaderTrim></ProfileHeaderTrim>
 					<ProfileImage></ProfileImage>
-					<ProfilePagePersonalInformation firstName={firstName} lastName={lastName} state={state} city={city} tagLine={tagLine}/>
+					<ProfilePagePersonalInformation profileData={profileData} firstName={firstName} lastName={lastName} state={state} city={city} tagLine={tagLine}/>
 				</ProfileHeaderContainer>
 				<ProfilePageInterests interests={interests}/>
 				<ProfilePageEducationSection education={education}/>

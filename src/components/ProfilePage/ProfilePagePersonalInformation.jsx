@@ -1,7 +1,16 @@
 import React from 'react';
 import S from 'styled-components';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+import {useSelector, useDispatch} from 'react-redux';
 
 const ProfilePagePersonalInformation = (props) => {
+    const dispatch = useDispatch();
+
+    const startMessage = (userInformation) => {
+        dispatch({type: 'START_MESSAGE_SESSION', paylod: userInformation});
+      }
+    
 	return(
         <>
             <CardContainer>
@@ -17,6 +26,7 @@ const ProfilePagePersonalInformation = (props) => {
                     <InformationContainer>
                         <Text>{props.tagLine}</Text>
                     </InformationContainer>
+                    <MessageButton  onClick={() => startMessage(props.profileData)} to="/"><FontAwesomeIcon icon={faEnvelope}/></MessageButton> 
                 </InformationContainer>
             </CardContainer>
         </>
@@ -58,4 +68,22 @@ const Text = S.p`
         font-size: ${props => props.primary ? '2.2rem' : '1.6rem' };
         padding: 0;
 	  }
+`;
+const MessageButton = S.div`
+font-size: 2.6rem;
+color: #0077ff;
+text-align: left;
+text-decoration: none;
+width: fit-content;
+&:hover {
+    cursor: pointer;
+    color: #000;
+}
+
+@media only screen and (max-width: 860px) {
+    display: ${props => props.primary ? 'block' : 'none;'};
+    font-size: 2.4rem;
+    color: #000;
+    font-weight: 600;
+  }
 `;
