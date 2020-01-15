@@ -8,7 +8,8 @@ const ProfilePagePersonalInformation = (props) => {
     const dispatch = useDispatch();
 
     const startMessage = (userInformation) => {
-        dispatch({type: 'START_MESSAGE_SESSION', paylod: userInformation});
+        console.log(userInformation);
+        dispatch({type: 'START_MESSAGE_SESSION', payload: userInformation});
       }
     
 	return(
@@ -26,7 +27,7 @@ const ProfilePagePersonalInformation = (props) => {
                     <InformationContainer>
                         <Text>{props.tagLine}</Text>
                     </InformationContainer>
-                    <MessageButton  onClick={() => startMessage(props.profileData)} to="/"><FontAwesomeIcon icon={faEnvelope}/></MessageButton> 
+                    <MessageButton  onClick={() => startMessage(props.profileData)} primary="true"><FontAwesomeIcon icon={faEnvelope}/></MessageButton> 
                 </InformationContainer>
             </CardContainer>
         </>

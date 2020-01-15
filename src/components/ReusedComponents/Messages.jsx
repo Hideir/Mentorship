@@ -1,31 +1,37 @@
 import React,{useState} from 'react';
 import S from 'styled-components';
 import axios from 'axios';
+import {useSelector} from 'react-redux';
 
 const Messages = (props) => {
     const [sentMessages, setSentMessages] = useState([]);
     const [messageInput, setMessageInput] = useState('');
+    // const messagedUser = useSelector(state => state.root.messageSessions)
 
-    console.log(sentMessages);
-    console.log(messageInput);
+    console.log(props.messages);
 
     const handleMessageInput = (event) => {
         setMessageInput(event.target.value)
     }
-    const sendMessage = (messageInputValue) => {
+    const sendMessage = (event,messageInputValue) => {
+        console.log(event);
+        event.preventDefault();
         setSentMessages([...sentMessages, messageInputValue]);
         setMessageInput('');
     }
     return(
         <MessageContainer>
-        <InnerMessagesContainer>
-        {sentMessages.length > 0 ? sentMessages.map( messages => {
-            return <UserMessages>{messages}</UserMessages>
-        }) : null}
-            
-        </InnerMessagesContainer>
+            <MessagedUserName>{props.messages.firstName} {props.messages.lastName}</MessagedUserName>
+            <InnerMessagesContainer>
+            {sentMessages.length > 0 ? sentMessages.map( messages => {
+                return <UserMessages>{messages}</UserMessages>
+            }) : null}
+                
+            </InnerMessagesContainer>
+            <StyledForm onSubmit={(event) => sendMessage(event,messageInput)}>
             <StyledInput onChange={handleMessageInput} type="text" value={messageInput}/>
-            <StyledButton onClick={ () => sendMessage(messageInput)}>Send</StyledButton>
+                <StyledButton>Send</StyledButton>
+            </StyledForm>
         </MessageContainer>
     );
 }
@@ -43,6 +49,16 @@ const MessageContainer = S.div`
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     background-color: #fff;
+`;
+const MessagedUserName = S.h3`
+    font-size: 1.8rem;
+    background-color: #0077ff;
+    width: 100%;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    color: #fff;
+    letter-spacing: 1px;
+    line-height: 40px;
 `;
 const InnerMessagesContainer = S.div`
     background-color: #fff;
@@ -70,7 +86,7 @@ const StyledInput = S.input`
     border: none;
     outline: none;
 `;
-const StyledButton = S.div`
+const StyledButton = S.button`
     background-color: blue;
     color: #fff;
     border: none;
@@ -80,4 +96,9 @@ const StyledButton = S.div`
     font-size: 1.8rem;
     min-width: 50px;
     width: 50px;
+`;
+const StyledForm = S.form`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
 `;
