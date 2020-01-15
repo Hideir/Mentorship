@@ -78,9 +78,13 @@ function App() {
 export default App;
 
 const MessageSessionsContainer = S.div`
-display: flex;
-    width: 100%;
-    position: fixed;
-    bottom: 0;
-    justify-content: flex-end;
+  position: fixed;
+  z-index: 1000;
+  bottom: 0;
+  right: 8px;
+  height: 0;
+  overflow: visible;
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: flex-end;
 `;
