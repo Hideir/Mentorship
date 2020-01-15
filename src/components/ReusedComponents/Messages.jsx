@@ -1,15 +1,30 @@
-import React from 'react';
+import React,{useState} from 'react';
 import S from 'styled-components';
 import axios from 'axios';
 
 const Messages = (props) => {
+    const [sentMessages, setSentMessages] = useState([]);
+    const [messageInput, setMessageInput] = useState('');
+
+    console.log(sentMessages);
+    console.log(messageInput);
+
+    const handleMessageInput = (event) => {
+        setMessageInput(event.target.value)
+    }
+    const sendMessage = (messageInputValue) => {
+        setSentMessages([...sentMessages, messageInputValue]);
+    }
     return(
         <MessageContainer>
         <InnerMessagesContainer>
-            <UserMessages>Hello There!</UserMessages>
+        {sentMessages.length > 0 ? sentMessages.map( messages => {
+            return <UserMessages>{messages}</UserMessages>
+        }) : null}
+            
         </InnerMessagesContainer>
-            <StyledInput type="text" />
-            <StyledButton>Send</StyledButton>
+            <StyledInput onChange={handleMessageInput} type="text" value={messageInput}/>
+            <StyledButton onClick={ () => sendMessage(messageInput)}>Send</StyledButton>
         </MessageContainer>
     );
 }
@@ -31,8 +46,7 @@ const MessageContainer = S.div`
 const InnerMessagesContainer = S.div`
     background-color: #fff;
     height: 300px;
-    display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     width: 100%;
     border-bottom: 1px solid #000;
 `;
@@ -45,6 +59,7 @@ const UserMessages = S.p`
     width: auto;
     margin: 5px;
     padding: 5px;
+    width: fit-content;
 `;
 const StyledInput = S.input`
     width: 200px;
@@ -54,7 +69,7 @@ const StyledInput = S.input`
     border: none;
     outline: none;
 `;
-const StyledButton = S.button`
+const StyledButton = S.div`
     background-color: blue;
     color: #fff;
     border: none;
