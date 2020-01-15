@@ -14,6 +14,7 @@ const Messages = (props) => {
     }
     const sendMessage = (messageInputValue) => {
         setSentMessages([...sentMessages, messageInputValue]);
+        setMessageInput('');
     }
     return(
         <MessageContainer>
