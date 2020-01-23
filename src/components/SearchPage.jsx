@@ -46,7 +46,7 @@ const SearchPage = () => {
     dispatch(toggleIsLoggedIn(true))
     axios
       .post(
-        `https://hideir.herokuapp.com//search`,
+        `https://hideir.herokuapp.com/search`,
         { selectedTags },
         {
           headers: {
