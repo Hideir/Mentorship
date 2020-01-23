@@ -22,7 +22,6 @@ const LoginForm = props => {
       dispatch({type: 'IS_LOGGED_IN', payload: true});
     }
   }
-  
   const handleSignUp = event => {
     event.preventDefault();
     // setIsLoading(true);
