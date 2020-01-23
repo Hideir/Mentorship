@@ -6,7 +6,7 @@ import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const UserCard = (props) => {
     const {user} = props;
-
+    
     return(
         <CardContainer>
         <ContentContainer>
@@ -17,7 +17,6 @@ const UserCard = (props) => {
                     <StyledText primary={false}>{user.state} {user.city}</StyledText>
                 </ProfileContentContainer>
         </ContentContainer>
-        <MessageButton  onClick={() => props.startMessage(user)} to="/"><FontAwesomeIcon icon={faEnvelope}/></MessageButton> 
             <InterestsUl>
                 {user.interests.map( (interest,index) => <InterestsTags key={index}>{interest}</InterestsTags>)}
             </InterestsUl>

@@ -4,7 +4,7 @@ import './isLoading.css';
 const IsLoadingComponent = () => {
     return(
         <div className="loaderContainer">
-            <div class="innerLoaderContainer">
+            <div className="innerLoaderContainer">
                 <ul className="loader">
                     <li className="center"></li>
                     <li className="item item-1"></li>

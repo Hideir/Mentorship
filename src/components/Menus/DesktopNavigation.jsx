@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import { Link } from "react-router-dom";
 import S from 'styled-components';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
+import { faSearch, faEnvelope } from "@fortawesome/free-solid-svg-icons";
 import Logo from '../Logos/Logo';
 import '../../App.css';
 
@@ -45,6 +45,12 @@ const DesktopNavigation = (props) => {
                         <StyledLi>
                             {isLoggedIn ? null : <StyledLink secondary="true" to="signup">Get Started</StyledLink>}
                         </StyledLi>
+                        {isLoggedIn
+                            ? <StyledLi>
+                                <StyledLink to="/inbox">Inbox</StyledLink>
+                            </StyledLi>
+                            : null
+                        }
                         {isLoggedIn
                             ? <StyledLi>
                                 <StyledLink to="/search"><FontAwesomeIcon icon={faSearch} /></StyledLink>

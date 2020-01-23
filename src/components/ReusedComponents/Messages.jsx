@@ -1,35 +1,46 @@
-import React,{useState} from 'react';
+import React,{useState, useEffect} from 'react';
 import S from 'styled-components';
 import axios from 'axios';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
+import '../../App.css';
+
+
+
 
 const Messages = (props) => {
-    const [sentMessages, setSentMessages] = useState([]);
-    const [messageInput, setMessageInput] = useState('');
-    // const messagedUser = useSelector(state => state.root.messageSessions)
+    const dispatch = useDispatch();
 
-    console.log(props.messages);
+    const [messageInput, setMessageInput] = useState('');
+    const currentMessages = useSelector(state => state.messageReducer.messages);
 
     const handleMessageInput = (event) => {
-        setMessageInput(event.target.value)
+        setMessageInput(event.target.value);
     }
     const sendMessage = (event,messageInputValue) => {
-        console.log(event);
         event.preventDefault();
-        setSentMessages([...sentMessages, messageInputValue]);
+        dispatch({type: 'SET_MESSAGES', payload: messageInputValue});
+        // need an axios call to post these messages.
         setMessageInput('');
+    }             
+
+    const handleClose = (id) => {
+        dispatch({type: "DELETE_MESSAGE_SESSION", payload: id}) ;
+    }
+    const minimizeMessage = (event) => {
+        console.log(event.target.parentElement);
+        event.target.parentElement.classList.toggle('minimize');
     }
     return(
         <MessageContainer>
-            <MessagedUserName>{props.messages.firstName} {props.messages.lastName}</MessagedUserName>
+            <MessagedUserName onClick={minimizeMessage} >{props.messages.firstName} {props.messages.lastName}</MessagedUserName>
+            <ExitButton onClick={() => handleClose(props.messages.id)}>exit</ExitButton>
             <InnerMessagesContainer>
-            {sentMessages.length > 0 ? sentMessages.map( messages => {
-                return <UserMessages>{messages}</UserMessages>
-            }) : null}
-                
+                {currentMessages.length > 0 ? currentMessages.map( messages => {
+                    return <UserMessages>{messages}</UserMessages>
+                }) : null} 
             </InnerMessagesContainer>
             <StyledForm onSubmit={(event) => sendMessage(event,messageInput)}>
-            <StyledInput onChange={handleMessageInput} type="text" value={messageInput}/>
+                <StyledInput onChange={handleMessageInput} type="text" value={messageInput}/>
                 <StyledButton>Send</StyledButton>
             </StyledForm>
         </MessageContainer>
@@ -49,9 +60,12 @@ const MessageContainer = S.div`
     border-top-right-radius: 5px;
     border-top-left-radius: 5px;
     background-color: #fff;
+    max-height: 500px;
+    max-width: 500px;
+    transition: all ease-in-out 300ms;
 `;
 const MessagedUserName = S.h3`
-    font-size: 1.8rem;
+    font-size: 1.6rem;
     background-color: #0077ff;
     width: 100%;
     border-top-right-radius: 5px;
@@ -59,6 +73,9 @@ const MessagedUserName = S.h3`
     color: #fff;
     letter-spacing: 1px;
     line-height: 40px;
+    text-transform: capitalize;
+    text-align: left;
+    padding-left: 10px;
 `;
 const InnerMessagesContainer = S.div`
     background-color: #fff;
@@ -101,4 +118,18 @@ const StyledForm = S.form`
     width: 100%;
     display: flex;
     justify-content: space-between;
+`;
+
+const ExitButton = S.div`
+    font-size: 20px;
+    color: #000;
+    padding: 5px;
+    text-align: right;
+    z-index: 1000;
+    transition: all ease 100ms;
+    right: 10px;
+    &:hover {
+        cursor: pointer;
+        color: #fff;
+    }
 `;

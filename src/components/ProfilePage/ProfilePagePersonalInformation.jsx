@@ -7,11 +7,20 @@ import {useSelector, useDispatch} from 'react-redux';
 const ProfilePagePersonalInformation = (props) => {
     const dispatch = useDispatch();
 
+    const messageSessions = useSelector(state => state.root.messageSessions);
+    const messageSessionIds = messageSessions.map( users => {
+            return users.id;
+    })
     const startMessage = (userInformation) => {
-        console.log(userInformation);
-        dispatch({type: 'START_MESSAGE_SESSION', payload: userInformation});
-      }
-    
+
+        if(messageSessions.length === 0) { // if array is empty, start one session.
+            dispatch({type: 'START_MESSAGE_SESSION', payload: userInformation});
+        } else if(!messageSessionIds.includes(userInformation.id)) { // if there are sessions in the array, check them before we spin up new sessions
+            dispatch({type: 'START_MESSAGE_SESSION', payload: userInformation});
+        }
+    }
+
+
 	return(
         <>
             <CardContainer>

@@ -45,7 +45,9 @@ export const rootReducer = (state = initialState, action) => {
             case 'REMOVE_ISLOADING':
                 return {...state, isLoading: false};
             case 'START_MESSAGE_SESSION':
-                return {...state, messageSessions: [...state.messageSessions, action.payload]};   
+                return {...state, messageSessions: [...state.messageSessions, action.payload]};  
+            case 'DELETE_MESSAGE_SESSION':
+                return {...state, messageSessions: [...state.messageSessions.filter( deletedSession => deletedSession.id !== action.payload)]}
         default:
             return state;
     }

@@ -30,3 +30,7 @@ body::-webkit-scrollbar-track {
 .sticky {
   position: fixed;
 }
+.minimize {
+  max-height: 40px !important;
+  max-width: 200px !important;
+}

@@ -24,7 +24,7 @@ const SearchPage = () => {
   useEffect(() => {
     axios
       .post(
-        `https://hideir.herokuapp.com/search`,
+        ` /search`,
         { params: { test: "randomData" } },
         {
           headers: {
@@ -46,7 +46,7 @@ const SearchPage = () => {
     dispatch(toggleIsLoggedIn(true))
     axios
       .post(
-        `https://hideir.herokuapp.com/search`,
+        ` /search`,
         { selectedTags },
         {
           headers: {
@@ -68,9 +68,6 @@ const SearchPage = () => {
         console.log("here is the error" + error);
       });
   };
-  const startMessage = (userInformation) => {
-    dispatch({type: 'START_MESSAGE_SESSION', paylod: userInformation});
-  }
 
   return (
     <>
@@ -96,7 +93,7 @@ const SearchPage = () => {
         <UserCardsContainer>
           {matchedUsers &&
             matchedUsers.map((user,index) => {
-              return <UserCard key={index} startMessage={startMessage} user={user} />;
+              return <UserCard key={index} user={user} />;
             })}
         </UserCardsContainer>
       )}
