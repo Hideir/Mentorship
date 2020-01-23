@@ -22,13 +22,13 @@ const LoginForm = props => {
       dispatch({type: 'IS_LOGGED_IN', payload: true});
     }
   }
- 
+  
   const handleSignUp = event => {
     event.preventDefault();
     // setIsLoading(true);
     dispatch(toggleIsLoggedIn(true));
     // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
-    axios.post(` /login`,{ email, password },
+    axios.post(`https://hideir.herokuapp.com/login`,{ email, password },
           {
             headers: {
               "content-type": "application/json" // Tell the server we are sending this over as JSON

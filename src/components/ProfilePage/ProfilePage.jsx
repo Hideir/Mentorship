@@ -20,7 +20,7 @@ const ProfilePage = (props) => {
 		let token = localStorage.getItem('auth-token');
 		dispatch(toggleIsLoggedIn(true));
 		const getProfileData = (profileId, filter) => {
-			axios.post(` /profile/${profileId}`, {filter}, {  
+			axios.post(`https://hideir.herokuapp.com/profile/${profileId}`, {filter}, {  
 				headers: {
 				  'content-type': 'application/json', // Tell the server we are sending this over as JSON
 				  'authorization': token, // Send the token in the header from the client.

@@ -19,7 +19,7 @@ import {toggleIsLoggedIn} from '../../../actions';
       // setIsLoading(true);
       dispatch(toggleIsLoggedIn(true));
       // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
-        axios.post(` /signup`, {email, password}, {  
+        axios.post(`https://hideir.herokuapp.com/signup`, {email, password}, {  
           headers: {
             'content-type': 'application/json'  // Tell the server we are sending this over as JSON
           },
