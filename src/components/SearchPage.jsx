@@ -24,7 +24,7 @@ const SearchPage = () => {
   useEffect(() => {
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/search`,
+        `${process.env. REACT_APP_API_LOCAL}/search`,
         { params: { test: "randomData" } },
         {
           headers: {
@@ -46,7 +46,7 @@ const SearchPage = () => {
     dispatch(toggleIsLoggedIn(true))
     axios
       .post(
-        `${process.env.REACT_APP_API_URL}/search`,
+        `${process.env. REACT_APP_API_LOCAL}/search`,
         { selectedTags },
         {
           headers: {

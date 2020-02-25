@@ -9,16 +9,27 @@ import '../../App.css';
 
 const Messages = (props) => {
     const dispatch = useDispatch();
-
     const [messageInput, setMessageInput] = useState('');
     const currentMessages = useSelector(state => state.messageReducer.messages);
+    const loggedInUser = useSelector( state => state.root.loggedInUser);
 
+    // Create an array of related messages.
+    const testMessages = currentMessages.map(messageObject => {
+        if(messageObject.receiverId === props.activeMessageSessions.id) {
+            return messageObject.message;
+        }
+    });
+    const filteredTestMessages = testMessages.filter(messages => messages !== undefined);
+    console.log({filteredTestMessages});
     const handleMessageInput = (event) => {
         setMessageInput(event.target.value);
     }
     const sendMessage = (event,messageInputValue) => {
         event.preventDefault();
-        dispatch({type: 'SET_MESSAGES', payload: messageInputValue});
+        dispatch({
+            type: 'SET_MESSAGES', 
+            payload: {senderId: loggedInUser.id, receiverId: props.activeMessageSessions.id, message: messageInputValue}
+        });
         // need an axios call to post these messages.
         setMessageInput('');
     }             
@@ -32,10 +43,10 @@ const Messages = (props) => {
     }
     return(
         <MessageContainer>
-            <MessagedUserName onClick={minimizeMessage} >{props.messages.firstName} {props.messages.lastName}</MessagedUserName>
-            <ExitButton onClick={() => handleClose(props.messages.id)}>exit</ExitButton>
+            <MessagedUserName onClick={minimizeMessage} >{props.activeMessageSessions.firstName} {props.activeMessageSessions.lastName}</MessagedUserName>
+            <ExitButton onClick={() => handleClose(props.activeMessageSessions.id)}>exit</ExitButton>
             <InnerMessagesContainer>
-                {currentMessages.length > 0 ? currentMessages.map( messages => {
+                {filteredTestMessages.length > 0 ? filteredTestMessages.map( messages => {
                     return <UserMessages>{messages}</UserMessages>
                 }) : null} 
             </InnerMessagesContainer>

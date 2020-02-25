@@ -8,6 +8,7 @@ import ProfilePageEducationSection from './ProfilePageEducationSection';
 import {toggleIsLoggedIn} from '../../actions';
 
 const ProfilePage = (props) => {
+	console.log(props);
 	const loggedInUser = useSelector(state => state.root.loggedInUser);
 	const [profileData, setProfileData] = useState({});
 	const routedEmail = props.location.state.user ? props.location.state.user.email : loggedInUser.email; // check if we have user state ( from Search page)
@@ -20,7 +21,7 @@ const ProfilePage = (props) => {
 		let token = localStorage.getItem('auth-token');
 		dispatch(toggleIsLoggedIn(true));
 		const getProfileData = (profileId, filter) => {
-			axios.post(`${process.env.REACT_APP_API_URL}/profile/${profileId}`, {filter}, {  
+			axios.post(`${process.env. REACT_APP_API_LOCAL}/profile/${profileId}`, {filter}, {  
 				headers: {
 				  'content-type': 'application/json', // Tell the server we are sending this over as JSON
 				  'authorization': token, // Send the token in the header from the client.

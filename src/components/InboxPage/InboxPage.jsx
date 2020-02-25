@@ -1,5 +1,4 @@
 import React from 'react'
-import axios from 'axios';
 import S from 'styled-components';
 import ConvoCard from './ConversationCard';
 import InboxForm from './InboxForm';
@@ -13,7 +12,7 @@ const InboxPage = () => {
                 <ConvoCard />
             </LeftSideBar>
             <RightSideBar>
-            <InboxMessage />
+                <InboxMessage />
                 <InboxForm />
             </RightSideBar>
         </PageContainer>

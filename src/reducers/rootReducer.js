@@ -9,7 +9,7 @@ export const initialState = {
         interests: [],
     },
     isLoading: false,
-    messageSessions: [],
+    // messageSessions: [],
 };
 
 
@@ -40,14 +40,14 @@ export const rootReducer = (state = initialState, action) => {
             newSignedUpUser: {
                 ...state.newSignedUpUser, interests:  state.newSignedUpUser.interests.filter( deselectedInterest  => deselectedInterest !== action.payload)
             }};
-            case 'SET_ISLOADING':
-                return {...state, isLoading: true};
-            case 'REMOVE_ISLOADING':
-                return {...state, isLoading: false};
-            case 'START_MESSAGE_SESSION':
-                return {...state, messageSessions: [...state.messageSessions, action.payload]};  
-            case 'DELETE_MESSAGE_SESSION':
-                return {...state, messageSessions: [...state.messageSessions.filter( deletedSession => deletedSession.id !== action.payload)]}
+        case 'SET_ISLOADING':
+            return {...state, isLoading: true};
+        case 'REMOVE_ISLOADING':
+            return {...state, isLoading: false};
+        // case 'START_MESSAGE_SESSION':
+        //     return {...state, messageSessions: [...state.messageSessions, action.payload]};  
+        // case 'DELETE_MESSAGE_SESSION':
+        //     return {...state, messageSessions: [...state.messageSessions.filter( deletedSession => deletedSession.id !== action.payload)]}
         default:
             return state;
     }

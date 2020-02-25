@@ -23,10 +23,11 @@ import S from 'styled-components';
 function App() {
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
   const isLoading = useSelector(state => state.root.isLoading);
-  const messages = useSelector(state => state.root.messageSessions);
-  console.log(messages);
+  const activeMessageSessions = useSelector(state => state.messageReducer.userRelations); // All the active user sessions
+  const globalMessages = useSelector(state => state.messageReducer.messages); // for testing to see all the messages sent
   const dispatch = useDispatch();
-
+  console.log(globalMessages);
+  console.log(activeMessageSessions.length);
   // this useEffect is to make sure we get the user information on Load. PRobably store their loggedin email in password
   // then when the user clicks on the profilePage we use their email to get the profile information instead of
   // making a request every render.
@@ -65,12 +66,11 @@ function App() {
             <Route exact path="/signup/interests" component={InterestListPage} />
             <Route exact path="/signup/add-profile"  component={ProfileCreationPage} />
           </Switch>
-          {messages.length > 0 
-          ? <MessageSessionsContainer> {messages.length > 0 ? messages.map( (messages,index) => {
-            return <Messages messages={messages} key={index}/>
+          {activeMessageSessions.length > 0
+          ? <MessageSessionsContainer> {activeMessageSessions.length > 0 ? activeMessageSessions.map( (users,index) => {
+            return <Messages activeMessageSessions={users} key={index}/>
           }) : null}</MessageSessionsContainer> 
           : null}
-
         </div>
     </Router>
 
