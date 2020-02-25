@@ -21,7 +21,7 @@ const ProfilePage = (props) => {
 		let token = localStorage.getItem('auth-token');
 		dispatch(toggleIsLoggedIn(true));
 		const getProfileData = (profileId, filter) => {
-			axios.post(`${process.env. REACT_APP_API_LOCAL}/profile/${profileId}`, {filter}, {  
+			axios.post(`${process.env.REACT_APP_API_LOCAL || process.env.REACT_APP_API_URL}/profile/${profileId}`, {filter}, {  
 				headers: {
 				  'content-type': 'application/json', // Tell the server we are sending this over as JSON
 				  'authorization': token, // Send the token in the header from the client.

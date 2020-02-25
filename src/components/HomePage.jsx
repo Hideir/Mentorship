@@ -11,7 +11,7 @@ const HomePage = () => {
   useEffect( () => {
     let authToken = localStorage.getItem('auth-token'); 
 		const getUserInformation = () => {
-			axios.get(`${process.env. REACT_APP_API_LOCAL}/loggedInUser`, {  
+			axios.get(`${process.env.REACT_APP_API_LOCAL || process.env.REACT_APP_API_URL}/loggedInUser`, {  
 				headers: {
 				  'content-type': 'application/json', // Tell the server we are sending this over as JSON
 				  'authorization': authToken, // Send the token in the header from the client.
