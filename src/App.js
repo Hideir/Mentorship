@@ -24,10 +24,7 @@ function App() {
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
   const isLoading = useSelector(state => state.root.isLoading);
   const activeMessageSessions = useSelector(state => state.messageReducer.userRelations); // All the active user sessions
-  const globalMessages = useSelector(state => state.messageReducer.messages); // for testing to see all the messages sent
   const dispatch = useDispatch();
-  console.log(globalMessages);
-  console.log(activeMessageSessions.length);
   // this useEffect is to make sure we get the user information on Load. PRobably store their loggedin email in password
   // then when the user clicks on the profilePage we use their email to get the profile information instead of
   // making a request every render.

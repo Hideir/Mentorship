@@ -19,11 +19,11 @@ const OnboardInterestList = (props) => {
         <CardContainer>
         {/* Create labels for selected interests*/ }
             <SelectedInterestTagsContainer>
-                <SelectedInterestUl>
-                    {usersInterests.map( (interests, index) => {
+                {/* <SelectedInterestUl>
+                    {usersInterests == false ? null : usersInterests.map( (interests, index) => {
                         return <SelectedInterestTags key={index}>{interests}</SelectedInterestTags>
                     })}
-                </SelectedInterestUl>
+                </SelectedInterestUl> */}
             </SelectedInterestTagsContainer>
             <SelectedInterestTagsContainer>
             {interestsArray.map( (interests, index) => {

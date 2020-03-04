@@ -8,11 +8,10 @@ import ProfilePageEducationSection from './ProfilePageEducationSection';
 import {toggleIsLoggedIn} from '../../actions';
 
 const ProfilePage = (props) => {
-	console.log(props);
 	const loggedInUser = useSelector(state => state.root.loggedInUser);
 	const [profileData, setProfileData] = useState({});
 	const routedEmail = props.location.state.user ? props.location.state.user.email : loggedInUser.email; // check if we have user state ( from Search page)
-	const userId = props.location.state.user ?  props.location.state.user.userId : loggedInUser.id; // check if we have user state ( from Search page)
+	const userId = props.match.params.id; // check if we have user state ( from Search page)
 	const {firstName, lastName, interests,state, city, tagLine, education} = profileData;
 	const dispatch = useDispatch();
 
@@ -21,7 +20,7 @@ const ProfilePage = (props) => {
 		let token = localStorage.getItem('auth-token');
 		dispatch(toggleIsLoggedIn(true));
 		const getProfileData = (profileId, filter) => {
-			axios.post(`${process.env.REACT_APP_API_LOCAL || process.env.REACT_APP_API_URL}/profile/${profileId}`, {filter}, {  
+			axios.post(`${process.env.REACT_APP_API_LOCAL || process.env.REACT_APP_API_URL}/profile/${profileId}`, {profileId}, {  
 				headers: {
 				  'content-type': 'application/json', // Tell the server we are sending this over as JSON
 				  'authorization': token, // Send the token in the header from the client.
@@ -37,7 +36,7 @@ const ProfilePage = (props) => {
 			})
 		}
 
-		if(routedEmail) getProfileData(userId,routedEmail);
+		if(userId) getProfileData(userId,userId);
 
 	},[userId,routedEmail]);
 

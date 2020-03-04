@@ -4,13 +4,18 @@ import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 
-import {createStore} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 import {Provider} from 'react-redux';
 import {reducer} from './reducers/index.js';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
-const store = createStore(reducer, composeWithDevTools());
 
+const configureStore = () => {
+    return createStore(reducer, applyMiddleware(thunk));
+}
+
+const store = configureStore();
 // Import our Global State Provider
 // import {GlobalStateProvider} from './store';
 

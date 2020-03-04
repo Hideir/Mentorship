@@ -7,7 +7,6 @@ import {useSelector, useDispatch} from 'react-redux';
 const ProfilePagePersonalInformation = (props) => {
     const dispatch = useDispatch();
     const messageSessions = useSelector(state => state.messageReducer.userRelations);
-    console.log(messageSessions);
     const messageSessionIds = messageSessions.map( users => {
             return users.id;
     })
