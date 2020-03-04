@@ -19,6 +19,7 @@ const Messages = (props) => {
     // Redux State
     const currentMessages = useSelector(state => state.messageReducer.messages);
     const loggedInUser = useSelector( state => state.root.loggedInUser);
+    console.log(loggedInUser);
     // deconstruction
     const receiveingUserId = props.activeMessageSessions.id;
     const loggedInUserId = loggedInUser.id;
@@ -92,7 +93,7 @@ const Messages = (props) => {
                     return (
                         <UserMessages key={index}>
                             <TitleAndContentMessageCotnainer>
-                            <StyledP><StyledLink to={{ pathname: `/profile/${receiveingUserId}`, state: { loggedInUser } }}>{props.activeMessageSessions.firstName} {props.activeMessageSessions.lastName}</StyledLink></StyledP>
+                            <StyledP><StyledLink to={{ pathname: `/profile/${receiveingUserId}`, state: { loggedInUser } }}>{loggedInUser.firstName} {loggedInUser.lastName}</StyledLink></StyledP>
                             <StyledP>{messages}</StyledP>
                             </TitleAndContentMessageCotnainer>
                         </UserMessages>
@@ -196,16 +197,16 @@ const StyledForm = S.form`
 `;
 
 const ExitButton = S.div`
-    font-size: 20px;
+    font-size: 24px;
     color: #fff;
-    padding: 5px;
+    padding: 2px 5px 0px 5px;
     text-align: right;
     z-index: 1000;
-    transition: all ease 100ms;
+    transition: all ease 120ms;
     right: 10px;
     position: absolute;
     &:hover {
         cursor: pointer;
-        color: #fff;
+        color: #000;
     }
 `;
