@@ -93,7 +93,7 @@ const Messages = (props) => {
                     return (
                         <UserMessages key={index}>
                             <TitleAndContentMessageCotnainer>
-                            <StyledP><StyledLink to={{ pathname: `/profile/${receiveingUserId}`, state: { loggedInUser } }}>{loggedInUser.firstName} {loggedInUser.lastName}</StyledLink></StyledP>
+                            <StyledP><StyledLink to={{ pathname: `/profile/${loggedInUserId}`, state: { loggedInUser } }}>{loggedInUser.firstName} {loggedInUser.lastName}</StyledLink></StyledP>
                             <StyledP>{messages}</StyledP>
                             </TitleAndContentMessageCotnainer>
                         </UserMessages>
