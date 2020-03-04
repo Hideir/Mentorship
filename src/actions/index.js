@@ -21,6 +21,7 @@ export const toggleIsLoggedIn = flag => {
 
 export const setMessagesGet = (loggedInUserId) => {
     return dispatch => {
+        console.log(authToken);
         return axios
             .get(
                 `${process.env.REACT_APP_API_LOCAL ||
