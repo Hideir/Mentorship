@@ -6,6 +6,7 @@ import '../../App.css';
 const InterestCard = (props) => {
     const dispatch = useDispatch();
     const {interests} = props;
+    console.log(interests);
     // State
     const [hasActiveClass, setHasActiveClass] = useState(false);
     // Event Handlers

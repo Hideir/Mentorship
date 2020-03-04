@@ -9,11 +9,11 @@ export const initialState = {
         interests: [],
     },
     isLoading: false,
-    // messageSessions: [],
 };
 
 
 export const rootReducer = (state = initialState, action) => {
+    console.log(action.payload);
     switch(action.type) {
         case 'SET_LOGGEDIN_USER':
             return  {...state, loggedInUser : action.payload};
@@ -28,11 +28,20 @@ export const rootReducer = (state = initialState, action) => {
                 ...state.newSignedUpUser, email: action.payload
             }};
         case 'SET_NEW_USER_INTERESTS':
+            if(state.newSignedUpUser.interests.length <= 0) {
             return {
-            ...state, 
-            newSignedUpUser: {
-                ...state.newSignedUpUser, interests: [...state.newSignedUpUser.interests, action.payload],
-            }};
+                ...state, 
+                newSignedUpUser: {
+                    ...state.newSignedUpUser, interests: [action.payload],
+                }}; 
+            } else {
+            return {
+                ...state, 
+                newSignedUpUser: {
+                    ...state.newSignedUpUser, interests: [...state.newSignedUpUser.interests, action.payload],
+                }};
+            }
+
         case 'REMOVE_NEW_USER_INTERESTS':
             return {
             ...state, 
@@ -43,10 +52,7 @@ export const rootReducer = (state = initialState, action) => {
             return {...state, isLoading: true};
         case 'REMOVE_ISLOADING':
             return {...state, isLoading: false};
-        // case 'START_MESSAGE_SESSION':
-        //     return {...state, messageSessions: [...state.messageSessions, action.payload]};  
-        // case 'DELETE_MESSAGE_SESSION':
-        //     return {...state, messageSessions: [...state.messageSessions.filter( deletedSession => deletedSession.id !== action.payload)]}
+    
         default:
             return state;
     }

@@ -9,7 +9,8 @@ import MedFormButton from '../ReusedComponents/MedFormButton';
 
 const OnboardInterestList = (props) => {
 
-    const usersInterests = useSelector(state => state.root.newSignedUpUser.interests);
+    // const usersInterests = useSelector(state => state.root.newSignedUpUser.interests);
+    // console.log(usersInterests);
     let cardCounter = 1;
 
     const pushUser = () => {
@@ -29,7 +30,6 @@ const OnboardInterestList = (props) => {
             {interestsArray.map( (interests, index) => {
                 return(
                     <InterestCard
-                        usersInterests={usersInterests}
                         interestCardCounter={cardCounter++}
                         key={index}
                         interests={interests}
