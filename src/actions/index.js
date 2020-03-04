@@ -21,14 +21,13 @@ export const toggleIsLoggedIn = flag => {
 
 export const setMessagesGet = (loggedInUserId) => {
     return dispatch => {
-        console.log(authToken);
         return axios
             .get(
                 `${process.env.REACT_APP_API_LOCAL ||
                             process.env.REACT_APP_API_URL}/profile/${loggedInUserId}/messages`, {
                     headers: {
                         "content-type": "application/json", // Tell the server we are sending this over as JSON
-                        "authorization": authToken // Send the token in the header from the client.
+                        "authorization": authToken, // Send the token in the header from the client.
                     }
                 }
             )
