@@ -188,7 +188,7 @@ const StyledButton = S.button`
     padding: 3px;
     font-size: 1.8rem;
     min-width: 50px;
-    width: 50px;
+    width: 80px;
 `;
 const StyledForm = S.form`
     width: 100%;

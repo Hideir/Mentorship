@@ -55,7 +55,7 @@ const TextContainer = S.div`
         content: '';
         width: 100%;
         position: absolute;
-        height: 200px;
+        height: 600px;
         top: 62px;
         right: 50px;
         z-index: -1;
@@ -71,6 +71,7 @@ const TextContainer = S.div`
         left: 100px;
         z-index: -2;
         border-radius: 5px;
+        box-shadow: 0px 0px 5px #232323c7;
     }
     @media only screen and (max-width: 1200px) {
         &::before {
@@ -95,9 +96,10 @@ const TextContainer = S.div`
 	  }
 `;
 const Title = S.h1`
-    font-size: 5rem;
+    font-size: 10rem;
     color: #000;
     text-align: left;
+    line-height: 90px;
 
     @media only screen and (max-width: 1200px) { 
         font-size: 4rem;
@@ -109,7 +111,7 @@ const Title = S.h1`
 const StyledText = S.p`
     font-size: 2.6rem;
     text-align: left;
-    margin-bottom: 40px;
+    margin: 40px 0;
     width: 80%;
     color: #fff;
 
