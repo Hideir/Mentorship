@@ -182,13 +182,14 @@ const StyledInput = S.input`
 const StyledButton = S.button`
     background-color: blue;
     color: #fff;
-    border: none;
+    border: unset;
     margin: 2px;
     border-radius: 5px;
     padding: 3px;
     font-size: 1.8rem;
     min-width: 50px;
-    width: 50px;
+    width: 80px;
+
 `;
 const StyledForm = S.form`
     width: 100%;
