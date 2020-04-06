@@ -178,7 +178,7 @@ const StyledInput = S.input`
     outline: none;
 `;
 const StyledButton = S.button`
-    background-color: blue;
+    background-color: #0077ff;
     color: #fff;
     border: unset;
     margin: 2px;
@@ -187,7 +187,6 @@ const StyledButton = S.button`
     font-size: 1.8rem;
     min-width: 50px;
     width: 80px;
-
 `;
 const StyledForm = S.form`
     width: 100%;

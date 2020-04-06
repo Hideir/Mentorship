@@ -21,6 +21,7 @@ import S from 'styled-components';
 
 
 function App() {
+
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
   const isLoading = useSelector(state => state.root.isLoading);
   const activeMessageSessions = useSelector(state => state.messageReducer.userRelations); // All the active user sessions
