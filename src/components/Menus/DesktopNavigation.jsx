@@ -39,18 +39,18 @@ const DesktopNavigation = (props) => {
                               </StyledLi>
                             : null
                          }
-                        <StyledLi>
-                            {isLoggedIn ? <StyledLink onClick={signOut} to="/">Log Out</StyledLink> : <StyledLink to="/login">Login</StyledLink>}
-                        </StyledLi>
-                        <StyledLi>
-                            {isLoggedIn ? null : <StyledLink secondary="true" to="signup">Get Started</StyledLink>}
-                        </StyledLi>
-                        {isLoggedIn
+                         {isLoggedIn
                             ? <StyledLi>
                                 <StyledLink to="/inbox">Inbox</StyledLink>
                             </StyledLi>
                             : null
                         }
+                        <StyledLi>
+                            {isLoggedIn ? <StyledLink secondary="true" onClick={signOut} to="/">Sign Out</StyledLink> : <StyledLink to="/signin">Sign In</StyledLink>}
+                        </StyledLi>
+                        <StyledLi>
+                            {isLoggedIn ? null : <StyledLink secondary="true" to="signup">Get Started</StyledLink>}
+                        </StyledLi>
                         {isLoggedIn
                             ? <StyledLi>
                                 <StyledLink to="/search"><FontAwesomeIcon icon={faSearch} /></StyledLink>

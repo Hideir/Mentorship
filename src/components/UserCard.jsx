@@ -1,8 +1,8 @@
 import React from 'react';
 import S from 'styled-components'
 import {Link} from 'react-router-dom';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
+// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+// import { faEnvelope } from "@fortawesome/free-solid-svg-icons";
 
 const UserCard = (props) => {
     const {user} = props;

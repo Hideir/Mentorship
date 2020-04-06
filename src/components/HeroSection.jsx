@@ -1,16 +1,26 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import HomeIllustraction from './undraw_partying.svg'
+import {Link} from 'react-router-dom';
 import S from 'styled-components';
 
 
 const HeroSection = () => {
+
+    const isLoggedIn = useSelector( state => state.root.isLoggedIn); // Grab logged In State
+    const loggedInUser = useSelector( state => state.root.loggedInUser); // Grab logged in user
+
   return (
     <HeroSectionWrapper>
         <ContentContainer>
             <TextContainer>
-                <Title>Welcome to Hideir</Title>
+                <Triangle></Triangle>
+                <Title>Hi<StyledSpan>deir</StyledSpan>!</Title>
                 <StyledText>New to the area, looking to network, or just looking to grow your inner circle? Connect
                 with like minded individuals on Hideir.</StyledText>
+                <StyledLinkContainer>
+                            {isLoggedIn ? <StyledLink to="/search">Connect</StyledLink> : <StyledLink to="/signup">Get Started</StyledLink>}
+                </StyledLinkContainer>
             </TextContainer>
             <StyledImg src={HomeIllustraction} />
         </ContentContainer>
@@ -44,35 +54,22 @@ const ContentContainer = S.div`
 
     }
 `;
+const Triangle = S.div`
+    width: 0;
+    height: 0;
+    border-top: 200px solid transparent;
+    border-bottom: 200px solid transparent;
+    position: absolute;
+    border-left: 800px solid #d0cde1;
+    transform: rotate(-25deg);
+`;
 const TextContainer = S.div`
     display: flex;
     flex-direction: column;
     width: 50%;
     position: relative;
+    justify-content: center;
 
-    &::before {
-        background-color: #0077ff;
-        content: '';
-        width: 100%;
-        position: absolute;
-        height: 600px;
-        top: 62px;
-        right: 50px;
-        z-index: -1;
-        box-shadow: 0px 0px 5px #232323c7;
-        border-radius: 5px;
-    }
-    &::after {
-        background-color: #c1deffc9;
-        content: '';
-        width: 100%;
-        position: absolute;
-        height: 100%;
-        left: 100px;
-        z-index: -2;
-        border-radius: 5px;
-        box-shadow: 0px 0px 5px #232323c7;
-    }
     @media only screen and (max-width: 1200px) {
         &::before {
             height: 150px;
@@ -96,11 +93,12 @@ const TextContainer = S.div`
 	  }
 `;
 const Title = S.h1`
-    font-size: 10rem;
+    font-size: 15rem;
     color: #000;
     text-align: left;
-    line-height: 90px;
-
+    font-weight: 900;
+    text-shadow: 6px 6px 0px rgba(0,0,0,0.2);
+    z-index: 1;
     @media only screen and (max-width: 1200px) { 
         font-size: 4rem;
     }
@@ -108,17 +106,22 @@ const Title = S.h1`
         text-align: center;
 	  }
 `; 
+const StyledSpan = S.span`
+    color: #0077ff;
+`;
 const StyledText = S.p`
-    font-size: 2.6rem;
+    font-size: 3rem;
     text-align: left;
     margin: 40px 0;
-    width: 80%;
-    color: #fff;
-
+    width: 100%;
+    color: #0077ff;
+    font-weight: 600;
+    z-index: 1;
     @media only screen and (max-width: 1200px) { 
         font-size: 2rem;
     }
     @media only screen and (max-width: 860px) {
+        color: #fff;
         font-size: 2.4rem;
         padding: 10px 10px 20px 10px;
         margin-bottom: 0;
@@ -130,6 +133,27 @@ const StyledText = S.p`
         margin: 0 auto;
         box-shadow: 0px 0px 5px #232323c7;
 	  }
+`;
+const StyledLinkContainer = S.div`
+      width: 100%;
+      justify-content: flex-start;
+      display: flex;
+      align-items: center;
+      z-index: 1;
+`;
+const StyledLink = S(Link)`
+    font-size: 2.2rem;
+    background-color: #0077ff;
+    color: #fff;
+    font-weight: 500;
+    text-align: left;
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 30px;
+    &:hover {
+        cursor: pointer;
+        background-color: #003c80;
+    }
 `;
 const StyledImg = S.img`
     width: 50%;

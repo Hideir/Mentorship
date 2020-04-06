@@ -1,5 +1,5 @@
 import React from 'react'
-import {useSelector} from 'react-redux';
+// import {useSelector} from 'react-redux';
 import S from 'styled-components';
 import InterestCard from './InterestCard';
 import {interestsArray} from './interestData';
@@ -68,32 +68,32 @@ const SelectedInterestTagsContainer = S.div`
         justify-content: space-around;
 	  }
 `;
-const SelectedInterestUl = S.ul`
-    display: flex;
-    list-style: none;
-    margin-bottom: 20px;
-    width: 90%;
-    flex-flow: row wrap;
-    height: auto;
-    &::after {
-        content: 'nothing';
-        font-size: 0;
-        height: 55px;
-        width: 10px;
-        background-color: transparent;
-    }
-`;
-const SelectedInterestTags = S.li`
-    font-size: 1.8rem;
-    background-color: #2f2c2c;
-    color: #fff;
-    width: auto;
-    padding: 10px 20px;
-    margin: 0 10px 10px 0;
-    border-radius: 1rem;
-    text-transform: capitalize;
+// const SelectedInterestUl = S.ul`
+//     display: flex;
+//     list-style: none;
+//     margin-bottom: 20px;
+//     width: 90%;
+//     flex-flow: row wrap;
+//     height: auto;
+//     &::after {
+//         content: 'nothing';
+//         font-size: 0;
+//         height: 55px;
+//         width: 10px;
+//         background-color: transparent;
+//     }
+// `;
+// const SelectedInterestTags = S.li`
+//     font-size: 1.8rem;
+//     background-color: #2f2c2c;
+//     color: #fff;
+//     width: auto;
+//     padding: 10px 20px;
+//     margin: 0 10px 10px 0;
+//     border-radius: 1rem;
+//     text-transform: capitalize;
 
-    @media only screen and (max-width: 860px) {
-        font-size: 1.4rem;
-	  }
-`;
+//     @media only screen and (max-width: 860px) {
+//         font-size: 1.4rem;
+// 	  }
+// `;

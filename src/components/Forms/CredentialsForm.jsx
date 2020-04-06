@@ -17,19 +17,19 @@ let buttonValue = '';
 
 const CredentialsForm = props => {
   if(props.isLoginPage && props.isLoading === false){
-       buttonValue = "Log In"; 
+       buttonValue = "Sign In"; 
   } else if(!props.isLoginPage && props.isLoading === false) {
        buttonValue = "Get Started";
   } else if( props.isLoading === true && !props.isLoginPage) {
        buttonValue = "Signing Up";
   } else if( props.isLoading === true && props.isLoginPage) {
-    buttonValue = "Logging In";
+    buttonValue = "Signing In...";
 }
 
   return (
     <FormContainer>
-      <Form action={props.isLoginPage ? 'login' : 'signup'} method="post" onSubmit={props.handleSignUp}>
-        <Title>{props.isLoginPage === true ? "Log In" : "Sign Up"}</Title>
+      <Form action={props.isLoginPage ? 'signin' : 'signup'} method="post" onSubmit={props.handleSignUp}>
+        <Title>{props.isLoginPage === true ? "Sign In" : "Sign Up"}</Title>
         {props.isValidFlag === false && props.isLoginPage ? (
           <ErrorMessage>
             That Friendlier account doesn't exist. Enter a different account or{" "}
@@ -72,7 +72,7 @@ const CredentialsForm = props => {
         </ButtonContainer>
         <StyledText>
          {props.isLoginPage ? 'New to Friendlier?' : 'Already have an account?'}
-         {props.isLoginPage ? <StyledSignup to="/signup" primary="true">Sign Up</StyledSignup> : <StyledSignup to="/login" primary="true">Log In</StyledSignup>}
+         {props.isLoginPage ? <StyledSignup to="/signup" primary="true">Sign Up</StyledSignup> : <StyledSignup to="/signin" primary="true">Sign In</StyledSignup>}
         </StyledText>
         {!props.isLoginPage ? null : (
           <StyledLink to="/forgot-credentials">

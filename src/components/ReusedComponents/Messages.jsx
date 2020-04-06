@@ -19,9 +19,7 @@ const Messages = (props) => {
     // Redux State
     const currentMessages = useSelector(state => state.messageReducer.messages);
     const loggedInUser = useSelector( state => state.root.loggedInUser);
-    console.log(loggedInUser);
     // deconstruction
-    const receiveingUserId = props.activeMessageSessions.id;
     const loggedInUserId = loggedInUser.id;
     // Create an array of related messages.
     const userMatchingMessages = currentMessages.map(messageObject => {
@@ -29,7 +27,7 @@ const Messages = (props) => {
             return messageObject.message;
         }
     });
-    const filteredMessages = userMatchingMessages.filter(messages => messages != false && messages != undefined);
+    const filteredMessages = userMatchingMessages.filter(messages => messages != false && messages !== undefined);
 
     const handleMessageInput = (event) => {
         setMessageInput(event.target.value);

@@ -45,7 +45,7 @@ const MobileMenu = (props) => {
         : null  
         }  
         <StyledLi>
-            {isLoggedIn ? <StyledLink className="iconLinks" onClick={signOut} to="/"> <FontAwesomeIcon icon={faSignOutAlt}/>Sign Out</StyledLink> : <StyledLink className="iconLinks defaultLinks"  secondary="false" to="/login">Sign In</StyledLink>}
+            {isLoggedIn ? <StyledLink className="iconLinks" onClick={signOut} to="/"> <FontAwesomeIcon icon={faSignOutAlt}/>Sign Out</StyledLink> : <StyledLink className="iconLinks defaultLinks"  secondary="false" to="/signin">Sign In</StyledLink>}
         </StyledLi>
         {isLoggedIn
         ? null 

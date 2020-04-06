@@ -58,7 +58,7 @@ function App() {
             <ProtectedRoute exact path="/search" component={SearchPage} IsLoggedIn={isLoggedIn}/>
             <ProtectedRoute  path="/profile/:id" component={ProfilePage} IsLoggedIn={isLoggedIn}  />
             <ProtectedRoute  path="/inbox" component={InboxPage} IsLoggedIn={isLoggedIn}  />
-            <Route exact path="/login" component={LoginForm} />
+            <Route exact path="/signin" component={LoginForm} />
             <Route exact path="/signup" render={props => <SignupForm {...props}/> } />
             <Route exact path="/signup/interests" component={InterestListPage} />
             <Route exact path="/signup/add-profile"  component={ProfileCreationPage} />

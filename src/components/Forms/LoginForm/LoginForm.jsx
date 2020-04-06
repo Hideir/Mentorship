@@ -27,7 +27,7 @@ const LoginForm = props => {
     // setIsLoading(true);
     dispatch(toggleIsLoggedIn(true));
     // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
-    axios.post(`${process.env.REACT_APP_API_LOCAL  || process.env.REACT_APP_API_URL}/login`,{ email, password },
+    axios.post(`${process.env.REACT_APP_API_LOCAL  || process.env.REACT_APP_API_URL}/signin`,{ email, password },
           {
             headers: {
               "content-type": "application/json" // Tell the server we are sending this over as JSON
@@ -42,7 +42,7 @@ const LoginForm = props => {
         await signIn();
         setIsValidFlag(true);
         await  dispatch(toggleIsLoggedIn(false));
-        // Redirect them to the homepage on sucessfull login.
+        // Redirect them to the homepage on sucessfull Sign In.
         props.history.push("/");
       })
       .catch(function (error) {
