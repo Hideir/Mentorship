@@ -11,6 +11,7 @@ import {toggleIsLoggedIn} from '../../../actions';
     // create a user object.
     const [email, setEmail, handleEmail] = useFormInputControl('');
     const [password, setPassword, handlePassword] = useFormInputControl('');
+    const [username, setUsername, handleUsername] = useFormInputControl('');
     const [isValidFlag, setIsValidFlag] = useState(true);
     // const [isLoading, setIsLoading] = useState(false);
 
@@ -19,13 +20,13 @@ import {toggleIsLoggedIn} from '../../../actions';
       // setIsLoading(true);
       dispatch(toggleIsLoggedIn(true));
       // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
-        axios.post(`${process.env.REACT_APP_API_LOCAL || process.env.REACT_APP_API_URL}/signup`, {email, password}, {  
+        axios.post(`${process.env.REACT_APP_API_LOCAL || process.env.REACT_APP_API_URL}/signup`, {username, email, password}, {  
           headers: {
             'content-type': 'application/json'  // Tell the server we are sending this over as JSON
           },
         })
         .then(function (response) {
-          dispatch({type: 'SET_NEW_USER_EMAIL', payload: email})
+          dispatch({type: 'SET_NEW_USER_ALIAS', payload: {email, username}})
           dispatch(toggleIsLoggedIn(false))
           // When our server responds that we made a good request we push our user to the home component.
           props.history.push("/signup/interests");
@@ -45,8 +46,10 @@ import {toggleIsLoggedIn} from '../../../actions';
           isLoading={isLoading}
           isLoginPage={false}
           isValidFlag={isValidFlag} 
+          username={username}
           email={email} 
           password={password} 
+          handleUsername={handleUsername}
           handleEmail={handleEmail}
           handlePassword={handlePassword} 
           handleSignUp={handleSignUp}

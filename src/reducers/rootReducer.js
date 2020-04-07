@@ -6,6 +6,7 @@ export const initialState = {
     isLoggedIn: token ? true : false,
     newSignedUpUser: {
         email: '',
+        username: '',
         interests: [],
     },
     isLoading: false,
@@ -13,7 +14,7 @@ export const initialState = {
 
 
 export const rootReducer = (state = initialState, action) => {
-    console.log(action.payload);
+    console.log({action: action.payload});
     switch(action.type) {
         case 'SET_LOGGEDIN_USER':
             return  {...state, loggedInUser : action.payload};
@@ -21,11 +22,11 @@ export const rootReducer = (state = initialState, action) => {
             return {...state, isLoggedIn : true};
         case 'LOG_OUT':
             return {...state, loggedInUser: {}, isLoggedIn : false, newSignedUpUser: {} };
-        case 'SET_NEW_USER_EMAIL':
+        case 'SET_NEW_USER_ALIAS':
             return {
             ...state, 
             newSignedUpUser: {
-                ...state.newSignedUpUser, email: action.payload
+                ...state.newSignedUpUser, email: action.payload.email, username: action.payload.username
             }};
         case 'SET_NEW_USER_INTERESTS':
             if(state.newSignedUpUser.interests.length <= 0) {

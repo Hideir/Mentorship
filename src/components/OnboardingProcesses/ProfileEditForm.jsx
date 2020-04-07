@@ -34,6 +34,7 @@ const ProfileEditForm = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         localStorage.setItem('userEmail', profileObject.email);
+        localStorage.setItem('user_username', profileObject.username);
         // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
           axios.post(`${process.env.REACT_APP_API_LOCAL || process.env.REACT_APP_API_URL}/signup/add-profile`, {profileObject}, {  
             headers: {

@@ -16,6 +16,7 @@ import {
 let buttonValue = '';
 
 const CredentialsForm = props => {
+  console.log(props);
   if(props.isLoginPage && props.isLoading === false){
        buttonValue = "Sign In"; 
   } else if(!props.isLoginPage && props.isLoading === false) {
@@ -45,6 +46,16 @@ const CredentialsForm = props => {
             </StyledLink>
           </ErrorMessage>
         ) : null}
+        <StyledLabel secondary="true">
+          Username
+          <StyledInput
+            label="Username"
+            type="text"
+            onChange={event => props.handleUsername(event.target.value)}
+            value={props.username.value}
+          />
+          {!props.isLoginPage ? <p style={{fontSize: '14px', fontStyle: 'italic'}}>Username must have a minimum of 5 characters</p> : null}
+        </StyledLabel>
         <StyledLabel secondary="true">
           Email
           <StyledInput

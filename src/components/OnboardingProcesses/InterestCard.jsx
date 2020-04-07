@@ -13,6 +13,8 @@ const InterestCard = (props) => {
     const clickHandler  =  async () => {
         if(!hasActiveClass) {
             await setHasActiveClass(true);
+            console.log(interests);
+            console.log(interests.interestName)
             dispatch({type:'SET_NEW_USER_INTERESTS', payload:  interests.interestName});
         } else if(hasActiveClass) {
              await setHasActiveClass(false);

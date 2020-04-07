@@ -18,6 +18,7 @@ const HomePage = () => {
 				},
 			})
 			.then( async response => {
+        console.log(response.data);
         await dispatch({type: 'SET_LOGGEDIN_USER', payload: response.data.loggedInUserData[0]})
 			})
 			.catch(error => console.log(error))

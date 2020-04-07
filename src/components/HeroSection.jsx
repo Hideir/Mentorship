@@ -8,7 +8,7 @@ import S from 'styled-components';
 const HeroSection = () => {
 
     const isLoggedIn = useSelector( state => state.root.isLoggedIn); // Grab logged In State
-    const loggedInUser = useSelector( state => state.root.loggedInUser); // Grab logged in user
+    // const loggedInUser = useSelector( state => state.root.loggedInUser); // Grab logged in user
 
   return (
     <HeroSectionWrapper>
