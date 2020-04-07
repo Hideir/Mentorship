@@ -56,7 +56,8 @@ const CredentialsForm = props => {
           />
           {!props.isLoginPage ? <p style={{fontSize: '14px', fontStyle: 'italic'}}>Username must have a minimum of 5 characters</p> : null}
         </StyledLabel>
-        <StyledLabel secondary="true">
+        {!props.isLoginPage 
+        ? <StyledLabel secondary="true">
           Email
           <StyledInput
             label="Email"
@@ -66,6 +67,7 @@ const CredentialsForm = props => {
           />
           {!props.isLoginPage ? <p style={{fontSize: '14px', fontStyle: 'italic'}}>Email must have a minimum of 12 characters</p> : null}
         </StyledLabel>
+         : null }
         <StyledLabel secondary="true">
           Password
           <StyledInput

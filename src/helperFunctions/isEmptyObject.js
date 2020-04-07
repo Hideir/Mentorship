@@ -7,5 +7,5 @@ function isEmpty(obj) {
 }
 
 module.exports ={
-    isEmpty,
+    isEmpty
 }

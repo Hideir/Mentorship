@@ -8,7 +8,7 @@ import {toggleIsLoggedIn} from '../../../actions';
 
 
 const LoginForm = props => {
-  const [email, setEmail, handleEmail] = useFormInputControl(" ");
+  // const [email, setEmail, handleEmail] = useFormInputControl(" ");
   const [password, setPassword, handlePassword] = useFormInputControl("");
   const [username, setUsername, handleUsername] = useFormInputControl('');
   const [isValidFlag, setIsValidFlag] = useState(true);
@@ -25,10 +25,11 @@ const LoginForm = props => {
   }
   const handleSignUp = event => {
     event.preventDefault();
+    
     // setIsLoading(true);
     dispatch(toggleIsLoggedIn(true));
     // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
-    axios.post(`${process.env.REACT_APP_API_LOCAL  || process.env.REACT_APP_API_URL}/signin`,{ username, email, password },
+    axios.post(`${process.env.REACT_APP_API_LOCAL  || process.env.REACT_APP_API_URL}/signin`,{ username, password },
           {
             headers: {
               "content-type": "application/json" // Tell the server we are sending this over as JSON
@@ -62,10 +63,10 @@ const LoginForm = props => {
           isLoginPage={true}
           isValidFlag={isValidFlag} 
           username={username}
-          email={email} 
+          // email={email} 
           password={password}
           handleUsername={handleUsername}
-          handleEmail={handleEmail}
+          // handleEmail={handleEmail}
           handlePassword={handlePassword} 
           handleSignUp={handleSignUp}
         />
