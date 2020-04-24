@@ -29,7 +29,10 @@ export const rootReducer = (state = initialState, action) => {
                 ...state.newSignedUpUser, email: action.payload.email, username: action.payload.username
             }};
         case 'SET_NEW_USER_INTERESTS':
-            if(state.newSignedUpUser.interests.length === 0) {
+            console.log(state);
+            console.log(state.newSignedUpUser);
+            console.log(state.newSignedUpUser.interests);
+            if(state.newSignedUpUser.interests.length === 0 || state.newSignedUpUser.interests.length === undefined) {
             return {
                 ...state, 
                 newSignedUpUser: {
@@ -42,7 +45,6 @@ export const rootReducer = (state = initialState, action) => {
                     ...state.newSignedUpUser, interests: [...state.newSignedUpUser.interests, action.payload],
                 }};
             }
-
         case 'REMOVE_NEW_USER_INTERESTS':
             return {
             ...state, 

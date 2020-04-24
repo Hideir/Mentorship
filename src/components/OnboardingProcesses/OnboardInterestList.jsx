@@ -1,16 +1,33 @@
-import React from 'react'
-// import {useSelector} from 'react-redux';
+import React,{useEffect, useState}from 'react'
+import axios from 'axios';
 import S from 'styled-components';
 import InterestCard from './InterestCard';
-import {interestsArray} from './interestData';
 import {withRouter} from 'react-router-dom';
 import MedFormButton from '../ReusedComponents/MedFormButton';
 
+const authToken = localStorage.getItem('auth-token');
 
 const OnboardInterestList = (props) => {
 
+    const [interests, setInterests] = useState([]);
+
+    useEffect( () => {
+      const getInterests = () => {
+        axios.get(`${process.env.REACT_APP_API_LOCAL || process.env.REACT_APP_API_URL}/signup/interests`, {  
+            headers: {
+            'content-type': 'application/json', // Tell the server we are sending this over as JSON
+            'authorization': authToken, // Send the token in the header from the client.
+            },
+        })
+        .then( async response => {
+            await setInterests(response.data.interests);
+        })
+        .catch(error => console.log(error))
+      }
+      getInterests();
+    }, []);
+    
     // const usersInterests = useSelector(state => state.root.newSignedUpUser.interests);
-    // console.log(usersInterests);
     let cardCounter = 1;
 
     const pushUser = () => {
@@ -27,12 +44,12 @@ const OnboardInterestList = (props) => {
                 </SelectedInterestUl> */}
             </SelectedInterestTagsContainer>
             <SelectedInterestTagsContainer>
-            {interestsArray.map( (interests, index) => {
+            {interests.map( (interest, index) => {
                 return(
                     <InterestCard
                         interestCardCounter={cardCounter++}
                         key={index}
-                        interests={interests}
+                        interest={interest}
                     />
                 );
             })}

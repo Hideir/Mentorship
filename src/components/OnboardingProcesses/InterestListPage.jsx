@@ -2,7 +2,6 @@ import React from "react";
 import S from "styled-components";
 import OnboardInterestList from "./OnboardInterestList";
 
-
 const InterestListPage = () => {
 
   return (
