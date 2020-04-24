@@ -6,9 +6,9 @@ import '../../App.css';
 const InterestCard = (props) => {
     const dispatch = useDispatch();
     const {interest} = props;
-    // State
+    
     const [hasActiveClass, setHasActiveClass] = useState(false);
-    // Event Handlers
+
     const clickHandler  =  async () => {
         if(!hasActiveClass) {
             await setHasActiveClass(true);
@@ -16,6 +16,7 @@ const InterestCard = (props) => {
         } else if(hasActiveClass) {
              await setHasActiveClass(false);
              dispatch({type:'REMOVE_NEW_USER_INTERESTS', payload:  interest.name});
+
         }
     }
     // Component Update
