@@ -17,7 +17,7 @@ const DesktopNavigation = (props) => {
     const dispatch = useDispatch();
     const signOut = () => {
         if (isLoggedIn) {
-            dispatch({ type: 'LOG_OUT', payload: false });
+            dispatch({ type: 'SANITIZE_USER', payload: false });
             localStorage.removeItem('auth-token');
         }
     }

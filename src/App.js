@@ -21,12 +21,13 @@ import S from 'styled-components';
 
 
 function App() {
-
+  // testing state
+  const state = useSelector(state => state.root);
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
   const isLoading = useSelector(state => state.root.isLoading);
   const activeMessageSessions = useSelector(state => state.messageReducer.userRelations); // All the active user sessions
   const dispatch = useDispatch();
-  // this useEffect is to make sure we get the user information on Load. PRobably store their loggedin email in password
+  // this useEffect is to make sure we get the user information on Load. Probably store their loggedin email and password
   // then when the user clicks on the profilePage we use their email to get the profile information instead of
   // making a request every render.
   
@@ -47,7 +48,7 @@ function App() {
     if(isLoggedIn) getUserInformation();
 
   },[isLoggedIn, dispatch]); 
-
+  console.log(state);
   return (
     <Router>
         <div className="App">

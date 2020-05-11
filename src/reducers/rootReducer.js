@@ -15,23 +15,29 @@ export const initialState = {
 
 export const rootReducer = (state = initialState, action) => {
     console.log({action: action.payload});
+    console.log(initialState);
+    console.log(state);
     switch(action.type) {
         case 'SET_LOGGEDIN_USER':
             return  {...state, loggedInUser : action.payload};
         case 'IS_LOGGED_IN':
             return {...state, isLoggedIn : true};
-        case 'LOG_OUT':
-            return {...state, loggedInUser: {}, isLoggedIn : false, newSignedUpUser: {} };
+        case 'SANITIZE_USER':
+            return {...state, loggedInUser: {}, isLoggedIn : false, 
+            newSignedUpUser: { 
+                email: '', 
+                username: '', 
+                interests: []
+            } 
+        };
         case 'SET_NEW_USER_ALIAS':
+            console.log(action);
             return {
             ...state, 
             newSignedUpUser: {
                 ...state.newSignedUpUser, email: action.payload.email, username: action.payload.username
             }};
         case 'SET_NEW_USER_INTERESTS':
-            console.log(state);
-            console.log(state.newSignedUpUser);
-            console.log(state.newSignedUpUser.interests);
             if(state.newSignedUpUser.interests.length === 0 || state.newSignedUpUser.interests.length === undefined) {
             return {
                 ...state, 
@@ -54,8 +60,7 @@ export const rootReducer = (state = initialState, action) => {
         case 'SET_ISLOADING':
             return {...state, isLoading: true};
         case 'REMOVE_ISLOADING':
-            return {...state, isLoading: false};
-    
+            return {...state, isLoading: false};       
         default:
             return state;
     }

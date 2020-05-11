@@ -1,5 +1,5 @@
 import React,{useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import axios from 'axios';
 import S from 'styled-components';
 import {withRouter} from 'react-router-dom';
@@ -9,6 +9,7 @@ import StateSelectList from '../ReusedComponents/StateSelectList';
 
 
 const ProfileEditForm = (props) => {
+    const dispatch = useDispatch();
     // Set up State
     const newSignedUpUser = useSelector(state => state.root.newSignedUpUser);
     // Create a new profile object to disconnect from global state.
@@ -43,6 +44,7 @@ const ProfileEditForm = (props) => {
           })
           .then(function (response) {
             props.history.push("/");
+            dispatch({type: 'SANITIZE_USER'})
           })
           .catch(function (error) {
             console.log(error);
