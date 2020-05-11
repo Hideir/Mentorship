@@ -48,7 +48,6 @@ function App() {
     if(isLoggedIn) getUserInformation();
 
   },[isLoggedIn, dispatch]); 
-  console.log(state);
   return (
     <Router>
         <div className="App">

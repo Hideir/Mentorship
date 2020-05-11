@@ -14,9 +14,6 @@ export const initialState = {
 
 
 export const rootReducer = (state = initialState, action) => {
-    console.log({action: action.payload});
-    console.log(initialState);
-    console.log(state);
     switch(action.type) {
         case 'SET_LOGGEDIN_USER':
             return  {...state, loggedInUser : action.payload};

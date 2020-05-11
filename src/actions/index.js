@@ -20,6 +20,7 @@ export const toggleIsLoggedIn = flag => {
 };
 
 export const setMessagesGet = (loggedInUserId) => {
+    console.log(loggedInUserId)
     return dispatch => {
         return axios
             .get(
@@ -33,6 +34,7 @@ export const setMessagesGet = (loggedInUserId) => {
             )
             .then(response => {
                 const object = response.data.messages;
+                console.log(object);
                 object.forEach(object => {
                     dispatch({
                         type: "SET_MESSAGES",
