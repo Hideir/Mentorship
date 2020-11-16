@@ -28,6 +28,7 @@ const ProfilePage = (props) => {
 			  })
 			.then( async response => {
 				await dispatch(toggleIsLoggedIn(false));
+				console.log(response.data.usersProfileData[0])
 				await setProfileData(response.data.usersProfileData[0]);
 			})
 			.catch(error =>  {

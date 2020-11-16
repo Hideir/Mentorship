@@ -23,23 +23,24 @@ const ProfileEditForm = (props) => {
         city: '',
         state: ''
     });
-
     // Set up event functions
     const handleInputChange = async (event) => {
         // update the profile information based off user input.
         await setProfileInformation({...profileInformation, [event.target.name]: event.target.value});
         // pass that updated information object into the profile object, plus whatever is in the newSignedUpUsder object.
+        console.log({profileInformation})
         await setProfileObject({...newSignedUpUser, profileInformation});
+        console.log({profileObject})
     }
 
     const handleSubmit = (event) => {
         event.preventDefault();
         localStorage.setItem('userEmail', profileObject.email);
         localStorage.setItem('user_username', profileObject.username);
-        // Send our data({email, password}) to the /signup endpoint on our server, with the email and password in the body
+        // Send the profile object to our api
           axios.post(`${process.env.REACT_APP_API_LOCAL || process.env.REACT_APP_API_URL}/signup/add-profile`, {profileObject}, {  
             headers: {
-              'content-type': 'application/json' // Tell the server we are sending this over as JSON
+              'content-type': 'application/json'
             },
           })
           .then(function (response) {
@@ -59,19 +60,19 @@ const ProfileEditForm = (props) => {
                     <Input onChange={handleInputChange} type="text" name="firstName" value={profileInformation.firstName}/>
                 </Label>
                 <Label>Last Name
-                    <Input onChange={handleInputChange} type="text" name="lastName"/>
+                    <Input onChange={handleInputChange} type="text" name="lastName"  value={profileInformation.lastName}/>
                 </Label>
                 <Label primary="true" >Tag Line
-                    <Input onChange={handleInputChange}  primary="true" type="text" name="tagLine"/>
+                    <Input onChange={handleInputChange}  primary="true" type="text" name="tagLine"  value={profileInformation.tagLine}/>
                 </Label>
                 <Label primary="true" >Education
-                    <Input onChange={handleInputChange}  type="text" name="education"/>
+                    <Input onChange={handleInputChange}  type="text" name="education"  value={profileInformation.education}/>
                 </Label>
                 <Label>Country/Region
                     <CountrySelectList handleInputChange={handleInputChange} profileInformation={profileInformation}/>
                 </Label>
                 <Label>City
-                    <Input onChange={handleInputChange}  type="text" name="city"/>
+                    <Input onChange={handleInputChange}  type="text" name="city" value={profileInformation.city}/>
                 </Label>
                 <Label>State
                     <StateSelectList handleInputChange={handleInputChange} profileInformation={profileInformation}/>
