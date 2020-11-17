@@ -57,6 +57,7 @@ function App() {
 /// Socket.io UseEffect
   useEffect( () => {
     const initSocket = () => {
+      console.log('this is running');
       const socket = io(socketURL)
       socket.on('connect', () => {
         console.log('connected')
