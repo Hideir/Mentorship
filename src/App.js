@@ -66,6 +66,7 @@ function App() {
     }
     initSocket()
   },[])
+  console.log(socket);
   return (
     <Router>
         <div className="App">
