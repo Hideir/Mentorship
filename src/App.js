@@ -18,6 +18,8 @@ import Messages from './components/ReusedComponents/Messages.jsx';
 import InboxPage from './components/InboxPage/InboxPage';
 import {setLoggedInUser} from './actions';
 import S from 'styled-components';
+
+// Socket.IO
 import io from 'socket.io-client';
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
   const isLoading = useSelector(state => state.root.isLoading);
   const activeMessageSessions = useSelector(state => state.messageReducer.userRelations); // All the active user sessions
   const dispatch = useDispatch();
+
+  
   const socketURL = 'http://localhost:8080';
   const [socket,setSocket] = useState(null);
   // this useEffect is to make sure we get the user information on Load. Probably store their loggedin email and password
@@ -49,6 +53,8 @@ function App() {
 
   },[isLoggedIn, dispatch]); 
 
+
+/// Socket.io UseEffect
   useEffect( () => {
     const initSocket = () => {
       const socket = io(socketURL)
