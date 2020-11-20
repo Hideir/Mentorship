@@ -29,7 +29,7 @@ function App() {
   const dispatch = useDispatch();
 
   
-  const socketURL = 'https://hideir.netlify.app';
+  const socketURL = 'https://hideir.netlify.app/messages';
   const [socket,setSocket] = useState(null);
   // this useEffect is to make sure we get the user information on Load. Probably store their loggedin email and password
   // then when the user clicks on the profilePage we use their email to get the profile information instead of
