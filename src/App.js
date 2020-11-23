@@ -19,7 +19,9 @@ import InboxPage from './components/InboxPage/InboxPage';
 import {setLoggedInUser} from './actions';
 import S from 'styled-components';
 
-
+// Socket.IO
+import openSocket from 'socket.io-client';
+const endpoint = 'http://localhost:8081';
 
 function App() {
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
@@ -28,7 +30,7 @@ function App() {
   const dispatch = useDispatch();
 
   
-
+  const [socket,setSocket] = useState("");
   // this useEffect is to make sure we get the user information on Load. Probably store their loggedin email and password
   // then when the user clicks on the profilePage we use their email to get the profile information instead of
   // making a request every render.
@@ -51,6 +53,23 @@ function App() {
 
   },[isLoggedIn, dispatch]); 
 
+
+/// Socket.io UseEffect
+  useEffect( () => {
+    const initSocket = () => {
+      const socket = openSocket(endpoint)
+      console.log(socket)
+      socket.on("hello", data => {
+        setSocket(data);
+        console.log(data);
+      });
+          // CLEAN UP THE EFFECT
+      return () => socket.disconnect();
+    }
+
+      initSocket()
+  },[])
+  console.log(socket);
   return (
     <Router>
         <div className="App">
