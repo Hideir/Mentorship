@@ -21,7 +21,7 @@ import S from 'styled-components';
 
 // Socket.IO
 import openSocket from 'socket.io-client';
-const endpoint = 'http://localhost:8081';
+const endpoint = 'http://https://hideir.netlify.app:8081';
 
 function App() {
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
