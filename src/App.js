@@ -19,8 +19,7 @@ import InboxPage from './components/InboxPage/InboxPage';
 import {setLoggedInUser} from './actions';
 import S from 'styled-components';
 
-// Socket.IO
-import io from 'socket.io-client';
+
 
 function App() {
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
@@ -29,8 +28,7 @@ function App() {
   const dispatch = useDispatch();
 
   
-  const socketURL = 'https://hideir.netlify.app/messages';
-  const [socket,setSocket] = useState(null);
+
   // this useEffect is to make sure we get the user information on Load. Probably store their loggedin email and password
   // then when the user clicks on the profilePage we use their email to get the profile information instead of
   // making a request every render.
@@ -53,20 +51,6 @@ function App() {
 
   },[isLoggedIn, dispatch]); 
 
-
-/// Socket.io UseEffect
-  useEffect( () => {
-    const initSocket = () => {
-      console.log('this is running');
-      const socket = io(socketURL)
-      socket.on('connect', () => {
-        console.log('connected')
-        setSocket({socket})
-      })
-    }
-    initSocket()
-  },[])
-  console.log(socket);
   return (
     <Router>
         <div className="App">

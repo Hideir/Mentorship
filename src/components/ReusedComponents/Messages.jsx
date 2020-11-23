@@ -8,12 +8,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import {Link} from 'react-router-dom';
 
+// Socket.IO
+import openSocket from 'socket.io-client';
+const endpoint = 'https://https://hideir.netlify.app:8081';
 
 
-let authToken = localStorage.getItem('auth-token'); 
+let authToken = localStorage.getItem('auth-token');
+
 const Messages = (props) => {
     // local state
     const [messageInput, setMessageInput] = useState('');
+    const [socket,setSocket] = useState("");
     // dispatch
     const dispatch = useDispatch();
     // Redux State
@@ -84,6 +89,19 @@ const Messages = (props) => {
         if(currentMessages.length <= 0) {
             dispatch(setMessagesGet(loggedInUserId));
         }
+        /// Socket.io UseEffect
+        const initSocket = () => {
+            const socket = openSocket(endpoint)
+            console.log(socket)
+            socket.on("hello", data => {
+                setSocket(data);
+                console.log(data);
+            });
+                // CLEAN UP THE EFFECT
+            return () => socket.disconnect();
+        }
+
+        initSocket()
     }, []);
 
     return(
