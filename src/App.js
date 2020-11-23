@@ -21,7 +21,7 @@ import S from 'styled-components';
 
 // Socket.IO
 import openSocket from 'socket.io-client';
-const endpoint = 'https://hideir.herokuapp.com:8081/messages';
+const endpoint = `${process.env.REACT_APP_API_URL}:8081/messages`;
 
 function App() {
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
