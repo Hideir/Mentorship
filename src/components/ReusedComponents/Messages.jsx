@@ -34,9 +34,9 @@ const Messages = (props) => {
     });
     const filteredMessages = userMatchingMessages.filter(messages => messages != false && messages !== undefined);
 
-    console.log({'current_messages': currentMessages}) 
-    console.log({'user_matched_messages': userMatchingMessages}) 
-    console.log({'filter_messages': filteredMessages})    
+    // console.log({'current_messages': currentMessages}) 
+    // console.log({'user_matched_messages': userMatchingMessages}) 
+    // console.log({'filter_messages': filteredMessages})    
     
     const handleMessageInput = (event) => {
         setMessageInput(event.target.value);
