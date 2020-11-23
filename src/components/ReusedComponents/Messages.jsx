@@ -10,7 +10,7 @@ import {Link} from 'react-router-dom';
 
 // Socket.IO
 import openSocket from 'socket.io-client';
-const endpoint = 'https://https://hideir.netlify.app:8081';
+const endpoint = 'https://hideir.netlify.app:8081';
 
 
 let authToken = localStorage.getItem('auth-token');
