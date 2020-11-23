@@ -61,7 +61,7 @@ const Messages = (props) => {
         })
         
         .then(response => {
-            console.log(response);
+            // console.log(response);
             dispatch({
                 type: "SET_MESSAGES",
                 payload: {
