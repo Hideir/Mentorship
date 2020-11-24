@@ -21,7 +21,8 @@ import S from 'styled-components';
 
 // Socket.IO
 import io from 'socket.io-client';
-const socket_io = io('localhost:8081')
+// const socket_io = io('localhost:8081')
+const socket_io = io("ws://hideir.herokuapp.com:8081", {transports: ['websocket']})
 
 function App() {
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
