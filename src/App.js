@@ -20,8 +20,8 @@ import {setLoggedInUser} from './actions';
 import S from 'styled-components';
 
 // Socket.IO
-import openSocket from 'socket.io-client';
-const endpoint = `${process.env.REACT_APP_API_URL}:8081/messages`;
+import io from 'socket.io-client';
+const socket_io = io('localhost:8081')
 
 function App() {
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
@@ -54,21 +54,20 @@ function App() {
   },[isLoggedIn, dispatch]); 
 
 
-/// Socket.io UseEffect
+  // Socket.io UseEffect
   useEffect( () => {
     const initSocket = () => {
-      const socket = openSocket('http://localhost:8081')
-      console.log(socket)
-      // socket.on("hello", data => {
-      //   setSocket(data);
-      //   console.log(data);
-      // });
+      console.log(socket_io)
+      socket_io.on("hello", data => {
+        setSocket(data);
+        console.log(data);
+      });
           // CLEAN UP THE EFFECT
-      return () => socket.disconnect();
+      return () => socket_io.disconnect();
     }
-
       initSocket()
   },[])
+
   console.log(socket);
   return (
     <Router>
