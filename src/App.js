@@ -21,7 +21,7 @@ import S from 'styled-components';
 
 // Socket.IO
 import openSocket from 'socket.io-client';
-const endpoint = `${process.env.REACT_APP_API_URL}/messages`;
+const endpoint = `${process.env.REACT_APP_API_URL}:8081/messages`;
 
 function App() {
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
@@ -57,12 +57,12 @@ function App() {
 /// Socket.io UseEffect
   useEffect( () => {
     const initSocket = () => {
-      const socket = openSocket(endpoint)
+      const socket = openSocket('http://localhost:8081')
       console.log(socket)
-      socket.on("hello", data => {
-        setSocket(data);
-        console.log(data);
-      });
+      // socket.on("hello", data => {
+      //   setSocket(data);
+      //   console.log(data);
+      // });
           // CLEAN UP THE EFFECT
       return () => socket.disconnect();
     }
