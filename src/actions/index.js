@@ -53,3 +53,9 @@ export const setMessagesGet = (loggedInUserId) => {
     }
 
 };
+export const setUserSocket = socket => {
+    return {
+        type: "SET_USER_SOCKET",
+        payload: socket,
+    };
+};

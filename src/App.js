@@ -16,22 +16,27 @@ import MobileMenu from './components/Menus/MobileMenu/MobileMenu';
 import IsLoadingComponent from './components/StyledComponents/IsLoadingComponent';
 import Messages from './components/ReusedComponents/Messages.jsx';
 import InboxPage from './components/InboxPage/InboxPage';
-import {setLoggedInUser} from './actions';
+import {setLoggedInUser, setUserSocket} from './actions';
 import S from 'styled-components';
 
 // Socket.IO
 import io from 'socket.io-client';
-// const socket_io = io('localhost:8081')
-const socket_io = io("https://hideir.herokuapp.com:80")
+const socket = io('localhost:8081')
+// const socket = io("https://hideir-rtc-api.herokuapp.com")
 
 function App() {
+
+  const loggedInUser = useSelector( state => state.root.loggedInUser);
   const isLoggedIn = useSelector(state => state.root.isLoggedIn);
   const isLoading = useSelector(state => state.root.isLoading);
   const activeMessageSessions = useSelector(state => state.messageReducer.userRelations); // All the active user sessions
+
   const dispatch = useDispatch();
 
-  
-  const [socket,setSocket] = useState("");
+  console.log(activeMessageSessions);
+  const loggedInName = `${loggedInUser.firstName} ${loggedInUser.lastName}`;
+  const loggedInUserId = loggedInUser.id;
+
   // this useEffect is to make sure we get the user information on Load. Probably store their loggedin email and password
   // then when the user clicks on the profilePage we use their email to get the profile information instead of
   // making a request every render.
@@ -47,6 +52,7 @@ function App() {
 			})
 			.then( async response => {
         await dispatch(setLoggedInUser(response));
+        await dispatch(setUserSocket(socket));
 			})
 			.catch(error => console.log(error))
     }
@@ -56,20 +62,19 @@ function App() {
 
 
   // Socket.io UseEffect
-  useEffect( () => {
-    const initSocket = () => {
-      console.log(socket_io)
-      socket_io.on("hello", data => {
-        setSocket(data);
-        console.log(data);
-      });
-          // CLEAN UP THE EFFECT
-      return () => socket_io.disconnect();
-    }
-      initSocket()
-  },[])
-
-  console.log(socket);
+  // useEffect( () => {
+  //   const initSocket = () => {
+  //     console.log(socket_io)
+  //     socket_io.on("hello", data => {
+  //       setSocket(data);
+  //       console.log(data);
+  //     });
+  //         // CLEAN UP THE EFFECT
+  //     return () => socket_io.disconnect();
+  //   }
+  //     initSocket()
+  // },[])
+  socket.emit('connect-user', {id:loggedInUserId, name: loggedInName});
   return (
     <Router>
         <div className="App">

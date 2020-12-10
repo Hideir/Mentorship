@@ -10,6 +10,7 @@ export const initialState = {
         interests: [],
     },
     isLoading: false,
+    socket: null,
 };
 
 
@@ -57,7 +58,10 @@ export const rootReducer = (state = initialState, action) => {
         case 'SET_ISLOADING':
             return {...state, isLoading: true};
         case 'REMOVE_ISLOADING':
-            return {...state, isLoading: false};       
+            return {...state, isLoading: false};  
+        case 'SET_USER_SOCKET':
+            console.log(action)
+            return  {...state, socket : action.payload};     
         default:
             return state;
     }

@@ -1,4 +1,4 @@
-import React,{useState, useEffect} from 'react';
+import React,{useState, useEffect, useRef} from 'react';
 import S from 'styled-components';
 import axios from 'axios';
 import {useSelector, useDispatch} from 'react-redux';
@@ -9,70 +9,85 @@ import { faTimes } from "@fortawesome/free-solid-svg-icons";
 import {Link} from 'react-router-dom';
 
 
+// let authToken = localStorage.getItem('auth-token');
 
-let authToken = localStorage.getItem('auth-token'); 
 const Messages = (props) => {
     // local state
     const [messageInput, setMessageInput] = useState('');
+    const [userTyping, setUserTyping] = useState('');
+    const [messages, setMessages] = useState('')
+
     // dispatch
     const dispatch = useDispatch();
-    // Redux State
-    const currentMessages = useSelector(state => state.messageReducer.messages);
-    const loggedInUser = useSelector( state => state.root.loggedInUser);
-    // deconstruction
-    const loggedInUserId = loggedInUser.id;
-    // Create an array of related messages.
-    const userMatchingMessages = currentMessages.map(messageObject => {
-        if(messageObject.receiverId === props.activeMessageSessions.id) {
-            return messageObject.message;
-        }
-    });
-    const filteredMessages = userMatchingMessages.filter(messages => messages != false && messages !== undefined);
 
-    // console.log({'current_messages': currentMessages}) 
-    // console.log({'user_matched_messages': userMatchingMessages}) 
-    // console.log({'filter_messages': filteredMessages})    
-    
+    // Redux State
+    // const currentMessages = useSelector(state => state.messageReducer.messages);
+    const loggedInUser = useSelector( state => state.root.loggedInUser);
+    const socket = useSelector(state => state.root.socket);
+    const loggedInUserId = loggedInUser.id;
+
+    // Create an array of related messages.
+    // const userMatchingMessages = currentMessages.map(messageObject => {
+    //     if(messageObject.receiverId === props.activeMessageSessions.id) {
+    //         return messageObject.message;
+    //     }
+    // });
+    // const filteredMessages = userMatchingMessages.filter(messages => messages != false && messages !== undefined);   
+
     const handleMessageInput = (event) => {
         setMessageInput(event.target.value);
-    }
-    const sendMessage = (event,messageInputValue) => {
-         if(messageInputValue == false) {
-             event.preventDefault();
-             return;
-         } 
-        event.preventDefault();
-        // need an axios call to post these messages.
-        axios.post(`${process.env.REACT_APP_API_LOCAL || process.env.REACT_APP_API_URL}/send-message`, {
-            senderId: loggedInUserId,
-            receiverId: props.activeMessageSessions.id,
-            message: messageInputValue,
-            sentAt: Date.now()
-        }, {
-            headers: {
-                "content-type": "application/json", // Tell the server we are sending this over as JSON
-                "authorization": authToken // Send the token in the header from the client.
-            }
-        })
-        
-        .then(response => {
-            console.log(response);
-            dispatch({
-                type: "SET_MESSAGES",
-                payload: {
-                  senderId: loggedInUserId,
-                  receiverId: props.activeMessageSessions.id,
-                  message: messageInputValue,
-                  sentAt: Date.now()
-                }
-              });
-        })
-        .catch(error => {
-            console.log(error);
-        })
-        setMessageInput('');
-    }             
 
+        // When user types, emit the event to the chat API that a user is typing.
+        socket.emit('typing', {firstName: props.activeMessageSessions.firstName, lastName: props.activeMessageSessions.lastName});
+    }
+    // const sendMessage = (event,messageInputValue) => {
+    //      if(messageInputValue == false) {
+    //          event.preventDefault();
+    //          return;
+    //      } 
+    //     event.preventDefault();
+    //     // need an axios call to post these messages.
+    //     axios.post(`${process.env.REACT_APP_API_LOCAL || process.env.REACT_APP_API_URL}/send-message`, {
+    //         senderId: loggedInUserId,
+    //         receiverId: props.activeMessageSessions.id,
+    //         message: messageInputValue,
+    //         sentAt: Date.now()
+    //     }, {
+    //         headers: {
+    //             "content-type": "application/json", // Tell the server we are sending this over as JSON
+    //             "authorization": authToken // Send the token in the header from the client.
+    //         }
+    //     })
+        
+    //     .then(response => {
+    //         console.log(response);
+    //         dispatch({
+    //             type: "SET_MESSAGES",
+    //             payload: {
+    //               senderId: loggedInUserId,
+    //               receiverId: props.activeMessageSessions.id,
+    //               message: messageInputValue,
+    //               sentAt: Date.now()
+    //             }
+    //           });
+    //     })
+    //     .catch(error => {
+    //         console.log(error);
+    //     })
+    //     setMessageInput('');
+    // }             
+    
+    const socketIOMessage = (event,messageInputValue) => {
+        event.preventDefault();
+
+        // When a user sends their message, emit an event to the chat API with the data {chatId / message}
+        socket.emit('send-message', {
+            chatId: props.activeMessageSessions.id,
+            message:messageInputValue
+        });
+        setMessageInput('');
+        setUserTyping('');
+    }
     const handleClose = (id) => {
         dispatch({type: "DELETE_MESSAGE_SESSION", payload: id}) ;
     }
@@ -81,29 +96,63 @@ const Messages = (props) => {
     }
 
     useEffect( () => {
-        if(currentMessages.length <= 0) {
-            dispatch(setMessagesGet(loggedInUserId));
-        }
+        // if(currentMessages.length <= 0) {
+        //     dispatch(setMessagesGet(loggedInUserId));
+        // }
+
+        /* 
+            When the messags component renders, listen to the send-message event for the data
+            to be passed from the server to this client.
+        */
+        socket.on('send-message', message => {
+            console.log(message);
+            dispatch({
+                type: "SET_MESSAGES",
+                payload: {
+                senderId: loggedInUserId,
+                receiverId: props.activeMessageSessions.id,
+                message: message,
+                sentAt: Date.now()
+                }
+            });
+        })
+
+        // Emit an event "prive-message" to the backend with the user id and the active session id
+        socket.emit('private-message', loggedInUserId, props.activeMessageSessions.id)
+
+        // listen to the message-received event and bring in the data it sends on that event.
+        socket.on(`message-received-${props.activeMessageSessions.id}`, data => {
+            console.log(data)
+            setMessages(data.message);
+        })
+
+        // Listen to the typing event and display that data.
+        socket.on('typing', data => {
+            setUserTyping(data);
+        })
     }, []);
 
     return(
         <MessageContainer>
-            <MessagedUserName onClick={minimizeMessage} >{props.activeMessageSessions.firstName} {props.activeMessageSessions.lastName}</MessagedUserName>
+            <MessagedUserName onClick={minimizeMessage}>
+                {props.activeMessageSessions.firstName} {props.activeMessageSessions.lastName}</MessagedUserName>
             <ExitButton onClick={() => handleClose(props.activeMessageSessions.id)}><FontAwesomeIcon icon={faTimes}/></ExitButton>
             <InnerMessagesContainer>
-                {filteredMessages.length > 0 ? filteredMessages.map( (messages,index) => {
-                    return (
-                        <UserMessages key={index}>
+                {/* {filteredMessages.length > 0 ? filteredMessages.map( (messages,index) => {
+                    return ( */}
+                        <UserMessages>
                             <TitleAndContentMessageCotnainer>
                             <StyledP><StyledLink to={{ pathname: `/profile/${loggedInUserId}`, state: { loggedInUser } }}>{loggedInUser.firstName} {loggedInUser.lastName}</StyledLink></StyledP>
                             <StyledP>{messages}</StyledP>
                             </TitleAndContentMessageCotnainer>
                         </UserMessages>
-                    )
-                }) : null} 
+                     {/* )
+                 }) : null}  */}
+                
             </InnerMessagesContainer>
-            <StyledForm onSubmit={(event) => sendMessage(event,messageInput)}>
-                <StyledInput onChange={handleMessageInput} type="text" value={messageInput}/>
+            {userTyping ? <UserTypingMessageAlert>{userTyping}</UserTypingMessageAlert> : null}
+            <StyledForm onSubmit={(event) => socketIOMessage(event,messageInput)}>
+                <StyledInput contentEditable={true} onChange={handleMessageInput}  type="textarea" ></StyledInput>
                 <StyledButton>Send</StyledButton>
             </StyledForm>
         </MessageContainer>
@@ -140,14 +189,16 @@ const MessagedUserName = S.h3`
     text-transform: capitalize;
     text-align: left;
     padding-left: 10px;
+    &: hover {
+        cursor: pointer;
+    }
 `;
 const InnerMessagesContainer = S.div`
     background-color: #fff;
     height: 300px;
     flex-direction: column;
     width: 100%;
-    border-bottom: 1px solid #000;
-    overflow: scroll;
+    overflow-y: scroll;
 `;
 const UserMessages = S.div`
     height: fit-content;
@@ -175,29 +226,42 @@ const StyledLink = S(Link)`
 `;
 const StyledInput = S.input`
     width: 200px;
-    min-width: 200px
-    padding: 5px;
+    min-width: 200px;
     font-size: 2rem;
     border: none;
     outline: none;
+    min-height: 10px;
+    max-height: 100px;
+    overflow: auto;
+    padding: 12px 10px 0 12px;
 `;
 const StyledButton = S.button`
     background-color: #0077ff;
     color: #fff;
     border: unset;
-    margin: 2px;
-    border-radius: 5px;
     padding: 3px;
     font-size: 1.8rem;
     min-width: 50px;
     width: 80px;
+    transition: all ease 120ms;
+    &: hover {
+        cursor: pointer;
+        background-color: #003c80;
+    }
 `;
 const StyledForm = S.form`
     width: 100%;
     display: flex;
     justify-content: space-between;
+    border-top: 1px solid #000;
 `;
-
+const UserTypingMessageAlert = S.p`
+    background-color: #ddd;
+    border-radius: 15px;
+    padding: 2px 15px;
+    font-size: 12px;
+    margin: 0 0 10px 10px;
+`;
 const ExitButton = S.div`
     font-size: 24px;
     color: #fff;
